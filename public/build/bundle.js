@@ -323,50 +323,50 @@ var app = (function () {
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[33] = list[i].name;
-    	child_ctx[30] = list[i].room;
-    	child_ctx[34] = list[i].value;
-    	child_ctx[35] = list;
-    	child_ctx[36] = i;
+    	child_ctx[39] = list[i].name;
+    	child_ctx[36] = list[i].room;
+    	child_ctx[40] = list[i].value;
+    	child_ctx[41] = list;
+    	child_ctx[42] = i;
     	return child_ctx;
     }
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[30] = list[i];
-    	child_ctx[32] = i;
+    	child_ctx[36] = list[i];
+    	child_ctx[38] = i;
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[37] = list[i];
-    	child_ctx[32] = i;
+    	child_ctx[43] = list[i];
+    	child_ctx[38] = i;
     	return child_ctx;
     }
 
     function get_each_context_3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[30] = list[i];
-    	child_ctx[32] = i;
+    	child_ctx[36] = list[i];
+    	child_ctx[38] = i;
     	return child_ctx;
     }
 
     function get_each_context_4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[33] = list[i];
-    	child_ctx[32] = i;
+    	child_ctx[39] = list[i];
+    	child_ctx[38] = i;
     	return child_ctx;
     }
 
     function get_each_context_5(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[41] = list[i];
-    	child_ctx[32] = i;
+    	child_ctx[47] = list[i];
+    	child_ctx[38] = i;
     	return child_ctx;
     }
 
-    // (675:1) {#if gui.deviceSelectOpen}
+    // (798:1) {#if gui.deviceSelectOpen}
     function create_if_block_7(ctx) {
     	let div3;
     	let div2;
@@ -403,25 +403,25 @@ var app = (function () {
     			div1 = element("div");
     			button = element("button");
     			button.textContent = "Закрыть";
-    			attr_dev(p, "class", "leaf svelte-nzitzk");
-    			add_location(p, file, 677, 4, 13094);
-    			attr_dev(ul, "class", "ul svelte-nzitzk");
+    			attr_dev(p, "class", "leaf svelte-k3eom2");
+    			add_location(p, file, 800, 4, 15576);
+    			attr_dev(ul, "class", "ul svelte-k3eom2");
     			attr_dev(ul, "id", "deviceSelectList");
-    			add_location(ul, file, 679, 5, 13214);
+    			add_location(ul, file, 802, 5, 15696);
     			attr_dev(div0, "id", "mutListPlayers");
-    			attr_dev(div0, "class", "deviceListPlayers deviceSelectButton svelte-nzitzk");
-    			add_location(div0, file, 678, 4, 13138);
+    			attr_dev(div0, "class", "deviceListPlayers deviceSelectButton svelte-k3eom2");
+    			add_location(div0, file, 801, 4, 15620);
     			attr_dev(button, "id", "deviceSelectCloseButton");
-    			attr_dev(button, "class", "button svelte-nzitzk");
-    			add_location(button, file, 689, 5, 13640);
-    			attr_dev(div1, "class", "deviceSelectCloseButton svelte-nzitzk");
-    			add_location(div1, file, 688, 4, 13597);
-    			attr_dev(div2, "class", "mutlist svelte-nzitzk");
-    			add_location(div2, file, 676, 3, 13068);
+    			attr_dev(button, "class", "button svelte-k3eom2");
+    			add_location(button, file, 812, 5, 16122);
+    			attr_dev(div1, "class", "deviceSelectCloseButton svelte-k3eom2");
+    			add_location(div1, file, 811, 4, 16079);
+    			attr_dev(div2, "class", "mutlist svelte-k3eom2");
+    			add_location(div2, file, 799, 3, 15550);
     			attr_dev(div3, "id", "floatwindow");
-    			attr_dev(div3, "class", "svelte-nzitzk");
-    			add_location(div3, file, 675, 2, 13041);
-    			dispose = listen_dev(button, "click", /*click_handler*/ ctx[10], false, false, false);
+    			attr_dev(div3, "class", "svelte-k3eom2");
+    			add_location(div3, file, 798, 2, 15523);
+    			dispose = listen_dev(button, "click", /*click_handler*/ ctx[16], false, false, false);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -474,14 +474,14 @@ var app = (function () {
     		block,
     		id: create_if_block_7.name,
     		type: "if",
-    		source: "(675:1) {#if gui.deviceSelectOpen}",
+    		source: "(798:1) {#if gui.deviceSelectOpen}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (681:6) {#each config.device as device,id}
+    // (804:6) {#each config.device as device,id}
     function create_each_block_5(ctx) {
     	let li;
     	let input;
@@ -490,7 +490,7 @@ var app = (function () {
     	let t0;
     	let label;
     	let div;
-    	let t1_value = /*device*/ ctx[41] + "";
+    	let t1_value = /*device*/ ctx[47] + "";
     	let t1;
     	let label_for_value;
     	let t2;
@@ -506,21 +506,21 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = space();
     			attr_dev(input, "type", "radio");
-    			input.__value = input_value_value = /*id*/ ctx[32];
+    			input.__value = input_value_value = /*id*/ ctx[38];
     			input.value = input.__value;
-    			attr_dev(input, "id", input_id_value = "radioDevice" + /*id*/ ctx[32]);
+    			attr_dev(input, "id", input_id_value = "radioDevice" + /*id*/ ctx[38]);
     			attr_dev(input, "name", "radioDevice");
-    			attr_dev(input, "class", "inputDevice svelte-nzitzk");
-    			/*$$binding_groups*/ ctx[9][3].push(input);
-    			add_location(input, file, 682, 8, 13324);
-    			attr_dev(div, "class", "button selectorDevice svelte-nzitzk");
-    			add_location(div, file, 683, 37, 13486);
-    			attr_dev(label, "for", label_for_value = "radioDevice" + /*id*/ ctx[32]);
-    			attr_dev(label, "class", "svelte-nzitzk");
-    			add_location(label, file, 683, 8, 13457);
-    			attr_dev(li, "class", "li svelte-nzitzk");
-    			add_location(li, file, 681, 7, 13300);
-    			dispose = listen_dev(input, "change", /*input_change_handler*/ ctx[8]);
+    			attr_dev(input, "class", "inputDevice svelte-k3eom2");
+    			/*$$binding_groups*/ ctx[15][3].push(input);
+    			add_location(input, file, 805, 8, 15806);
+    			attr_dev(div, "class", "button selectorDevice svelte-k3eom2");
+    			add_location(div, file, 806, 37, 15968);
+    			attr_dev(label, "for", label_for_value = "radioDevice" + /*id*/ ctx[38]);
+    			attr_dev(label, "class", "svelte-k3eom2");
+    			add_location(label, file, 806, 8, 15939);
+    			attr_dev(li, "class", "li svelte-k3eom2");
+    			add_location(li, file, 804, 7, 15782);
+    			dispose = listen_dev(input, "change", /*input_change_handler*/ ctx[14]);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -537,11 +537,11 @@ var app = (function () {
     				input.checked = input.__value === /*config*/ ctx[0].selectDevice;
     			}
 
-    			if (dirty[0] & /*config*/ 1 && t1_value !== (t1_value = /*device*/ ctx[41] + "")) set_data_dev(t1, t1_value);
+    			if (dirty[0] & /*config*/ 1 && t1_value !== (t1_value = /*device*/ ctx[47] + "")) set_data_dev(t1, t1_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(li);
-    			/*$$binding_groups*/ ctx[9][3].splice(/*$$binding_groups*/ ctx[9][3].indexOf(input), 1);
+    			/*$$binding_groups*/ ctx[15][3].splice(/*$$binding_groups*/ ctx[15][3].indexOf(input), 1);
     			dispose();
     		}
     	};
@@ -550,14 +550,14 @@ var app = (function () {
     		block,
     		id: create_each_block_5.name,
     		type: "each",
-    		source: "(681:6) {#each config.device as device,id}",
+    		source: "(804:6) {#each config.device as device,id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (695:1) {#if gui.mutList}
+    // (818:1) {#if gui.mutList}
     function create_if_block_6(ctx) {
     	let div3;
     	let div2;
@@ -570,7 +570,7 @@ var app = (function () {
     	let div1;
     	let button;
     	let dispose;
-    	let each_value_4 = /*mutList*/ ctx[3];
+    	let each_value_4 = /*mutList*/ ctx[4];
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value_4.length; i += 1) {
@@ -596,27 +596,27 @@ var app = (function () {
     			div1 = element("div");
     			button = element("button");
     			button.textContent = "Закрыть";
-    			attr_dev(p, "class", "leaf svelte-nzitzk");
-    			add_location(p, file, 697, 4, 13865);
-    			attr_dev(input, "class", "input-text leaf mut-leaf svelte-nzitzk");
+    			attr_dev(p, "class", "leaf svelte-k3eom2");
+    			add_location(p, file, 820, 4, 16347);
+    			attr_dev(input, "class", "input-text leaf mut-leaf svelte-k3eom2");
     			attr_dev(input, "type", "text");
     			attr_dev(input, "placeholder", "Введите никнейм");
-    			add_location(input, file, 698, 4, 13907);
+    			add_location(input, file, 821, 4, 16389);
     			attr_dev(div0, "id", "mutListPlayers");
-    			attr_dev(div0, "class", "mutListPlayers svelte-nzitzk");
-    			add_location(div0, file, 699, 4, 13994);
+    			attr_dev(div0, "class", "mutListPlayers svelte-k3eom2");
+    			add_location(div0, file, 822, 4, 16476);
     			attr_dev(button, "id", "mutListCloseButton");
-    			attr_dev(button, "class", "button svelte-nzitzk");
-    			add_location(button, file, 705, 5, 14219);
+    			attr_dev(button, "class", "button svelte-k3eom2");
+    			add_location(button, file, 828, 5, 16701);
     			set_style(div1, "text-align", "center");
-    			attr_dev(div1, "class", "svelte-nzitzk");
-    			add_location(div1, file, 704, 4, 14180);
-    			attr_dev(div2, "class", "mutlist svelte-nzitzk");
-    			add_location(div2, file, 696, 3, 13839);
+    			attr_dev(div1, "class", "svelte-k3eom2");
+    			add_location(div1, file, 827, 4, 16662);
+    			attr_dev(div2, "class", "mutlist svelte-k3eom2");
+    			add_location(div2, file, 819, 3, 16321);
     			attr_dev(div3, "id", "floatwindow");
-    			attr_dev(div3, "class", "svelte-nzitzk");
-    			add_location(div3, file, 695, 2, 13813);
-    			dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[11], false, false, false);
+    			attr_dev(div3, "class", "svelte-k3eom2");
+    			add_location(div3, file, 818, 2, 16295);
+    			dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[17], false, false, false);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -636,8 +636,8 @@ var app = (function () {
     			append_dev(div1, button);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*mutList*/ 8) {
-    				each_value_4 = /*mutList*/ ctx[3];
+    			if (dirty[0] & /*mutList*/ 16) {
+    				each_value_4 = /*mutList*/ ctx[4];
     				let i;
 
     				for (i = 0; i < each_value_4.length; i += 1) {
@@ -670,17 +670,17 @@ var app = (function () {
     		block,
     		id: create_if_block_6.name,
     		type: "if",
-    		source: "(695:1) {#if gui.mutList}",
+    		source: "(818:1) {#if gui.mutList}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (701:5) {#each mutList as name,id}
+    // (824:5) {#each mutList as name,id}
     function create_each_block_4(ctx) {
     	let button;
-    	let t_value = /*name*/ ctx[33] + "";
+    	let t_value = /*name*/ ctx[39] + "";
     	let t;
     	let button_id_value;
 
@@ -688,9 +688,9 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			t = text(t_value);
-    			attr_dev(button, "id", button_id_value = "1" + /*id*/ ctx[32] + "Vf");
-    			attr_dev(button, "class", "button selector mut-leaf svelte-nzitzk");
-    			add_location(button, file, 701, 7, 14082);
+    			attr_dev(button, "id", button_id_value = "1" + /*id*/ ctx[38] + "Vf");
+    			attr_dev(button, "class", "button selector mut-leaf svelte-k3eom2");
+    			add_location(button, file, 824, 7, 16564);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -706,14 +706,14 @@ var app = (function () {
     		block,
     		id: create_each_block_4.name,
     		type: "each",
-    		source: "(701:5) {#each mutList as name,id}",
+    		source: "(824:5) {#each mutList as name,id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (711:1) {#if gui.roomSelectOpen}
+    // (834:1) {#if gui.roomSelectOpen}
     function create_if_block_5(ctx) {
     	let div4;
     	let div3;
@@ -752,28 +752,28 @@ var app = (function () {
     			div1 = element("div");
     			button = element("button");
     			button.textContent = "Закрыть";
-    			attr_dev(p, "class", "leaf svelte-nzitzk");
-    			add_location(p, file, 714, 24, 14496);
-    			attr_dev(ul, "class", "ul svelte-nzitzk");
+    			attr_dev(p, "class", "leaf svelte-k3eom2");
+    			add_location(p, file, 837, 24, 16978);
+    			attr_dev(ul, "class", "ul svelte-k3eom2");
     			attr_dev(ul, "id", "roomSelectList");
-    			add_location(ul, file, 716, 28, 14656);
+    			add_location(ul, file, 839, 28, 17138);
     			attr_dev(div0, "id", "mutListPlayers");
-    			attr_dev(div0, "class", "deviceListPlayers deviceSelectButton svelte-nzitzk");
-    			add_location(div0, file, 715, 24, 14557);
+    			attr_dev(div0, "class", "deviceListPlayers deviceSelectButton svelte-k3eom2");
+    			add_location(div0, file, 838, 24, 17039);
     			attr_dev(button, "id", "roomSelectCloseButton");
-    			attr_dev(button, "class", "button svelte-nzitzk");
-    			add_location(button, file, 726, 28, 15164);
-    			attr_dev(div1, "class", "deviceSelectCloseButton svelte-nzitzk");
-    			add_location(div1, file, 725, 24, 15098);
-    			attr_dev(div2, "class", "mutlist svelte-nzitzk");
-    			add_location(div2, file, 713, 16, 14450);
+    			attr_dev(button, "class", "button svelte-k3eom2");
+    			add_location(button, file, 849, 28, 17646);
+    			attr_dev(div1, "class", "deviceSelectCloseButton svelte-k3eom2");
+    			add_location(div1, file, 848, 24, 17580);
+    			attr_dev(div2, "class", "mutlist svelte-k3eom2");
+    			add_location(div2, file, 836, 16, 16932);
     			attr_dev(div3, "id", "roomSelect");
-    			attr_dev(div3, "class", "svelte-nzitzk");
-    			add_location(div3, file, 712, 3, 14412);
+    			attr_dev(div3, "class", "svelte-k3eom2");
+    			add_location(div3, file, 835, 3, 16894);
     			attr_dev(div4, "id", "floatwindow");
-    			attr_dev(div4, "class", "svelte-nzitzk");
-    			add_location(div4, file, 711, 2, 14385);
-    			dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[13], false, false, false);
+    			attr_dev(div4, "class", "svelte-k3eom2");
+    			add_location(div4, file, 834, 2, 16867);
+    			dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[19], false, false, false);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div4, anchor);
@@ -827,14 +827,14 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(711:1) {#if gui.roomSelectOpen}",
+    		source: "(834:1) {#if gui.roomSelectOpen}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (718:8) {#each config.room as room,id}
+    // (841:8) {#each config.room as room,id}
     function create_each_block_3(ctx) {
     	let li;
     	let input;
@@ -843,7 +843,7 @@ var app = (function () {
     	let t0;
     	let label;
     	let div;
-    	let t1_value = /*room*/ ctx[30] + "";
+    	let t1_value = /*room*/ ctx[36] + "";
     	let t1;
     	let label_for_value;
     	let t2;
@@ -859,21 +859,21 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = space();
     			attr_dev(input, "type", "radio");
-    			input.__value = input_value_value = /*id*/ ctx[32];
+    			input.__value = input_value_value = /*id*/ ctx[38];
     			input.value = input.__value;
-    			attr_dev(input, "id", input_id_value = "radioRoom" + /*id*/ ctx[32]);
+    			attr_dev(input, "id", input_id_value = "radioRoom" + /*id*/ ctx[38]);
     			attr_dev(input, "name", "radioRoom");
-    			attr_dev(input, "class", "inputDevice svelte-nzitzk");
-    			/*$$binding_groups*/ ctx[9][2].push(input);
-    			add_location(input, file, 719, 10, 14766);
-    			attr_dev(div, "class", "button selectorDevice svelte-nzitzk");
-    			add_location(div, file, 720, 37, 14922);
-    			attr_dev(label, "for", label_for_value = "radioRoom" + /*id*/ ctx[32]);
-    			attr_dev(label, "class", "svelte-nzitzk");
-    			add_location(label, file, 720, 10, 14895);
-    			attr_dev(li, "class", "li svelte-nzitzk");
-    			add_location(li, file, 718, 9, 14740);
-    			dispose = listen_dev(input, "change", /*input_change_handler_1*/ ctx[12]);
+    			attr_dev(input, "class", "inputDevice svelte-k3eom2");
+    			/*$$binding_groups*/ ctx[15][2].push(input);
+    			add_location(input, file, 842, 10, 17248);
+    			attr_dev(div, "class", "button selectorDevice svelte-k3eom2");
+    			add_location(div, file, 843, 37, 17404);
+    			attr_dev(label, "for", label_for_value = "radioRoom" + /*id*/ ctx[38]);
+    			attr_dev(label, "class", "svelte-k3eom2");
+    			add_location(label, file, 843, 10, 17377);
+    			attr_dev(li, "class", "li svelte-k3eom2");
+    			add_location(li, file, 841, 9, 17222);
+    			dispose = listen_dev(input, "change", /*input_change_handler_1*/ ctx[18]);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -890,11 +890,11 @@ var app = (function () {
     				input.checked = input.__value === /*config*/ ctx[0].selectRoom;
     			}
 
-    			if (dirty[0] & /*config*/ 1 && t1_value !== (t1_value = /*room*/ ctx[30] + "")) set_data_dev(t1, t1_value);
+    			if (dirty[0] & /*config*/ 1 && t1_value !== (t1_value = /*room*/ ctx[36] + "")) set_data_dev(t1, t1_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(li);
-    			/*$$binding_groups*/ ctx[9][2].splice(/*$$binding_groups*/ ctx[9][2].indexOf(input), 1);
+    			/*$$binding_groups*/ ctx[15][2].splice(/*$$binding_groups*/ ctx[15][2].indexOf(input), 1);
     			dispose();
     		}
     	};
@@ -903,14 +903,14 @@ var app = (function () {
     		block,
     		id: create_each_block_3.name,
     		type: "each",
-    		source: "(718:8) {#each config.room as room,id}",
+    		source: "(841:8) {#each config.room as room,id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (733:1) {#if gui.channelSelectOpen}
+    // (856:1) {#if gui.channelSelectOpen}
     function create_if_block_4(ctx) {
     	let div8;
     	let div7;
@@ -991,80 +991,80 @@ var app = (function () {
     			div5 = element("div");
     			button = element("button");
     			button.textContent = "Закрыть";
-    			attr_dev(p, "class", "leaf svelte-nzitzk");
-    			add_location(p, file, 736, 24, 15509);
+    			attr_dev(p, "class", "leaf svelte-k3eom2");
+    			add_location(p, file, 859, 24, 17991);
     			attr_dev(input0, "type", "radio");
     			input0.value = "0";
     			attr_dev(input0, "id", "radioChannel0");
     			attr_dev(input0, "name", "radioChannel");
-    			attr_dev(input0, "class", "inputDevice svelte-nzitzk");
-    			add_location(input0, file, 746, 8, 16088);
-    			attr_dev(div0, "class", "button selectorDevice svelte-nzitzk");
-    			add_location(div0, file, 747, 35, 16213);
+    			attr_dev(input0, "class", "inputDevice svelte-k3eom2");
+    			add_location(input0, file, 869, 8, 18570);
+    			attr_dev(div0, "class", "button selectorDevice svelte-k3eom2");
+    			add_location(div0, file, 870, 35, 18695);
     			attr_dev(label0, "for", "radioChannel0");
-    			attr_dev(label0, "class", "svelte-nzitzk");
-    			add_location(label0, file, 747, 8, 16186);
-    			attr_dev(li0, "class", "li svelte-nzitzk");
-    			add_location(li0, file, 745, 28, 16064);
+    			attr_dev(label0, "class", "svelte-k3eom2");
+    			add_location(label0, file, 870, 8, 18668);
+    			attr_dev(li0, "class", "li svelte-k3eom2");
+    			add_location(li0, file, 868, 28, 18546);
     			attr_dev(input1, "type", "radio");
     			input1.value = "1";
     			attr_dev(input1, "id", "radioChannel1");
     			attr_dev(input1, "name", "radioChannel");
-    			attr_dev(input1, "class", "inputDevice svelte-nzitzk");
-    			add_location(input1, file, 749, 22, 16306);
-    			attr_dev(div1, "class", "button selectorDevice svelte-nzitzk");
-    			add_location(div1, file, 749, 138, 16422);
+    			attr_dev(input1, "class", "inputDevice svelte-k3eom2");
+    			add_location(input1, file, 872, 22, 18788);
+    			attr_dev(div1, "class", "button selectorDevice svelte-k3eom2");
+    			add_location(div1, file, 872, 138, 18904);
     			attr_dev(label1, "for", "radioChannel1");
-    			attr_dev(label1, "class", "svelte-nzitzk");
-    			add_location(label1, file, 749, 111, 16395);
-    			attr_dev(li1, "class", "li svelte-nzitzk");
-    			add_location(li1, file, 749, 7, 16291);
+    			attr_dev(label1, "class", "svelte-k3eom2");
+    			add_location(label1, file, 872, 111, 18877);
+    			attr_dev(li1, "class", "li svelte-k3eom2");
+    			add_location(li1, file, 872, 7, 18773);
     			attr_dev(input2, "type", "radio");
     			input2.value = "2";
     			attr_dev(input2, "id", "radioChannel2");
     			attr_dev(input2, "name", "radioChannel");
-    			attr_dev(input2, "class", "inputDevice svelte-nzitzk");
-    			add_location(input2, file, 749, 215, 16499);
-    			attr_dev(div2, "class", "button selectorDevice svelte-nzitzk");
-    			add_location(div2, file, 749, 331, 16615);
+    			attr_dev(input2, "class", "inputDevice svelte-k3eom2");
+    			add_location(input2, file, 872, 215, 18981);
+    			attr_dev(div2, "class", "button selectorDevice svelte-k3eom2");
+    			add_location(div2, file, 872, 331, 19097);
     			attr_dev(label2, "for", "radioChannel2");
-    			attr_dev(label2, "class", "svelte-nzitzk");
-    			add_location(label2, file, 749, 304, 16588);
-    			attr_dev(li2, "class", "li svelte-nzitzk");
-    			add_location(li2, file, 749, 200, 16484);
+    			attr_dev(label2, "class", "svelte-k3eom2");
+    			add_location(label2, file, 872, 304, 19070);
+    			attr_dev(li2, "class", "li svelte-k3eom2");
+    			add_location(li2, file, 872, 200, 18966);
     			attr_dev(input3, "type", "radio");
     			input3.value = "3";
     			attr_dev(input3, "id", "radioChannel3");
     			attr_dev(input3, "name", "radioChannel");
-    			attr_dev(input3, "class", "inputDevice svelte-nzitzk");
-    			add_location(input3, file, 749, 408, 16692);
-    			attr_dev(div3, "class", "button selectorDevice svelte-nzitzk");
-    			add_location(div3, file, 749, 524, 16808);
+    			attr_dev(input3, "class", "inputDevice svelte-k3eom2");
+    			add_location(input3, file, 872, 408, 19174);
+    			attr_dev(div3, "class", "button selectorDevice svelte-k3eom2");
+    			add_location(div3, file, 872, 524, 19290);
     			attr_dev(label3, "for", "radioChannel3");
-    			attr_dev(label3, "class", "svelte-nzitzk");
-    			add_location(label3, file, 749, 497, 16781);
-    			attr_dev(li3, "class", "li svelte-nzitzk");
-    			add_location(li3, file, 749, 393, 16677);
-    			attr_dev(ul, "class", "ul svelte-nzitzk");
+    			attr_dev(label3, "class", "svelte-k3eom2");
+    			add_location(label3, file, 872, 497, 19263);
+    			attr_dev(li3, "class", "li svelte-k3eom2");
+    			add_location(li3, file, 872, 393, 19159);
+    			attr_dev(ul, "class", "ul svelte-k3eom2");
     			attr_dev(ul, "id", "channelSelectList");
-    			add_location(ul, file, 738, 28, 15667);
+    			add_location(ul, file, 861, 28, 18149);
     			attr_dev(div4, "id", "mutListPlayers");
-    			attr_dev(div4, "class", "deviceListPlayers deviceSelectButton svelte-nzitzk");
-    			add_location(div4, file, 737, 24, 15568);
+    			attr_dev(div4, "class", "deviceListPlayers deviceSelectButton svelte-k3eom2");
+    			add_location(div4, file, 860, 24, 18050);
     			attr_dev(button, "id", "channelSelectCloseButton");
-    			attr_dev(button, "class", "button svelte-nzitzk");
-    			add_location(button, file, 753, 28, 17005);
-    			attr_dev(div5, "class", "deviceSelectCloseButton svelte-nzitzk");
-    			add_location(div5, file, 752, 24, 16939);
-    			attr_dev(div6, "class", "mutlist svelte-nzitzk");
-    			add_location(div6, file, 735, 16, 15463);
+    			attr_dev(button, "class", "button svelte-k3eom2");
+    			add_location(button, file, 876, 28, 19487);
+    			attr_dev(div5, "class", "deviceSelectCloseButton svelte-k3eom2");
+    			add_location(div5, file, 875, 24, 19421);
+    			attr_dev(div6, "class", "mutlist svelte-k3eom2");
+    			add_location(div6, file, 858, 16, 17945);
     			attr_dev(div7, "id", "channelSelect");
-    			attr_dev(div7, "class", "svelte-nzitzk");
-    			add_location(div7, file, 734, 3, 15422);
+    			attr_dev(div7, "class", "svelte-k3eom2");
+    			add_location(div7, file, 857, 3, 17904);
     			attr_dev(div8, "id", "floatwindow");
-    			attr_dev(div8, "class", "svelte-nzitzk");
-    			add_location(div8, file, 733, 2, 15395);
-    			dispose = listen_dev(button, "click", /*click_handler_3*/ ctx[15], false, false, false);
+    			attr_dev(div8, "class", "svelte-k3eom2");
+    			add_location(div8, file, 856, 2, 17877);
+    			dispose = listen_dev(button, "click", /*click_handler_3*/ ctx[21], false, false, false);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div8, anchor);
@@ -1137,14 +1137,14 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(733:1) {#if gui.channelSelectOpen}",
+    		source: "(856:1) {#if gui.channelSelectOpen}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (740:7) {#each config.channel as channel,id}
+    // (863:7) {#each config.channel as channel,id}
     function create_each_block_2(ctx) {
     	let li;
     	let input;
@@ -1153,7 +1153,7 @@ var app = (function () {
     	let t0;
     	let label;
     	let div;
-    	let t1_value = /*channel*/ ctx[37] + "";
+    	let t1_value = /*channel*/ ctx[43] + "";
     	let t1;
     	let label_for_value;
     	let dispose;
@@ -1167,21 +1167,21 @@ var app = (function () {
     			div = element("div");
     			t1 = text(t1_value);
     			attr_dev(input, "type", "radio");
-    			input.__value = input_value_value = /*id*/ ctx[32];
+    			input.__value = input_value_value = /*id*/ ctx[38];
     			input.value = input.__value;
-    			attr_dev(input, "id", input_id_value = "radioChanne" + /*id*/ ctx[32]);
+    			attr_dev(input, "id", input_id_value = "radioChanne" + /*id*/ ctx[38]);
     			attr_dev(input, "name", "radioChannel");
-    			attr_dev(input, "class", "inputDevice svelte-nzitzk");
-    			/*$$binding_groups*/ ctx[9][1].push(input);
-    			add_location(input, file, 741, 9, 15783);
-    			attr_dev(div, "class", "button selectorDevice svelte-nzitzk");
-    			add_location(div, file, 742, 38, 15948);
-    			attr_dev(label, "for", label_for_value = "radioChanne" + /*id*/ ctx[32]);
-    			attr_dev(label, "class", "svelte-nzitzk");
-    			add_location(label, file, 742, 9, 15919);
-    			attr_dev(li, "class", "li svelte-nzitzk");
-    			add_location(li, file, 740, 8, 15758);
-    			dispose = listen_dev(input, "change", /*input_change_handler_2*/ ctx[14]);
+    			attr_dev(input, "class", "inputDevice svelte-k3eom2");
+    			/*$$binding_groups*/ ctx[15][1].push(input);
+    			add_location(input, file, 864, 9, 18265);
+    			attr_dev(div, "class", "button selectorDevice svelte-k3eom2");
+    			add_location(div, file, 865, 38, 18430);
+    			attr_dev(label, "for", label_for_value = "radioChanne" + /*id*/ ctx[38]);
+    			attr_dev(label, "class", "svelte-k3eom2");
+    			add_location(label, file, 865, 9, 18401);
+    			attr_dev(li, "class", "li svelte-k3eom2");
+    			add_location(li, file, 863, 8, 18240);
+    			dispose = listen_dev(input, "change", /*input_change_handler_2*/ ctx[20]);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -1197,11 +1197,11 @@ var app = (function () {
     				input.checked = input.__value === /*config*/ ctx[0].selectchannel;
     			}
 
-    			if (dirty[0] & /*config*/ 1 && t1_value !== (t1_value = /*channel*/ ctx[37] + "")) set_data_dev(t1, t1_value);
+    			if (dirty[0] & /*config*/ 1 && t1_value !== (t1_value = /*channel*/ ctx[43] + "")) set_data_dev(t1, t1_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(li);
-    			/*$$binding_groups*/ ctx[9][1].splice(/*$$binding_groups*/ ctx[9][1].indexOf(input), 1);
+    			/*$$binding_groups*/ ctx[15][1].splice(/*$$binding_groups*/ ctx[15][1].indexOf(input), 1);
     			dispose();
     		}
     	};
@@ -1210,17 +1210,17 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(740:7) {#each config.channel as channel,id}",
+    		source: "(863:7) {#each config.channel as channel,id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (760:1) {#if gui.volumeMainWindow}
+    // (883:1) {#if gui.volumeMainWindow}
     function create_if_block_2(ctx) {
     	let div;
-    	let each_value = /*volumeWindowRoom*/ ctx[4];
+    	let each_value = /*volumeWindowRoom*/ ctx[5];
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value.length; i += 1) {
@@ -1235,9 +1235,9 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div, "class", "volumeMainWindow svelte-nzitzk");
+    			attr_dev(div, "class", "volumeMainWindow svelte-k3eom2");
     			attr_dev(div, "id", "volumeMainWindow");
-    			add_location(div, file, 760, 2, 17241);
+    			add_location(div, file, 883, 2, 19723);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1247,8 +1247,8 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*volumeWindowPlayer, volumeWindowRoom*/ 18) {
-    				each_value = /*volumeWindowRoom*/ ctx[4];
+    			if (dirty[0] & /*volumeWindowPlayer, volumeWindowRoom*/ 34) {
+    				each_value = /*volumeWindowRoom*/ ctx[5];
     				let i;
 
     				for (i = 0; i < each_value.length; i += 1) {
@@ -1280,14 +1280,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(760:1) {#if gui.volumeMainWindow}",
+    		source: "(883:1) {#if gui.volumeMainWindow}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (774:8) {#if room == id}
+    // (897:8) {#if room == id}
     function create_if_block_3(ctx) {
     	let tr;
     	let th0;
@@ -1295,7 +1295,7 @@ var app = (function () {
     	let img0_src_value;
     	let t0;
     	let p0;
-    	let t1_value = /*name*/ ctx[33] + "";
+    	let t1_value = /*name*/ ctx[39] + "";
     	let t1;
     	let t2;
     	let th1;
@@ -1315,14 +1315,14 @@ var app = (function () {
     	let input_id_value;
     	let t9;
     	let p3;
-    	let t10_value = /*value*/ ctx[34] + "";
+    	let t10_value = /*value*/ ctx[40] + "";
     	let t10;
     	let p3_id_value;
     	let t11;
     	let dispose;
 
     	function input_change_input_handler() {
-    		/*input_change_input_handler*/ ctx[16].call(input, /*value*/ ctx[34], /*each_value_1*/ ctx[35], /*each_index*/ ctx[36]);
+    		/*input_change_input_handler*/ ctx[22].call(input, /*value*/ ctx[40], /*each_value_1*/ ctx[41], /*each_index*/ ctx[42]);
     	}
 
     	const block = {
@@ -1352,43 +1352,43 @@ var app = (function () {
     			t10 = text(t10_value);
     			t11 = space();
     			if (img0.src !== (img0_src_value = "img/userloc.png")) attr_dev(img0, "src", img0_src_value);
-    			attr_dev(img0, "class", "userloc svelte-nzitzk");
+    			attr_dev(img0, "class", "userloc svelte-k3eom2");
     			attr_dev(img0, "alt", "userloc");
-    			add_location(img0, file, 776, 11, 17944);
-    			attr_dev(p0, "class", "userName svelte-nzitzk");
-    			add_location(p0, file, 777, 11, 18013);
-    			attr_dev(th0, "class", "th svelte-nzitzk");
-    			add_location(th0, file, 775, 10, 17917);
+    			add_location(img0, file, 899, 11, 20426);
+    			attr_dev(p0, "class", "userName svelte-k3eom2");
+    			add_location(p0, file, 900, 11, 20495);
+    			attr_dev(th0, "class", "th svelte-k3eom2");
+    			add_location(th0, file, 898, 10, 20399);
     			if (img1.src !== (img1_src_value = "img/distance.png")) attr_dev(img1, "src", img1_src_value);
-    			attr_dev(img1, "class", "imgdistance svelte-nzitzk");
+    			attr_dev(img1, "class", "imgdistance svelte-k3eom2");
     			attr_dev(img1, "alt", "distance");
-    			add_location(img1, file, 780, 11, 18097);
-    			attr_dev(p1, "id", p1_id_value = "userName" + /*id*/ ctx[32] + "Distance");
-    			attr_dev(p1, "class", "userName svelte-nzitzk");
-    			add_location(p1, file, 781, 11, 18172);
-    			attr_dev(p2, "class", "userName margin svelte-nzitzk");
-    			add_location(p2, file, 782, 11, 18238);
-    			attr_dev(th1, "class", "th svelte-nzitzk");
-    			add_location(th1, file, 779, 10, 18070);
+    			add_location(img1, file, 903, 11, 20579);
+    			attr_dev(p1, "id", p1_id_value = "userName" + /*id*/ ctx[38] + "Distance");
+    			attr_dev(p1, "class", "userName svelte-k3eom2");
+    			add_location(p1, file, 904, 11, 20654);
+    			attr_dev(p2, "class", "userName margin svelte-k3eom2");
+    			add_location(p2, file, 905, 11, 20720);
+    			attr_dev(th1, "class", "th svelte-k3eom2");
+    			add_location(th1, file, 902, 10, 20552);
     			if (img2.src !== (img2_src_value = "img/micSettings.png")) attr_dev(img2, "src", img2_src_value);
-    			attr_dev(img2, "class", "micSettings svelte-nzitzk");
+    			attr_dev(img2, "class", "micSettings svelte-k3eom2");
     			attr_dev(img2, "alt", "micSettings");
-    			add_location(img2, file, 785, 11, 18335);
-    			attr_dev(input, "id", input_id_value = "sliderP" + /*id*/ ctx[32]);
+    			add_location(img2, file, 908, 11, 20817);
+    			attr_dev(input, "id", input_id_value = "sliderP" + /*id*/ ctx[38]);
     			attr_dev(input, "min", "0");
     			attr_dev(input, "max", "100");
     			attr_dev(input, "type", "range");
-    			attr_dev(input, "class", "sliderP svelte-nzitzk");
-    			set_style(input, "--columnsP", /*value*/ ctx[34] + "%");
-    			add_location(input, file, 786, 11, 18416);
-    			attr_dev(p3, "id", p3_id_value = "sliderP" + /*id*/ ctx[32] + "volume");
-    			attr_dev(p3, "class", "userName svelte-nzitzk");
-    			add_location(p3, file, 787, 11, 18551);
+    			attr_dev(input, "class", "sliderP svelte-k3eom2");
+    			set_style(input, "--columnsP", /*value*/ ctx[40] + "%");
+    			add_location(input, file, 909, 11, 20898);
+    			attr_dev(p3, "id", p3_id_value = "sliderP" + /*id*/ ctx[38] + "volume");
+    			attr_dev(p3, "class", "userName svelte-k3eom2");
+    			add_location(p3, file, 910, 11, 21033);
     			attr_dev(th2, "id", "grid");
-    			attr_dev(th2, "class", "th svelte-nzitzk");
-    			add_location(th2, file, 784, 10, 18298);
-    			attr_dev(tr, "class", "voiceRoomPlayerSettings svelte-nzitzk");
-    			add_location(tr, file, 774, 10, 17870);
+    			attr_dev(th2, "class", "th svelte-k3eom2");
+    			add_location(th2, file, 907, 10, 20780);
+    			attr_dev(tr, "class", "voiceRoomPlayerSettings svelte-k3eom2");
+    			add_location(tr, file, 897, 10, 20352);
 
     			dispose = [
     				listen_dev(input, "change", input_change_input_handler),
@@ -1414,7 +1414,7 @@ var app = (function () {
     			append_dev(th2, img2);
     			append_dev(th2, t8);
     			append_dev(th2, input);
-    			set_input_value(input, /*value*/ ctx[34]);
+    			set_input_value(input, /*value*/ ctx[40]);
     			append_dev(th2, t9);
     			append_dev(th2, p3);
     			append_dev(p3, t10);
@@ -1422,17 +1422,17 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*volumeWindowPlayer*/ 2 && t1_value !== (t1_value = /*name*/ ctx[33] + "")) set_data_dev(t1, t1_value);
+    			if (dirty[0] & /*volumeWindowPlayer*/ 2 && t1_value !== (t1_value = /*name*/ ctx[39] + "")) set_data_dev(t1, t1_value);
 
     			if (dirty[0] & /*volumeWindowPlayer*/ 2) {
-    				set_style(input, "--columnsP", /*value*/ ctx[34] + "%");
+    				set_style(input, "--columnsP", /*value*/ ctx[40] + "%");
     			}
 
     			if (dirty[0] & /*volumeWindowPlayer*/ 2) {
-    				set_input_value(input, /*value*/ ctx[34]);
+    				set_input_value(input, /*value*/ ctx[40]);
     			}
 
-    			if (dirty[0] & /*volumeWindowPlayer*/ 2 && t10_value !== (t10_value = /*value*/ ctx[34] + "")) set_data_dev(t10, t10_value);
+    			if (dirty[0] & /*volumeWindowPlayer*/ 2 && t10_value !== (t10_value = /*value*/ ctx[40] + "")) set_data_dev(t10, t10_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(tr);
@@ -1444,17 +1444,17 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(774:8) {#if room == id}",
+    		source: "(897:8) {#if room == id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (773:8) {#each volumeWindowPlayer as {name, room, value}}
+    // (896:8) {#each volumeWindowPlayer as {name, room, value}}
     function create_each_block_1(ctx) {
     	let if_block_anchor;
-    	let if_block = /*room*/ ctx[30] == /*id*/ ctx[32] && create_if_block_3(ctx);
+    	let if_block = /*room*/ ctx[36] == /*id*/ ctx[38] && create_if_block_3(ctx);
 
     	const block = {
     		c: function create() {
@@ -1466,7 +1466,7 @@ var app = (function () {
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (/*room*/ ctx[30] == /*id*/ ctx[32]) {
+    			if (/*room*/ ctx[36] == /*id*/ ctx[38]) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
@@ -1489,14 +1489,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(773:8) {#each volumeWindowPlayer as {name, room, value}}",
+    		source: "(896:8) {#each volumeWindowPlayer as {name, room, value}}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (762:3) {#each volumeWindowRoom as room,id}
+    // (885:3) {#each volumeWindowRoom as room,id}
     function create_each_block(ctx) {
     	let div2;
     	let div0;
@@ -1504,7 +1504,7 @@ var app = (function () {
     	let img_src_value;
     	let t0;
     	let p;
-    	let t1_value = /*room*/ ctx[30] + "";
+    	let t1_value = /*room*/ ctx[36] + "";
     	let t1;
     	let t2;
     	let input;
@@ -1545,32 +1545,32 @@ var app = (function () {
     			}
 
     			t5 = space();
-    			attr_dev(img, "class", "radiomin svelte-nzitzk");
+    			attr_dev(img, "class", "radiomin svelte-k3eom2");
     			if (img.src !== (img_src_value = "img/radiomin.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "PicturaCka");
-    			add_location(img, file, 764, 6, 17419);
-    			attr_dev(p, "class", "voiceroomlogotext svelte-nzitzk");
-    			add_location(p, file, 765, 6, 17488);
+    			add_location(img, file, 887, 6, 19901);
+    			attr_dev(p, "class", "voiceroomlogotext svelte-k3eom2");
+    			add_location(p, file, 888, 6, 19970);
     			attr_dev(input, "id", "hiddenSetting");
     			attr_dev(input, "type", "checkbox");
-    			attr_dev(input, "class", "svelte-nzitzk");
-    			add_location(input, file, 766, 6, 17534);
+    			attr_dev(input, "class", "svelte-k3eom2");
+    			add_location(input, file, 889, 6, 20016);
     			attr_dev(label, "for", "hiddenSetting");
-    			attr_dev(label, "class", "hiddenSetting svelte-nzitzk");
-    			add_location(label, file, 767, 6, 17583);
-    			attr_dev(div0, "class", "voiceroomlogo svelte-nzitzk");
-    			add_location(div0, file, 763, 5, 17385);
-    			attr_dev(tbody, "class", "svelte-nzitzk");
-    			add_location(tbody, file, 771, 7, 17769);
+    			attr_dev(label, "class", "hiddenSetting svelte-k3eom2");
+    			add_location(label, file, 890, 6, 20065);
+    			attr_dev(div0, "class", "voiceroomlogo svelte-k3eom2");
+    			add_location(div0, file, 886, 5, 19867);
+    			attr_dev(tbody, "class", "svelte-k3eom2");
+    			add_location(tbody, file, 894, 7, 20251);
     			attr_dev(table, "id", "voiceRoomPlayerSettings1");
-    			attr_dev(table, "class", "svelte-nzitzk");
-    			add_location(table, file, 770, 6, 17724);
+    			attr_dev(table, "class", "svelte-k3eom2");
+    			add_location(table, file, 893, 6, 20206);
     			attr_dev(div1, "id", "voiceRoom1PlayerList");
-    			attr_dev(div1, "class", "voiceRoomPlayerList svelte-nzitzk");
-    			add_location(div1, file, 769, 5, 17658);
-    			attr_dev(div2, "id", div2_id_value = "voiceroom" + /*id*/ ctx[32]);
-    			attr_dev(div2, "class", "voiceroom svelte-nzitzk");
-    			add_location(div2, file, 762, 4, 17337);
+    			attr_dev(div1, "class", "voiceRoomPlayerList svelte-k3eom2");
+    			add_location(div1, file, 892, 5, 20140);
+    			attr_dev(div2, "id", div2_id_value = "voiceroom" + /*id*/ ctx[38]);
+    			attr_dev(div2, "class", "voiceroom svelte-k3eom2");
+    			add_location(div2, file, 885, 4, 19819);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -1628,14 +1628,14 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(762:3) {#each volumeWindowRoom as room,id}",
+    		source: "(885:3) {#each volumeWindowRoom as room,id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (800:1) {#if gui.mainWindowOpen}
+    // (923:1) {#if gui.mainWindowOpen}
     function create_if_block(ctx) {
     	let div18;
     	let h1;
@@ -1859,184 +1859,184 @@ var app = (function () {
     			div17 = element("div");
     			button7 = element("button");
     			button7.textContent = "Закрыть";
-    			attr_dev(img0, "class", "mainImg svelte-nzitzk");
+    			attr_dev(img0, "class", "mainImg svelte-k3eom2");
     			if (img0.src !== (img0_src_value = "img/logo.png")) attr_dev(img0, "src", img0_src_value);
     			attr_dev(img0, "alt", "Logo");
-    			add_location(img0, file, 801, 17, 18814);
+    			add_location(img0, file, 924, 17, 21296);
     			attr_dev(h1, "id", "logo");
-    			attr_dev(h1, "class", "svelte-nzitzk");
-    			add_location(h1, file, 801, 3, 18800);
+    			attr_dev(h1, "class", "svelte-k3eom2");
+    			add_location(h1, file, 924, 3, 21282);
     			if (img1.src !== (img1_src_value = "img/headphones.png")) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "Headphones");
-    			attr_dev(img1, "class", "inline-block headphones shadow svelte-nzitzk");
-    			add_location(img1, file, 804, 5, 18923);
-    			attr_dev(p0, "class", "volume svelte-nzitzk");
-    			add_location(p0, file, 806, 6, 19060);
+    			attr_dev(img1, "class", "inline-block headphones shadow svelte-k3eom2");
+    			add_location(img1, file, 927, 5, 21405);
+    			attr_dev(p0, "class", "volume svelte-k3eom2");
+    			add_location(p0, file, 929, 6, 21542);
     			attr_dev(input0, "id", "range1");
     			attr_dev(input0, "min", "0");
     			attr_dev(input0, "max", "100");
     			attr_dev(input0, "type", "range");
-    			attr_dev(input0, "class", "slider svelte-nzitzk");
+    			attr_dev(input0, "class", "slider svelte-k3eom2");
     			set_style(input0, "--columns", /*config*/ ctx[0].main.soundVolume + "%");
-    			add_location(input0, file, 808, 7, 19132);
-    			attr_dev(p1, "class", "light inline-block svelte-nzitzk");
-    			add_location(p1, file, 809, 7, 19292);
-    			attr_dev(div0, "class", "volume svelte-nzitzk");
-    			add_location(div0, file, 807, 6, 19104);
-    			attr_dev(div1, "class", "inline-block soundvolume svelte-nzitzk");
-    			add_location(div1, file, 805, 5, 19015);
-    			attr_dev(div2, "class", "sound svelte-nzitzk");
-    			add_location(div2, file, 803, 4, 18898);
+    			add_location(input0, file, 931, 7, 21614);
+    			attr_dev(p1, "class", "light inline-block svelte-k3eom2");
+    			add_location(p1, file, 932, 7, 21774);
+    			attr_dev(div0, "class", "volume svelte-k3eom2");
+    			add_location(div0, file, 930, 6, 21586);
+    			attr_dev(div1, "class", "inline-block soundvolume svelte-k3eom2");
+    			add_location(div1, file, 928, 5, 21497);
+    			attr_dev(div2, "class", "sound svelte-k3eom2");
+    			add_location(div2, file, 926, 4, 21380);
     			if (img2.src !== (img2_src_value = "img/mic.png")) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "alt", "Mic");
-    			attr_dev(img2, "class", "mic inline-block shadow svelte-nzitzk");
-    			add_location(img2, file, 814, 5, 19417);
-    			attr_dev(p2, "class", "volume svelte-nzitzk");
-    			add_location(p2, file, 816, 5, 19532);
+    			attr_dev(img2, "class", "mic inline-block shadow svelte-k3eom2");
+    			add_location(img2, file, 937, 5, 21899);
+    			attr_dev(p2, "class", "volume svelte-k3eom2");
+    			add_location(p2, file, 939, 5, 22014);
     			attr_dev(input1, "id", "range2");
     			attr_dev(input1, "min", "0");
     			attr_dev(input1, "max", "100");
     			attr_dev(input1, "type", "range");
-    			attr_dev(input1, "class", "slider svelte-nzitzk");
+    			attr_dev(input1, "class", "slider svelte-k3eom2");
     			set_style(input1, "--columns", /*config*/ ctx[0].main.microphoneVolume + "%");
-    			add_location(input1, file, 818, 7, 19608);
-    			attr_dev(p3, "class", "light inline-block svelte-nzitzk");
-    			add_location(p3, file, 819, 7, 19778);
-    			attr_dev(div3, "class", "volume svelte-nzitzk");
-    			add_location(div3, file, 817, 6, 19580);
-    			attr_dev(div4, "class", "inline-block soundvolume svelte-nzitzk");
-    			add_location(div4, file, 815, 5, 19488);
-    			attr_dev(div5, "class", "sound svelte-nzitzk");
-    			add_location(div5, file, 813, 4, 19392);
+    			add_location(input1, file, 941, 7, 22090);
+    			attr_dev(p3, "class", "light inline-block svelte-k3eom2");
+    			add_location(p3, file, 942, 7, 22260);
+    			attr_dev(div3, "class", "volume svelte-k3eom2");
+    			add_location(div3, file, 940, 6, 22062);
+    			attr_dev(div4, "class", "inline-block soundvolume svelte-k3eom2");
+    			add_location(div4, file, 938, 5, 21970);
+    			attr_dev(div5, "class", "sound svelte-k3eom2");
+    			add_location(div5, file, 936, 4, 21874);
     			attr_dev(div6, "id", "boxvoice");
-    			attr_dev(div6, "class", "svelte-nzitzk");
-    			add_location(div6, file, 802, 3, 18874);
-    			attr_dev(p4, "class", "regular svelte-nzitzk");
-    			add_location(p4, file, 825, 4, 19920);
-    			attr_dev(button0, "class", "input-text deviceSelectOpen svelte-nzitzk");
+    			attr_dev(div6, "class", "svelte-k3eom2");
+    			add_location(div6, file, 925, 3, 21356);
+    			attr_dev(p4, "class", "regular svelte-k3eom2");
+    			add_location(p4, file, 948, 4, 22402);
+    			attr_dev(button0, "class", "input-text deviceSelectOpen svelte-k3eom2");
     			attr_dev(button0, "id", "deviceSelectOpenButton");
-    			add_location(button0, file, 827, 5, 19976);
-    			attr_dev(button1, "class", "button mut shadow svelte-nzitzk");
+    			add_location(button0, file, 950, 5, 22458);
+    			attr_dev(button1, "class", "button mut shadow svelte-k3eom2");
     			attr_dev(button1, "id", "mutListOpenButton");
-    			add_location(button1, file, 828, 5, 20116);
-    			attr_dev(button2, "class", "button mut shadow svelte-nzitzk");
+    			add_location(button1, file, 951, 5, 22598);
+    			attr_dev(button2, "class", "button mut shadow svelte-k3eom2");
     			attr_dev(button2, "id", "volumePlayersButton");
-    			add_location(button2, file, 829, 5, 20232);
-    			attr_dev(div7, "class", "svelte-nzitzk");
-    			add_location(div7, file, 826, 4, 19965);
-    			attr_dev(div8, "class", "boxdevice svelte-nzitzk");
-    			add_location(div8, file, 824, 3, 19892);
-    			attr_dev(p5, "class", "svelte-nzitzk");
-    			add_location(p5, file, 834, 5, 20453);
+    			add_location(button2, file, 952, 5, 22714);
+    			attr_dev(div7, "class", "svelte-k3eom2");
+    			add_location(div7, file, 949, 4, 22447);
+    			attr_dev(div8, "class", "boxdevice svelte-k3eom2");
+    			add_location(div8, file, 947, 3, 22374);
+    			attr_dev(p5, "class", "svelte-k3eom2");
+    			add_location(p5, file, 957, 5, 22935);
     			attr_dev(input2, "id", "triggerOnOffSound");
     			attr_dev(input2, "type", "checkbox");
-    			attr_dev(input2, "class", "svelte-nzitzk");
-    			add_location(input2, file, 835, 5, 20481);
+    			attr_dev(input2, "class", "svelte-k3eom2");
+    			add_location(input2, file, 958, 5, 22963);
     			attr_dev(label0, "for", "triggerOnOffSound");
-    			attr_dev(label0, "class", "checker onoff-sound svelte-nzitzk");
-    			add_location(label0, file, 836, 5, 20578);
-    			attr_dev(div9, "class", "alignment svelte-nzitzk");
-    			add_location(div9, file, 833, 4, 20424);
-    			attr_dev(p6, "class", "svelte-nzitzk");
-    			add_location(p6, file, 839, 5, 20698);
+    			attr_dev(label0, "class", "checker onoff-sound svelte-k3eom2");
+    			add_location(label0, file, 959, 5, 23060);
+    			attr_dev(div9, "class", "alignment svelte-k3eom2");
+    			add_location(div9, file, 956, 4, 22906);
+    			attr_dev(p6, "class", "svelte-k3eom2");
+    			add_location(p6, file, 962, 5, 23180);
     			attr_dev(input3, "id", "triggerSound3D");
     			attr_dev(input3, "type", "checkbox");
-    			attr_dev(input3, "class", "svelte-nzitzk");
-    			add_location(input3, file, 840, 5, 20718);
+    			attr_dev(input3, "class", "svelte-k3eom2");
+    			add_location(input3, file, 963, 5, 23200);
     			attr_dev(label1, "for", "triggerSound3D");
-    			attr_dev(label1, "class", "checker checker-sound3D svelte-nzitzk");
-    			add_location(label1, file, 841, 5, 20809);
-    			attr_dev(div10, "class", "sound3D alignment svelte-nzitzk");
-    			add_location(div10, file, 838, 4, 20661);
-    			attr_dev(div11, "class", "boxmodes alignment svelte-nzitzk");
-    			add_location(div11, file, 832, 3, 20387);
-    			attr_dev(p7, "class", "white svelte-nzitzk");
-    			add_location(p7, file, 847, 6, 21013);
+    			attr_dev(label1, "class", "checker checker-sound3D svelte-k3eom2");
+    			add_location(label1, file, 964, 5, 23291);
+    			attr_dev(div10, "class", "sound3D alignment svelte-k3eom2");
+    			add_location(div10, file, 961, 4, 23143);
+    			attr_dev(div11, "class", "boxmodes alignment svelte-k3eom2");
+    			add_location(div11, file, 955, 3, 22869);
+    			attr_dev(p7, "class", "white svelte-k3eom2");
+    			add_location(p7, file, 970, 6, 23495);
     			attr_dev(input4, "id", "triggerInputMode");
     			attr_dev(input4, "type", "checkbox");
-    			attr_dev(input4, "class", "svelte-nzitzk");
-    			add_location(input4, file, 848, 6, 21052);
+    			attr_dev(input4, "class", "svelte-k3eom2");
+    			add_location(input4, file, 971, 6, 23534);
     			attr_dev(label2, "for", "triggerInputMode");
-    			attr_dev(label2, "class", "checker input-mode svelte-nzitzk");
-    			add_location(label2, file, 849, 6, 21141);
-    			attr_dev(div12, "class", "margin-bottom alignment svelte-nzitzk");
-    			add_location(div12, file, 846, 5, 20969);
-    			attr_dev(div13, "class", "upinputmode svelte-nzitzk");
-    			add_location(div13, file, 845, 4, 20938);
-    			attr_dev(button3, "class", "input-text channelSelectOpen svelte-nzitzk");
+    			attr_dev(label2, "class", "checker input-mode svelte-k3eom2");
+    			add_location(label2, file, 972, 6, 23623);
+    			attr_dev(div12, "class", "margin-bottom alignment svelte-k3eom2");
+    			add_location(div12, file, 969, 5, 23451);
+    			attr_dev(div13, "class", "upinputmode svelte-k3eom2");
+    			add_location(div13, file, 968, 4, 23420);
+    			attr_dev(button3, "class", "input-text channelSelectOpen svelte-k3eom2");
     			attr_dev(button3, "id", "roomSelectOpenButton");
-    			add_location(button3, file, 871, 5, 22137);
-    			attr_dev(button4, "class", "input-text channelSelectOpen svelte-nzitzk");
+    			add_location(button3, file, 994, 5, 24619);
+    			attr_dev(button4, "class", "input-text channelSelectOpen svelte-k3eom2");
     			attr_dev(button4, "id", "channelSelectOpenButton");
-    			add_location(button4, file, 872, 5, 22276);
-    			attr_dev(p8, "class", "white svelte-nzitzk");
-    			add_location(p8, file, 874, 6, 22456);
-    			attr_dev(div14, "class", "alignmentKey svelte-nzitzk");
-    			add_location(div14, file, 873, 5, 22423);
+    			add_location(button4, file, 995, 5, 24758);
+    			attr_dev(p8, "class", "white svelte-k3eom2");
+    			add_location(p8, file, 997, 6, 24938);
+    			attr_dev(div14, "class", "alignmentKey svelte-k3eom2");
+    			add_location(div14, file, 996, 5, 24905);
     			if (img3.src !== (img3_src_value = "img/minmik.png")) attr_dev(img3, "src", img3_src_value);
-    			attr_dev(img3, "class", "minMic svelte-nzitzk");
+    			attr_dev(img3, "class", "minMic svelte-k3eom2");
     			attr_dev(img3, "alt", "minMic");
-    			add_location(img3, file, 879, 12, 22589);
-    			attr_dev(th0, "class", "svelte-nzitzk");
-    			add_location(th0, file, 879, 8, 22585);
-    			attr_dev(p9, "class", "button-selection svelte-nzitzk");
-    			add_location(p9, file, 880, 12, 22661);
-    			attr_dev(th1, "class", "svelte-nzitzk");
-    			add_location(th1, file, 880, 8, 22657);
-    			attr_dev(button5, "class", "inputbutton input-text svelte-nzitzk");
+    			add_location(img3, file, 1002, 12, 25071);
+    			attr_dev(th0, "class", "svelte-k3eom2");
+    			add_location(th0, file, 1002, 8, 25067);
+    			attr_dev(p9, "class", "button-selection svelte-k3eom2");
+    			add_location(p9, file, 1003, 12, 25143);
+    			attr_dev(th1, "class", "svelte-k3eom2");
+    			add_location(th1, file, 1003, 8, 25139);
+    			attr_dev(button5, "class", "inputbutton input-text svelte-k3eom2");
     			attr_dev(button5, "id", "kiGlobal");
-    			add_location(button5, file, 881, 12, 22719);
-    			attr_dev(th2, "class", "svelte-nzitzk");
-    			add_location(th2, file, 881, 8, 22715);
-    			attr_dev(tr0, "class", "svelte-nzitzk");
-    			add_location(tr0, file, 878, 7, 22572);
+    			add_location(button5, file, 1004, 12, 25201);
+    			attr_dev(th2, "class", "svelte-k3eom2");
+    			add_location(th2, file, 1004, 8, 25197);
+    			attr_dev(tr0, "class", "svelte-k3eom2");
+    			add_location(tr0, file, 1001, 7, 25054);
     			if (img4.src !== (img4_src_value = "img/radio.png")) attr_dev(img4, "src", img4_src_value);
-    			attr_dev(img4, "class", "minradio svelte-nzitzk");
+    			attr_dev(img4, "class", "minradio svelte-k3eom2");
     			attr_dev(img4, "alt", "minradio");
-    			add_location(img4, file, 884, 12, 22825);
-    			attr_dev(th3, "class", "svelte-nzitzk");
-    			add_location(th3, file, 884, 8, 22821);
-    			attr_dev(p10, "class", "button-selection svelte-nzitzk");
-    			add_location(p10, file, 885, 12, 22900);
-    			attr_dev(th4, "class", "svelte-nzitzk");
-    			add_location(th4, file, 885, 8, 22896);
-    			attr_dev(button6, "class", "inputbutton input-text svelte-nzitzk");
+    			add_location(img4, file, 1007, 12, 25307);
+    			attr_dev(th3, "class", "svelte-k3eom2");
+    			add_location(th3, file, 1007, 8, 25303);
+    			attr_dev(p10, "class", "button-selection svelte-k3eom2");
+    			add_location(p10, file, 1008, 12, 25382);
+    			attr_dev(th4, "class", "svelte-k3eom2");
+    			add_location(th4, file, 1008, 8, 25378);
+    			attr_dev(button6, "class", "inputbutton input-text svelte-k3eom2");
     			attr_dev(button6, "id", "kiRadio");
-    			add_location(button6, file, 886, 12, 22966);
-    			attr_dev(th5, "class", "svelte-nzitzk");
-    			add_location(th5, file, 886, 8, 22962);
-    			attr_dev(tr1, "class", "svelte-nzitzk");
-    			add_location(tr1, file, 883, 7, 22808);
-    			attr_dev(tbody, "class", "svelte-nzitzk");
-    			add_location(tbody, file, 877, 6, 22557);
-    			attr_dev(table, "class", "keyname-space-between svelte-nzitzk");
-    			add_location(table, file, 876, 5, 22513);
-    			attr_dev(div15, "class", "inline-block margin svelte-nzitzk");
-    			add_location(div15, file, 870, 4, 22098);
-    			attr_dev(div16, "class", "boxmodes box-flex svelte-nzitzk");
-    			add_location(div16, file, 844, 3, 20902);
-    			attr_dev(button7, "class", "button shadow closebuttonwidth svelte-nzitzk");
-    			add_location(button7, file, 893, 4, 23131);
-    			attr_dev(div17, "class", "boxmodes end svelte-nzitzk");
-    			add_location(div17, file, 892, 3, 23100);
+    			add_location(button6, file, 1009, 12, 25448);
+    			attr_dev(th5, "class", "svelte-k3eom2");
+    			add_location(th5, file, 1009, 8, 25444);
+    			attr_dev(tr1, "class", "svelte-k3eom2");
+    			add_location(tr1, file, 1006, 7, 25290);
+    			attr_dev(tbody, "class", "svelte-k3eom2");
+    			add_location(tbody, file, 1000, 6, 25039);
+    			attr_dev(table, "class", "keyname-space-between svelte-k3eom2");
+    			add_location(table, file, 999, 5, 24995);
+    			attr_dev(div15, "class", "inline-block margin svelte-k3eom2");
+    			add_location(div15, file, 993, 4, 24580);
+    			attr_dev(div16, "class", "boxmodes box-flex svelte-k3eom2");
+    			add_location(div16, file, 967, 3, 23384);
+    			attr_dev(button7, "class", "button shadow closebuttonwidth svelte-k3eom2");
+    			add_location(button7, file, 1016, 4, 25613);
+    			attr_dev(div17, "class", "boxmodes end svelte-k3eom2");
+    			add_location(div17, file, 1015, 3, 25582);
     			attr_dev(div18, "id", "container");
-    			attr_dev(div18, "class", "svelte-nzitzk");
-    			add_location(div18, file, 800, 2, 18776);
+    			attr_dev(div18, "class", "svelte-k3eom2");
+    			add_location(div18, file, 923, 2, 21258);
 
     			dispose = [
-    				listen_dev(input0, "change", /*input0_change_input_handler*/ ctx[17]),
-    				listen_dev(input0, "input", /*input0_change_input_handler*/ ctx[17]),
-    				listen_dev(input1, "change", /*input1_change_input_handler*/ ctx[18]),
-    				listen_dev(input1, "input", /*input1_change_input_handler*/ ctx[18]),
-    				listen_dev(button0, "click", /*click_handler_4*/ ctx[19], false, false, false),
-    				listen_dev(button1, "click", /*click_handler_5*/ ctx[20], false, false, false),
-    				listen_dev(button2, "click", /*click_handler_6*/ ctx[21], false, false, false),
-    				listen_dev(input2, "change", /*input2_change_handler*/ ctx[22]),
-    				listen_dev(input3, "change", /*input3_change_handler*/ ctx[23]),
-    				listen_dev(input4, "change", /*input4_change_handler*/ ctx[24]),
-    				listen_dev(button3, "click", /*click_handler_7*/ ctx[28], false, false, false),
-    				listen_dev(button4, "click", /*click_handler_8*/ ctx[29], false, false, false),
-    				listen_dev(button7, "click", /*closeMainWindow*/ ctx[6], false, false, false)
+    				listen_dev(input0, "change", /*input0_change_input_handler*/ ctx[23]),
+    				listen_dev(input0, "input", /*input0_change_input_handler*/ ctx[23]),
+    				listen_dev(input1, "change", /*input1_change_input_handler*/ ctx[24]),
+    				listen_dev(input1, "input", /*input1_change_input_handler*/ ctx[24]),
+    				listen_dev(button0, "click", /*click_handler_4*/ ctx[25], false, false, false),
+    				listen_dev(button1, "click", /*click_handler_5*/ ctx[26], false, false, false),
+    				listen_dev(button2, "click", /*click_handler_6*/ ctx[27], false, false, false),
+    				listen_dev(input2, "change", /*input2_change_handler*/ ctx[28]),
+    				listen_dev(input3, "change", /*input3_change_handler*/ ctx[29]),
+    				listen_dev(input4, "change", /*input4_change_handler*/ ctx[30]),
+    				listen_dev(button3, "click", /*click_handler_7*/ ctx[34], false, false, false),
+    				listen_dev(button4, "click", /*click_handler_8*/ ctx[35], false, false, false),
+    				listen_dev(button7, "click", /*closeMainWindow*/ ctx[7], false, false, false)
     			];
     		},
     		m: function mount(target, anchor) {
@@ -2200,14 +2200,14 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(800:1) {#if gui.mainWindowOpen}",
+    		source: "(923:1) {#if gui.mainWindowOpen}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (852:5) {#if !config.main.inputmode}
+    // (975:5) {#if !config.main.inputmode}
     function create_if_block_1(ctx) {
     	let div3;
     	let ul;
@@ -2262,56 +2262,56 @@ var app = (function () {
     			input0.value = input0.__value;
     			attr_dev(input0, "id", "radio1");
     			attr_dev(input0, "name", "radio");
-    			attr_dev(input0, "class", "input svelte-nzitzk");
-    			/*$$binding_groups*/ ctx[9][0].push(input0);
-    			add_location(input0, file, 855, 8, 21350);
-    			attr_dev(div0, "class", "button selector A svelte-nzitzk");
-    			add_location(div0, file, 856, 28, 21488);
+    			attr_dev(input0, "class", "input svelte-k3eom2");
+    			/*$$binding_groups*/ ctx[15][0].push(input0);
+    			add_location(input0, file, 978, 8, 23832);
+    			attr_dev(div0, "class", "button selector A svelte-k3eom2");
+    			add_location(div0, file, 979, 28, 23970);
     			attr_dev(label0, "for", "radio1");
-    			attr_dev(label0, "class", "svelte-nzitzk");
-    			add_location(label0, file, 856, 8, 21468);
-    			attr_dev(li0, "class", "li svelte-nzitzk");
-    			add_location(li0, file, 854, 7, 21326);
+    			attr_dev(label0, "class", "svelte-k3eom2");
+    			add_location(label0, file, 979, 8, 23950);
+    			attr_dev(li0, "class", "li svelte-k3eom2");
+    			add_location(li0, file, 977, 7, 23808);
     			attr_dev(input1, "type", "radio");
     			input1.__value = input1_value_value = 2;
     			input1.value = input1.__value;
     			attr_dev(input1, "id", "radio2");
     			attr_dev(input1, "name", "radio");
-    			attr_dev(input1, "class", "input svelte-nzitzk");
-    			/*$$binding_groups*/ ctx[9][0].push(input1);
-    			add_location(input1, file, 859, 8, 21587);
-    			attr_dev(div1, "class", "button selector A svelte-nzitzk");
-    			add_location(div1, file, 860, 28, 21725);
+    			attr_dev(input1, "class", "input svelte-k3eom2");
+    			/*$$binding_groups*/ ctx[15][0].push(input1);
+    			add_location(input1, file, 982, 8, 24069);
+    			attr_dev(div1, "class", "button selector A svelte-k3eom2");
+    			add_location(div1, file, 983, 28, 24207);
     			attr_dev(label1, "for", "radio2");
-    			attr_dev(label1, "class", "svelte-nzitzk");
-    			add_location(label1, file, 860, 8, 21705);
-    			attr_dev(li1, "class", "li svelte-nzitzk");
-    			add_location(li1, file, 858, 7, 21563);
+    			attr_dev(label1, "class", "svelte-k3eom2");
+    			add_location(label1, file, 983, 8, 24187);
+    			attr_dev(li1, "class", "li svelte-k3eom2");
+    			add_location(li1, file, 981, 7, 24045);
     			attr_dev(input2, "type", "radio");
     			input2.__value = input2_value_value = 3;
     			input2.value = input2.__value;
     			attr_dev(input2, "id", "radio3");
     			attr_dev(input2, "name", "radio");
-    			attr_dev(input2, "class", "input svelte-nzitzk");
-    			/*$$binding_groups*/ ctx[9][0].push(input2);
-    			add_location(input2, file, 863, 8, 21828);
-    			attr_dev(div2, "class", "button selector A svelte-nzitzk");
-    			add_location(div2, file, 864, 28, 21966);
+    			attr_dev(input2, "class", "input svelte-k3eom2");
+    			/*$$binding_groups*/ ctx[15][0].push(input2);
+    			add_location(input2, file, 986, 8, 24310);
+    			attr_dev(div2, "class", "button selector A svelte-k3eom2");
+    			add_location(div2, file, 987, 28, 24448);
     			attr_dev(label2, "for", "radio3");
-    			attr_dev(label2, "class", "svelte-nzitzk");
-    			add_location(label2, file, 864, 8, 21946);
-    			attr_dev(li2, "class", "li svelte-nzitzk");
-    			add_location(li2, file, 862, 7, 21804);
-    			attr_dev(ul, "class", "ul svelte-nzitzk");
-    			add_location(ul, file, 853, 6, 21303);
+    			attr_dev(label2, "class", "svelte-k3eom2");
+    			add_location(label2, file, 987, 8, 24428);
+    			attr_dev(li2, "class", "li svelte-k3eom2");
+    			add_location(li2, file, 985, 7, 24286);
+    			attr_dev(ul, "class", "ul svelte-k3eom2");
+    			add_location(ul, file, 976, 6, 23785);
     			attr_dev(div3, "id", "inputmode");
-    			attr_dev(div3, "class", "inputmode svelte-nzitzk");
-    			add_location(div3, file, 852, 5, 21258);
+    			attr_dev(div3, "class", "inputmode svelte-k3eom2");
+    			add_location(div3, file, 975, 5, 23740);
 
     			dispose = [
-    				listen_dev(input0, "change", /*input0_change_handler*/ ctx[25]),
-    				listen_dev(input1, "change", /*input1_change_handler*/ ctx[26]),
-    				listen_dev(input2, "change", /*input2_change_handler_1*/ ctx[27])
+    				listen_dev(input0, "change", /*input0_change_handler*/ ctx[31]),
+    				listen_dev(input1, "change", /*input1_change_handler*/ ctx[32]),
+    				listen_dev(input2, "change", /*input2_change_handler_1*/ ctx[33])
     			];
     		},
     		m: function mount(target, anchor) {
@@ -2353,9 +2353,9 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div3);
-    			/*$$binding_groups*/ ctx[9][0].splice(/*$$binding_groups*/ ctx[9][0].indexOf(input0), 1);
-    			/*$$binding_groups*/ ctx[9][0].splice(/*$$binding_groups*/ ctx[9][0].indexOf(input1), 1);
-    			/*$$binding_groups*/ ctx[9][0].splice(/*$$binding_groups*/ ctx[9][0].indexOf(input2), 1);
+    			/*$$binding_groups*/ ctx[15][0].splice(/*$$binding_groups*/ ctx[15][0].indexOf(input0), 1);
+    			/*$$binding_groups*/ ctx[15][0].splice(/*$$binding_groups*/ ctx[15][0].indexOf(input1), 1);
+    			/*$$binding_groups*/ ctx[15][0].splice(/*$$binding_groups*/ ctx[15][0].indexOf(input2), 1);
     			run_all(dispose);
     		}
     	};
@@ -2364,7 +2364,7 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(852:5) {#if !config.main.inputmode}",
+    		source: "(975:5) {#if !config.main.inputmode}",
     		ctx
     	});
 
@@ -2372,12 +2372,119 @@ var app = (function () {
     }
 
     function create_fragment(ctx) {
-    	let div;
+    	let div2;
     	let t0;
     	let t1;
     	let t2;
     	let t3;
     	let t4;
+    	let t5;
+    	let div1;
+    	let div0;
+    	let table0;
+    	let thead0;
+    	let tr0;
+    	let th0;
+    	let img0;
+    	let img0_src_value;
+    	let t6;
+    	let th1;
+    	let p0;
+    	let t8;
+    	let tbody0;
+    	let tr1;
+    	let th2;
+    	let img1;
+    	let img1_src_value;
+    	let t9;
+    	let th3;
+    	let p1;
+    	let t11;
+    	let th4;
+    	let p2;
+    	let t13;
+    	let tr2;
+    	let th5;
+    	let img2;
+    	let img2_src_value;
+    	let t14;
+    	let th6;
+    	let p3;
+    	let t16;
+    	let th7;
+    	let p4;
+    	let t18;
+    	let tr3;
+    	let th8;
+    	let img3;
+    	let img3_src_value;
+    	let t19;
+    	let th9;
+    	let p5;
+    	let t21;
+    	let th10;
+    	let p6;
+    	let t23;
+    	let tr4;
+    	let th11;
+    	let img4;
+    	let img4_src_value;
+    	let t24;
+    	let th12;
+    	let p7;
+    	let t26;
+    	let th13;
+    	let p8;
+    	let t28;
+    	let tr5;
+    	let th14;
+    	let img5;
+    	let img5_src_value;
+    	let t29;
+    	let th15;
+    	let p9;
+    	let t31;
+    	let th16;
+    	let p10;
+    	let t33;
+    	let table1;
+    	let thead1;
+    	let tr6;
+    	let th17;
+    	let img6;
+    	let img6_src_value;
+    	let t34;
+    	let th18;
+    	let p11;
+    	let t36;
+    	let tbody1;
+    	let tr7;
+    	let th19;
+    	let img7;
+    	let img7_src_value;
+    	let t37;
+    	let th20;
+    	let p12;
+    	let t39;
+    	let th21;
+    	let p13;
+    	let t41;
+    	let tr8;
+    	let th22;
+    	let img8;
+    	let img8_src_value;
+    	let t42;
+    	let th23;
+    	let p14;
+    	let t44;
+    	let th24;
+    	let p15;
+    	let t46;
+    	let img9;
+    	let img9_src_value;
+    	let t47;
+    	let img10;
+    	let img10_src_value;
     	let dispose;
     	let if_block0 = /*gui*/ ctx[2].deviceSelectOpen && create_if_block_7(ctx);
     	let if_block1 = /*gui*/ ctx[2].mutList && create_if_block_6(ctx);
@@ -2388,7 +2495,7 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div = element("div");
+    			div2 = element("div");
     			if (if_block0) if_block0.c();
     			t0 = space();
     			if (if_block1) if_block1.c();
@@ -2400,28 +2507,430 @@ var app = (function () {
     			if (if_block4) if_block4.c();
     			t4 = space();
     			if (if_block5) if_block5.c();
-    			attr_dev(div, "id", "mainWindow");
-    			attr_dev(div, "oncontextmenu", "return false");
-    			attr_dev(div, "class", "svelte-nzitzk");
-    			add_location(div, file, 673, 0, 12960);
-    			dispose = listen_dev(window, "keydown", /*mainWindow*/ ctx[5], false, false, false);
+    			t5 = space();
+    			div1 = element("div");
+    			div0 = element("div");
+    			table0 = element("table");
+    			thead0 = element("thead");
+    			tr0 = element("tr");
+    			th0 = element("th");
+    			img0 = element("img");
+    			t6 = space();
+    			th1 = element("th");
+    			p0 = element("p");
+    			p0.textContent = "Общий";
+    			t8 = space();
+    			tbody0 = element("tbody");
+    			tr1 = element("tr");
+    			th2 = element("th");
+    			img1 = element("img");
+    			t9 = space();
+    			th3 = element("th");
+    			p1 = element("p");
+    			p1.textContent = "Vf";
+    			t11 = space();
+    			th4 = element("th");
+    			p2 = element("p");
+    			p2.textContent = "100m.";
+    			t13 = space();
+    			tr2 = element("tr");
+    			th5 = element("th");
+    			img2 = element("img");
+    			t14 = space();
+    			th6 = element("th");
+    			p3 = element("p");
+    			p3.textContent = "Vf";
+    			t16 = space();
+    			th7 = element("th");
+    			p4 = element("p");
+    			p4.textContent = "100m.";
+    			t18 = space();
+    			tr3 = element("tr");
+    			th8 = element("th");
+    			img3 = element("img");
+    			t19 = space();
+    			th9 = element("th");
+    			p5 = element("p");
+    			p5.textContent = "Vf";
+    			t21 = space();
+    			th10 = element("th");
+    			p6 = element("p");
+    			p6.textContent = "100m.";
+    			t23 = space();
+    			tr4 = element("tr");
+    			th11 = element("th");
+    			img4 = element("img");
+    			t24 = space();
+    			th12 = element("th");
+    			p7 = element("p");
+    			p7.textContent = "Vf";
+    			t26 = space();
+    			th13 = element("th");
+    			p8 = element("p");
+    			p8.textContent = "100m.";
+    			t28 = space();
+    			tr5 = element("tr");
+    			th14 = element("th");
+    			img5 = element("img");
+    			t29 = space();
+    			th15 = element("th");
+    			p9 = element("p");
+    			p9.textContent = "Vf";
+    			t31 = space();
+    			th16 = element("th");
+    			p10 = element("p");
+    			p10.textContent = "100m.";
+    			t33 = space();
+    			table1 = element("table");
+    			thead1 = element("thead");
+    			tr6 = element("tr");
+    			th17 = element("th");
+    			img6 = element("img");
+    			t34 = space();
+    			th18 = element("th");
+    			p11 = element("p");
+    			p11.textContent = "Рация";
+    			t36 = space();
+    			tbody1 = element("tbody");
+    			tr7 = element("tr");
+    			th19 = element("th");
+    			img7 = element("img");
+    			t37 = space();
+    			th20 = element("th");
+    			p12 = element("p");
+    			p12.textContent = "Vf";
+    			t39 = space();
+    			th21 = element("th");
+    			p13 = element("p");
+    			p13.textContent = "[текст]";
+    			t41 = space();
+    			tr8 = element("tr");
+    			th22 = element("th");
+    			img8 = element("img");
+    			t42 = space();
+    			th23 = element("th");
+    			p14 = element("p");
+    			p14.textContent = "Vf";
+    			t44 = space();
+    			th24 = element("th");
+    			p15 = element("p");
+    			p15.textContent = "[текст]";
+    			t46 = space();
+    			img9 = element("img");
+    			t47 = space();
+    			img10 = element("img");
+    			attr_dev(img0, "class", "owerlayRadiomin svelte-k3eom2");
+    			if (img0.src !== (img0_src_value = "img/radiomin.png")) attr_dev(img0, "src", img0_src_value);
+    			attr_dev(img0, "alt", "owerlayRadiomin");
+    			add_location(img0, file, 1025, 10, 25887);
+    			attr_dev(th0, "class", "svelte-k3eom2");
+    			add_location(th0, file, 1025, 6, 25883);
+    			attr_dev(p0, "class", "owerlayRoomName svelte-k3eom2");
+    			attr_dev(p0, "id", "owerlayRoomName");
+    			add_location(p0, file, 1026, 10, 25977);
+    			attr_dev(th1, "class", "svelte-k3eom2");
+    			add_location(th1, file, 1026, 6, 25973);
+    			attr_dev(tr0, "class", "svelte-k3eom2");
+    			add_location(tr0, file, 1024, 5, 25872);
+    			attr_dev(thead0, "class", "svelte-k3eom2");
+    			add_location(thead0, file, 1023, 4, 25859);
+    			attr_dev(img1, "class", "owerlayRadiominImg svelte-k3eom2");
+    			if (img1.src !== (img1_src_value = "img/owerlayVolume.png")) attr_dev(img1, "src", img1_src_value);
+    			attr_dev(img1, "alt", "owerlayRadiomin");
+    			add_location(img1, file, 1031, 10, 26096);
+    			attr_dev(th2, "class", "svelte-k3eom2");
+    			add_location(th2, file, 1031, 6, 26092);
+    			attr_dev(p1, "class", "owerlayPlayer svelte-k3eom2");
+    			attr_dev(p1, "id", "owerlayPlayer");
+    			add_location(p1, file, 1032, 10, 26194);
+    			attr_dev(th3, "class", "svelte-k3eom2");
+    			add_location(th3, file, 1032, 6, 26190);
+    			attr_dev(p2, "class", "owerlayPlayerDistance svelte-k3eom2");
+    			attr_dev(p2, "id", "owerlayPlayerDistance");
+    			add_location(p2, file, 1033, 10, 26260);
+    			attr_dev(th4, "class", "svelte-k3eom2");
+    			add_location(th4, file, 1033, 6, 26256);
+    			attr_dev(tr1, "class", "svelte-k3eom2");
+    			add_location(tr1, file, 1030, 5, 26081);
+    			attr_dev(img2, "class", "owerlayRadiominImg svelte-k3eom2");
+    			if (img2.src !== (img2_src_value = "img/owerlayVolume.png")) attr_dev(img2, "src", img2_src_value);
+    			attr_dev(img2, "alt", "owerlayRadiomin");
+    			add_location(img2, file, 1036, 10, 26366);
+    			attr_dev(th5, "class", "svelte-k3eom2");
+    			add_location(th5, file, 1036, 6, 26362);
+    			attr_dev(p3, "class", "owerlayPlayer svelte-k3eom2");
+    			attr_dev(p3, "id", "owerlayPlayer");
+    			add_location(p3, file, 1037, 10, 26464);
+    			attr_dev(th6, "class", "svelte-k3eom2");
+    			add_location(th6, file, 1037, 6, 26460);
+    			attr_dev(p4, "class", "owerlayPlayerDistance svelte-k3eom2");
+    			attr_dev(p4, "id", "owerlayPlayerDistance");
+    			add_location(p4, file, 1038, 10, 26530);
+    			attr_dev(th7, "class", "svelte-k3eom2");
+    			add_location(th7, file, 1038, 6, 26526);
+    			attr_dev(tr2, "class", "svelte-k3eom2");
+    			add_location(tr2, file, 1035, 5, 26351);
+    			attr_dev(img3, "class", "owerlayRadiominImg svelte-k3eom2");
+    			if (img3.src !== (img3_src_value = "img/owerlayVolume.png")) attr_dev(img3, "src", img3_src_value);
+    			attr_dev(img3, "alt", "owerlayRadiomin");
+    			add_location(img3, file, 1041, 10, 26636);
+    			attr_dev(th8, "class", "svelte-k3eom2");
+    			add_location(th8, file, 1041, 6, 26632);
+    			attr_dev(p5, "class", "owerlayPlayer svelte-k3eom2");
+    			attr_dev(p5, "id", "owerlayPlayer");
+    			add_location(p5, file, 1042, 10, 26734);
+    			attr_dev(th9, "class", "svelte-k3eom2");
+    			add_location(th9, file, 1042, 6, 26730);
+    			attr_dev(p6, "class", "owerlayPlayerDistance svelte-k3eom2");
+    			attr_dev(p6, "id", "owerlayPlayerDistance");
+    			add_location(p6, file, 1043, 10, 26800);
+    			attr_dev(th10, "class", "svelte-k3eom2");
+    			add_location(th10, file, 1043, 6, 26796);
+    			attr_dev(tr3, "class", "svelte-k3eom2");
+    			add_location(tr3, file, 1040, 5, 26621);
+    			attr_dev(img4, "class", "owerlayRadiominImg svelte-k3eom2");
+    			if (img4.src !== (img4_src_value = "img/owerlayVolume.png")) attr_dev(img4, "src", img4_src_value);
+    			attr_dev(img4, "alt", "owerlayRadiomin");
+    			add_location(img4, file, 1046, 10, 26906);
+    			attr_dev(th11, "class", "svelte-k3eom2");
+    			add_location(th11, file, 1046, 6, 26902);
+    			attr_dev(p7, "class", "owerlayPlayer svelte-k3eom2");
+    			attr_dev(p7, "id", "owerlayPlayer");
+    			add_location(p7, file, 1047, 10, 27004);
+    			attr_dev(th12, "class", "svelte-k3eom2");
+    			add_location(th12, file, 1047, 6, 27000);
+    			attr_dev(p8, "class", "owerlayPlayerDistance svelte-k3eom2");
+    			attr_dev(p8, "id", "owerlayPlayerDistance");
+    			add_location(p8, file, 1048, 10, 27070);
+    			attr_dev(th13, "class", "svelte-k3eom2");
+    			add_location(th13, file, 1048, 6, 27066);
+    			attr_dev(tr4, "class", "svelte-k3eom2");
+    			add_location(tr4, file, 1045, 5, 26891);
+    			attr_dev(img5, "class", "owerlayRadiominImg svelte-k3eom2");
+    			if (img5.src !== (img5_src_value = "img/owerlayVolume.png")) attr_dev(img5, "src", img5_src_value);
+    			attr_dev(img5, "alt", "owerlayRadiomin");
+    			add_location(img5, file, 1051, 10, 27176);
+    			attr_dev(th14, "class", "svelte-k3eom2");
+    			add_location(th14, file, 1051, 6, 27172);
+    			attr_dev(p9, "class", "owerlayPlayer svelte-k3eom2");
+    			attr_dev(p9, "id", "owerlayPlayer");
+    			add_location(p9, file, 1052, 10, 27274);
+    			attr_dev(th15, "class", "svelte-k3eom2");
+    			add_location(th15, file, 1052, 6, 27270);
+    			attr_dev(p10, "class", "owerlayPlayerDistance svelte-k3eom2");
+    			attr_dev(p10, "id", "owerlayPlayerDistance");
+    			add_location(p10, file, 1053, 10, 27340);
+    			attr_dev(th16, "class", "svelte-k3eom2");
+    			add_location(th16, file, 1053, 6, 27336);
+    			attr_dev(tr5, "class", "svelte-k3eom2");
+    			add_location(tr5, file, 1050, 5, 27161);
+    			attr_dev(tbody0, "class", "svelte-k3eom2");
+    			add_location(tbody0, file, 1029, 4, 26068);
+    			attr_dev(table0, "class", "svelte-k3eom2");
+    			add_location(table0, file, 1022, 3, 25847);
+    			attr_dev(img6, "class", "owerlayRadiomin svelte-k3eom2");
+    			if (img6.src !== (img6_src_value = "img/radiomin.png")) attr_dev(img6, "src", img6_src_value);
+    			attr_dev(img6, "alt", "owerlayRadiomin");
+    			add_location(img6, file, 1060, 10, 27494);
+    			attr_dev(th17, "class", "svelte-k3eom2");
+    			add_location(th17, file, 1060, 6, 27490);
+    			attr_dev(p11, "class", "owerlayRoomName svelte-k3eom2");
+    			attr_dev(p11, "id", "owerlayRoomName");
+    			add_location(p11, file, 1061, 10, 27584);
+    			attr_dev(th18, "class", "svelte-k3eom2");
+    			add_location(th18, file, 1061, 6, 27580);
+    			attr_dev(tr6, "class", "svelte-k3eom2");
+    			add_location(tr6, file, 1059, 5, 27479);
+    			attr_dev(thead1, "class", "svelte-k3eom2");
+    			add_location(thead1, file, 1058, 4, 27466);
+    			attr_dev(img7, "class", "owerlayRadiominImg svelte-k3eom2");
+    			if (img7.src !== (img7_src_value = "img/owerlayVolume.png")) attr_dev(img7, "src", img7_src_value);
+    			attr_dev(img7, "alt", "owerlayRadiomin");
+    			add_location(img7, file, 1066, 10, 27703);
+    			attr_dev(th19, "class", "svelte-k3eom2");
+    			add_location(th19, file, 1066, 6, 27699);
+    			attr_dev(p12, "class", "owerlayPlayer svelte-k3eom2");
+    			attr_dev(p12, "id", "owerlayPlayer");
+    			add_location(p12, file, 1067, 10, 27801);
+    			attr_dev(th20, "class", "svelte-k3eom2");
+    			add_location(th20, file, 1067, 6, 27797);
+    			attr_dev(p13, "class", "owerlayPlayerDistance svelte-k3eom2");
+    			attr_dev(p13, "id", "owerlayPlayerDistance");
+    			add_location(p13, file, 1068, 10, 27867);
+    			attr_dev(th21, "class", "svelte-k3eom2");
+    			add_location(th21, file, 1068, 6, 27863);
+    			attr_dev(tr7, "class", "svelte-k3eom2");
+    			add_location(tr7, file, 1065, 5, 27688);
+    			attr_dev(img8, "class", "owerlayRadiominImg svelte-k3eom2");
+    			if (img8.src !== (img8_src_value = "img/owerlayVolume.png")) attr_dev(img8, "src", img8_src_value);
+    			attr_dev(img8, "alt", "owerlayRadiomin");
+    			add_location(img8, file, 1071, 10, 27975);
+    			attr_dev(th22, "class", "svelte-k3eom2");
+    			add_location(th22, file, 1071, 6, 27971);
+    			attr_dev(p14, "class", "owerlayPlayer svelte-k3eom2");
+    			attr_dev(p14, "id", "owerlayPlayer");
+    			add_location(p14, file, 1072, 10, 28073);
+    			attr_dev(th23, "class", "svelte-k3eom2");
+    			add_location(th23, file, 1072, 6, 28069);
+    			attr_dev(p15, "class", "owerlayPlayerDistance svelte-k3eom2");
+    			attr_dev(p15, "id", "owerlayPlayerDistance");
+    			add_location(p15, file, 1073, 10, 28139);
+    			attr_dev(th24, "class", "svelte-k3eom2");
+    			add_location(th24, file, 1073, 6, 28135);
+    			attr_dev(tr8, "class", "svelte-k3eom2");
+    			add_location(tr8, file, 1070, 5, 27960);
+    			attr_dev(tbody1, "class", "svelte-k3eom2");
+    			add_location(tbody1, file, 1064, 4, 27675);
+    			attr_dev(table1, "class", "svelte-k3eom2");
+    			add_location(table1, file, 1057, 3, 27454);
+    			attr_dev(div0, "id", "owerlay");
+    			attr_dev(div0, "class", "owerlay svelte-k3eom2");
+    			set_style(div0, "--left", /*move*/ ctx[3].owerlay.left + "px");
+    			set_style(div0, "--top", /*move*/ ctx[3].owerlay.top + "px");
+    			add_location(div0, file, 1021, 2, 25739);
+    			attr_dev(img9, "draggable", "false");
+    			attr_dev(img9, "class", "owerlayMicrophone svelte-k3eom2");
+    			attr_dev(img9, "id", "owerlayMicrophone");
+    			if (img9.src !== (img9_src_value = "img/owerlayMicrophone.png")) attr_dev(img9, "src", img9_src_value);
+    			attr_dev(img9, "alt", "owerlayMicrophone");
+    			set_style(img9, "--left", /*move*/ ctx[3].owerlayMicrophone.left + "px");
+    			set_style(img9, "--top", /*move*/ ctx[3].owerlayMicrophone.top + "px");
+    			add_location(img9, file, 1078, 2, 28263);
+    			attr_dev(img10, "draggable", "false");
+    			attr_dev(img10, "class", "owerlayVolumeOn svelte-k3eom2");
+    			attr_dev(img10, "id", "owerlayVolumeOn");
+    			if (img10.src !== (img10_src_value = "img/owerlayVolumeOn.png")) attr_dev(img10, "src", img10_src_value);
+    			attr_dev(img10, "alt", "owerlayVolumeOn");
+    			set_style(img10, "--left", /*move*/ ctx[3].owerlayVolumeOn.left + "px");
+    			set_style(img10, "--top", /*move*/ ctx[3].owerlayVolumeOn.top + "px");
+    			add_location(img10, file, 1085, 2, 28503);
+    			attr_dev(div1, "class", "svelte-k3eom2");
+    			add_location(div1, file, 1020, 1, 25731);
+    			attr_dev(div2, "id", "mainWindow");
+    			set_style(div2, "background-image", "url(img/dsfghdfshsdg.png)");
+    			attr_dev(div2, "oncontextmenu", "return false");
+    			attr_dev(div2, "class", "svelte-k3eom2");
+    			add_location(div2, file, 796, 0, 15389);
+
+    			dispose = [
+    				listen_dev(window, "mousemove", /*mousemove_handler*/ ctx[11], false, false, false),
+    				listen_dev(window, "mousedown", /*mousedown_handler*/ ctx[12], false, false, false),
+    				listen_dev(window, "mouseup", /*mouseup_handler*/ ctx[13], false, false, false),
+    				listen_dev(window, "keydown", /*keydown*/ ctx[6], false, false, false)
+    			];
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			if (if_block0) if_block0.m(div, null);
-    			append_dev(div, t0);
-    			if (if_block1) if_block1.m(div, null);
-    			append_dev(div, t1);
-    			if (if_block2) if_block2.m(div, null);
-    			append_dev(div, t2);
-    			if (if_block3) if_block3.m(div, null);
-    			append_dev(div, t3);
-    			if (if_block4) if_block4.m(div, null);
-    			append_dev(div, t4);
-    			if (if_block5) if_block5.m(div, null);
+    			insert_dev(target, div2, anchor);
+    			if (if_block0) if_block0.m(div2, null);
+    			append_dev(div2, t0);
+    			if (if_block1) if_block1.m(div2, null);
+    			append_dev(div2, t1);
+    			if (if_block2) if_block2.m(div2, null);
+    			append_dev(div2, t2);
+    			if (if_block3) if_block3.m(div2, null);
+    			append_dev(div2, t3);
+    			if (if_block4) if_block4.m(div2, null);
+    			append_dev(div2, t4);
+    			if (if_block5) if_block5.m(div2, null);
+    			append_dev(div2, t5);
+    			append_dev(div2, div1);
+    			append_dev(div1, div0);
+    			append_dev(div0, table0);
+    			append_dev(table0, thead0);
+    			append_dev(thead0, tr0);
+    			append_dev(tr0, th0);
+    			append_dev(th0, img0);
+    			append_dev(tr0, t6);
+    			append_dev(tr0, th1);
+    			append_dev(th1, p0);
+    			append_dev(table0, t8);
+    			append_dev(table0, tbody0);
+    			append_dev(tbody0, tr1);
+    			append_dev(tr1, th2);
+    			append_dev(th2, img1);
+    			append_dev(tr1, t9);
+    			append_dev(tr1, th3);
+    			append_dev(th3, p1);
+    			append_dev(tr1, t11);
+    			append_dev(tr1, th4);
+    			append_dev(th4, p2);
+    			append_dev(tbody0, t13);
+    			append_dev(tbody0, tr2);
+    			append_dev(tr2, th5);
+    			append_dev(th5, img2);
+    			append_dev(tr2, t14);
+    			append_dev(tr2, th6);
+    			append_dev(th6, p3);
+    			append_dev(tr2, t16);
+    			append_dev(tr2, th7);
+    			append_dev(th7, p4);
+    			append_dev(tbody0, t18);
+    			append_dev(tbody0, tr3);
+    			append_dev(tr3, th8);
+    			append_dev(th8, img3);
+    			append_dev(tr3, t19);
+    			append_dev(tr3, th9);
+    			append_dev(th9, p5);
+    			append_dev(tr3, t21);
+    			append_dev(tr3, th10);
+    			append_dev(th10, p6);
+    			append_dev(tbody0, t23);
+    			append_dev(tbody0, tr4);
+    			append_dev(tr4, th11);
+    			append_dev(th11, img4);
+    			append_dev(tr4, t24);
+    			append_dev(tr4, th12);
+    			append_dev(th12, p7);
+    			append_dev(tr4, t26);
+    			append_dev(tr4, th13);
+    			append_dev(th13, p8);
+    			append_dev(tbody0, t28);
+    			append_dev(tbody0, tr5);
+    			append_dev(tr5, th14);
+    			append_dev(th14, img5);
+    			append_dev(tr5, t29);
+    			append_dev(tr5, th15);
+    			append_dev(th15, p9);
+    			append_dev(tr5, t31);
+    			append_dev(tr5, th16);
+    			append_dev(th16, p10);
+    			append_dev(div0, t33);
+    			append_dev(div0, table1);
+    			append_dev(table1, thead1);
+    			append_dev(thead1, tr6);
+    			append_dev(tr6, th17);
+    			append_dev(th17, img6);
+    			append_dev(tr6, t34);
+    			append_dev(tr6, th18);
+    			append_dev(th18, p11);
+    			append_dev(table1, t36);
+    			append_dev(table1, tbody1);
+    			append_dev(tbody1, tr7);
+    			append_dev(tr7, th19);
+    			append_dev(th19, img7);
+    			append_dev(tr7, t37);
+    			append_dev(tr7, th20);
+    			append_dev(th20, p12);
+    			append_dev(tr7, t39);
+    			append_dev(tr7, th21);
+    			append_dev(th21, p13);
+    			append_dev(tbody1, t41);
+    			append_dev(tbody1, tr8);
+    			append_dev(tr8, th22);
+    			append_dev(th22, img8);
+    			append_dev(tr8, t42);
+    			append_dev(tr8, th23);
+    			append_dev(th23, p14);
+    			append_dev(tr8, t44);
+    			append_dev(tr8, th24);
+    			append_dev(th24, p15);
+    			append_dev(div1, t46);
+    			append_dev(div1, img9);
+    			append_dev(div1, t47);
+    			append_dev(div1, img10);
     		},
     		p: function update(ctx, dirty) {
     			if (/*gui*/ ctx[2].deviceSelectOpen) {
@@ -2430,7 +2939,7 @@ var app = (function () {
     				} else {
     					if_block0 = create_if_block_7(ctx);
     					if_block0.c();
-    					if_block0.m(div, t0);
+    					if_block0.m(div2, t0);
     				}
     			} else if (if_block0) {
     				if_block0.d(1);
@@ -2443,7 +2952,7 @@ var app = (function () {
     				} else {
     					if_block1 = create_if_block_6(ctx);
     					if_block1.c();
-    					if_block1.m(div, t1);
+    					if_block1.m(div2, t1);
     				}
     			} else if (if_block1) {
     				if_block1.d(1);
@@ -2456,7 +2965,7 @@ var app = (function () {
     				} else {
     					if_block2 = create_if_block_5(ctx);
     					if_block2.c();
-    					if_block2.m(div, t2);
+    					if_block2.m(div2, t2);
     				}
     			} else if (if_block2) {
     				if_block2.d(1);
@@ -2469,7 +2978,7 @@ var app = (function () {
     				} else {
     					if_block3 = create_if_block_4(ctx);
     					if_block3.c();
-    					if_block3.m(div, t3);
+    					if_block3.m(div2, t3);
     				}
     			} else if (if_block3) {
     				if_block3.d(1);
@@ -2482,7 +2991,7 @@ var app = (function () {
     				} else {
     					if_block4 = create_if_block_2(ctx);
     					if_block4.c();
-    					if_block4.m(div, t4);
+    					if_block4.m(div2, t4);
     				}
     			} else if (if_block4) {
     				if_block4.d(1);
@@ -2495,24 +3004,48 @@ var app = (function () {
     				} else {
     					if_block5 = create_if_block(ctx);
     					if_block5.c();
-    					if_block5.m(div, null);
+    					if_block5.m(div2, t5);
     				}
     			} else if (if_block5) {
     				if_block5.d(1);
     				if_block5 = null;
     			}
+
+    			if (dirty[0] & /*move*/ 8) {
+    				set_style(div0, "--left", /*move*/ ctx[3].owerlay.left + "px");
+    			}
+
+    			if (dirty[0] & /*move*/ 8) {
+    				set_style(div0, "--top", /*move*/ ctx[3].owerlay.top + "px");
+    			}
+
+    			if (dirty[0] & /*move*/ 8) {
+    				set_style(img9, "--left", /*move*/ ctx[3].owerlayMicrophone.left + "px");
+    			}
+
+    			if (dirty[0] & /*move*/ 8) {
+    				set_style(img9, "--top", /*move*/ ctx[3].owerlayMicrophone.top + "px");
+    			}
+
+    			if (dirty[0] & /*move*/ 8) {
+    				set_style(img10, "--left", /*move*/ ctx[3].owerlayVolumeOn.left + "px");
+    			}
+
+    			if (dirty[0] & /*move*/ 8) {
+    				set_style(img10, "--top", /*move*/ ctx[3].owerlayVolumeOn.top + "px");
+    			}
     		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(div2);
     			if (if_block0) if_block0.d();
     			if (if_block1) if_block1.d();
     			if (if_block2) if_block2.d();
     			if (if_block3) if_block3.d();
     			if (if_block4) if_block4.d();
     			if (if_block5) if_block5.d();
-    			dispose();
+    			run_all(dispose);
     		}
     	};
 
@@ -2578,7 +3111,16 @@ var app = (function () {
     		volumeMainWindow: false
     	};
 
-    	function mainWindow(event) {
+    	const move = {
+    		nowMove: "",
+    		ismove: false,
+    		elem: { shiftX: 0, shiftY: 0 },
+    		owerlay: { left: 122, top: 19 },
+    		owerlayMicrophone: { left: 78, top: 20 },
+    		owerlayVolumeOn: { left: 25, top: 19 }
+    	};
+
+    	function keydown(event) {
     		if (gui.mainWindowOpen == false && event.key == "Insert") {
     			openMainWindow();
     		} else if (gui.mainWindowOpen == true && (event.key == "Escape" || event.key == "Insert")) {
@@ -2604,7 +3146,75 @@ var app = (function () {
     	}
 
     	
+
+    	function handlerDrag(event) {
+    		if (event.which == 1) {
+    			$$invalidate(3, move.nowMove = event.target.id, move);
+    			let id = event.target.id;
+
+    			if (id == "owerlayMicrophone" || id == "owerlayVolumeOn" || id == "owerlay") {
+    				$$invalidate(3, move.elem.shiftX = event.clientX - event.target.getBoundingClientRect().left, move);
+    				$$invalidate(3, move.elem.shiftY = event.clientY - event.target.getBoundingClientRect().top, move);
+    				$$invalidate(3, move.ismove = true, move);
+    			}
+    		}
+    	}
+
+    	function onMouseMove(event) {
+    		if (move.ismove) {
+    			console.log(move.nowMove);
+
+    			switch (move.nowMove) {
+    				case "owerlay":
+    					{
+    						$$invalidate(3, move.owerlay.left = event.pageX - move.elem.shiftX, move);
+    						$$invalidate(3, move.owerlay.top = event.pageY - move.elem.shiftY, move);
+    						break;
+    					}
+    					
+    				case "owerlayVolumeOn":
+    					{
+    						$$invalidate(3, move.owerlayVolumeOn.left = event.pageX - move.elem.shiftX, move);
+    						$$invalidate(3, move.owerlayVolumeOn.top = event.pageY - move.elem.shiftY, move);
+
+    						$$invalidate(
+    							3,
+    							move.owerlayVolumeOn.ondragstart = function () {
+    								return false;
+    							},
+    							move
+    						);
+
+    						break;
+    					}
+    					
+    				case "owerlayMicrophone":
+    					{
+    						$$invalidate(3, move.owerlayMicrophone.left = event.pageX - move.elem.shiftX, move);
+    						$$invalidate(3, move.owerlayMicrophone.top = event.pageY - move.elem.shiftY, move);
+
+    						$$invalidate(
+    							3,
+    							move.owerlayMicrophone.ondragstart = function () {
+    								return false;
+    							},
+    							move
+    						);
+
+    						break;
+    					}
+    					
+    			}
+    		}
+    	}
+
     	const $$binding_groups = [[], [], [], []];
+    	const mousemove_handler = event => onMouseMove(event);
+    	const mousedown_handler = event => handlerDrag(event);
+
+    	const mouseup_handler = () => {
+    		$$invalidate(3, move.ismove = false, move);
+    	};
 
     	function input_change_handler() {
     		config.selectDevice = this.__value;
@@ -2692,11 +3302,17 @@ var app = (function () {
     		config,
     		volumeWindowPlayer,
     		gui,
+    		move,
     		mutList,
     		volumeWindowRoom,
-    		mainWindow,
+    		keydown,
     		closeMainWindow,
+    		handlerDrag,
+    		onMouseMove,
     		openMainWindow,
+    		mousemove_handler,
+    		mousedown_handler,
+    		mouseup_handler,
     		input_change_handler,
     		$$binding_groups,
     		click_handler,

@@ -72,12 +72,33 @@
 	  mutList: false,
 	  volumeMainWindow: false,
 	};
+	const move = {
+		nowMove:'',
+		ismove: false,
+		elem: {
+			shiftX:0,
+			shiftY:0,
+		},
+		owerlay: {
+			left: 122,
+			top: 19,
+		},
+		owerlayMicrophone: {
+			left: 78,
+			top: 20,
+		},
+		owerlayVolumeOn: {
+			left: 25,
+			top: 19,
+		},
+
+	}
 
 	/**
 	 * Opens and closes the main window.
 	 * @param {object} event - Event on main window.
 	 */
-	function mainWindow(event) {
+	function keydown(event) {
 	  if (gui.mainWindowOpen == false && event.key == 'Insert') {
 	    openMainWindow();
 	  } else if (
@@ -106,9 +127,55 @@
 	function openMainWindow() {
 	  gui.mainWindowOpen = true;
 	};
+
+	/**
+	 * Drag and drop handler.
+	 */
+	function handlerDrag(event) {
+		if(event.which == 1){
+			move.nowMove = event.target.id;
+			let id = event.target.id;
+			if(id =="owerlayMicrophone" || id == "owerlayVolumeOn" || id == "owerlay"){
+				move.elem.shiftX = event.clientX - event.target.getBoundingClientRect().left;
+				move.elem.shiftY = event.clientY - event.target.getBoundingClientRect().top;
+				move.ismove = true;
+			}
+		}
+	}
+
+	function onMouseMove(event) {
+		if(move.ismove){
+			console.log(move.nowMove);
+			switch(move.nowMove){
+				case 'owerlay' :{
+					move.owerlay.left = event.pageX - move.elem.shiftX;
+					move.owerlay.top = event.pageY - move.elem.shiftY;
+					break;
+				};
+				case 'owerlayVolumeOn' :{
+					move.owerlayVolumeOn.left = event.pageX - move.elem.shiftX;
+					move.owerlayVolumeOn.top = event.pageY - move.elem.shiftY;
+					move.owerlayVolumeOn.ondragstart = function() {
+        			return false;
+    			}; 
+					break;
+				};
+				case 'owerlayMicrophone' :{
+					move.owerlayMicrophone.left = event.pageX - move.elem.shiftX;
+					move.owerlayMicrophone.top = event.pageY - move.elem.shiftY;
+					move.owerlayMicrophone.ondragstart = function() {
+        			return false;
+    			}; 
+					break;
+				};
+			}
+		}
+	}
 </script>
 
-<style type="scss">
+
+
+<style type="text/scss">
 	@font-face {
 		font-family: TTNorms-Medium;
 		src: url(TT-Norms-Fonts/TTNorms-Medium.otf);
@@ -143,7 +210,7 @@
 	input, button {
     	outline: none;
 	}
-		::-webkit-scrollbar {
+	::-webkit-scrollbar {
 		width: 6px;
 		height: 6px;
 	}
@@ -166,11 +233,9 @@
 	}
 	#container {
 		width: 58vh;
-		height: 72vh;
+		height: 67vh;
 		min-width: 443px;
-		min-height: 577px;
-		max-width: 596px;
-		max-height: 714px;
+		min-height: 603px;
 		background: radial-gradient(circle farthest-corner at 180% 200%, #eb2e4a 0%, #000000 100%);
 		padding: 1% 52px;
     	padding-bottom: 24px;
@@ -265,6 +330,7 @@
 	.boxdevice{
 		margin-top: 4vh;
     	margin-left: 9%;
+		min-width: 55vh;
 	}
 	.regular{
 		margin: 0;
@@ -668,10 +734,68 @@
 		border: 0;
 		margin-left: 1vh;
 	}
+	.owerlay {
+		position: absolute;
+		min-width: 125px;
+		top: var(--top);
+		left: var(--left);
+		cursor: pointer;
+		background-color: #ffffff77;
+		z-index: 1000;
+	}
+	.owerlayRadiomin {
+		height: 2.3vh;
+		margin-top: 0.3vh;
+		margin-left: 1vh;
+	}
+	.owerlayRoomName {
+		font-family: TTNormal-Light;
+		font-size: 1.6em;
+		margin-left: 1vh;
+		color: #ffffff;
+		width: 0px;
+	}
+	.owerlayRadiominImg {
+		height: 1.3vh;
+	}
+	.owerlayPlayer {
+		font-family: TTNorms-Regular;
+		color: #ffffff;
+		font-size: 0.8em;
+		width: 26px;
+	}
+	.owerlayPlayerDistance {
+		font-family: TTNorms-Regular;
+		color: #ffffff;
+		font-size: 0.8em;
+	}
+	.owerlayMicrophone {
+		height: 5vh;
+		position: absolute;
+		z-index: 1000;
+		top: var(--top);
+		left: var(--left);
+		cursor: pointer;
+	}
+	.owerlayVolumeOn {
+		height: 5vh;
+		position: absolute;
+		z-index: 1000;
+		top: var(--top);
+		left: var(--left);
+		cursor: pointer;
+	}
 </style>
 
-<svelte:window on:keydown={mainWindow}/>
-<div id="mainWindow" oncontextmenu="return false">
+
+<svelte:window 
+	on:mousemove="{(event) => onMouseMove(event)}"
+	on:mousedown="{(event) => handlerDrag(event)}"
+	on:mouseup="{() => {move.ismove = false}}"
+	on:keydown={keydown}
+/>
+
+<div id="mainWindow" style="background-image: url(img/dsfghdfshsdg.png);" oncontextmenu="return false">
 	{#if gui.deviceSelectOpen}
 		<div id="floatwindow" >
 			<div class="mutlist">
@@ -895,5 +1019,77 @@
 			</div>
 		</div>
 	{/if}
-
+	<div>
+		<div id="owerlay" class="owerlay" style="--left:{move.owerlay.left+'px'};--top:{move.owerlay.top+'px'}">
+			<table>
+				<thead>
+					<tr>
+						<th><img class="owerlayRadiomin" src="img/radiomin.png" alt="owerlayRadiomin"></th>
+						<th><p class="owerlayRoomName" id="owerlayRoomName">Общий</p></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
+						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
+						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">100m.</p></th>
+					</tr>
+					<tr>
+						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
+						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
+						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">100m.</p></th>
+					</tr>
+					<tr>
+						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
+						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
+						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">100m.</p></th>
+					</tr>
+					<tr>
+						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
+						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
+						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">100m.</p></th>
+					</tr>
+					<tr>
+						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
+						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
+						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">100m.</p></th>
+					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
+					<tr>
+						<th><img class="owerlayRadiomin" src="img/radiomin.png" alt="owerlayRadiomin"></th>
+						<th><p class="owerlayRoomName" id="owerlayRoomName">Рация</p></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
+						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
+						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">[текст]</p></th>
+					</tr>
+					<tr>
+						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
+						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
+						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">[текст]</p></th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<img draggable="false"
+			class="owerlayMicrophone"
+			id="owerlayMicrophone"
+			src="img/owerlayMicrophone.png"
+			alt="owerlayMicrophone"
+			style="--left:{move.owerlayMicrophone.left+'px'};--top:{move.owerlayMicrophone.top+'px'}"
+			>
+		<img draggable="false"
+			class="owerlayVolumeOn"
+			id="owerlayVolumeOn"
+			src="img/owerlayVolumeOn.png"
+			alt="owerlayVolumeOn"
+			style="--left:{move.owerlayVolumeOn.left+'px'};--top:{move.owerlayVolumeOn.top+'px'}"
+			>
+	</div>
 </div>
