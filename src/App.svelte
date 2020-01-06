@@ -93,7 +93,13 @@
 			top: 19,
 		},
 
-	}
+	};
+	const selectButton = {
+		kiGlobal: false,
+		buttonkiGlobal:'A',
+		kiRadio: false,
+		buttonkiRadio:'S',
+	};
 
 	/**
 	 * Opens and closes the main window.
@@ -107,7 +113,19 @@
 	   (event.key == 'Escape' || event.key == 'Insert')
 	  ) {
 	    closeMainWindow();
-	  }
+	  };
+		if(selectButton.kiGlobal){
+			let key = event.key;
+        	key = key.length == 1 ? key.toUpperCase() : key;
+			selectButton.buttonkiGlobal = key;
+			selectButton.kiGlobal = false;
+		}
+		else if(selectButton.kiRadio){
+			let key = event.key;
+        	key = key.length == 1 ? key.toUpperCase() : key;
+			selectButton.buttonkiRadio = key;
+			selectButton.kiRadio = false;
+		};
 	};
 
 	/**
@@ -134,22 +152,18 @@
 	 */
 	function handlerDrag(event) {
 		let arr = event.target.classList;
-		arr.map((e)=> {
-			console.log(e);
-		})
-		console.log(arr)
 		// let classS = arr.filter(item => item == 'ower');
 		// console.log(classS);
 		if(event.which == 1){
 			move.nowMove = event.target.id;
 			let id = event.target.id;
-			if(id =="owerlayMicrophone" || id == "owerlayVolumeOn" || id == owerlay || event.target.class == "ower"){
+			if(id =="owerlayMicrophone" || id == "owerlayVolumeOn" || id == "owerlay"){
 				move.elem.shiftX = event.clientX - event.target.getBoundingClientRect().left;
 				move.elem.shiftY = event.clientY - event.target.getBoundingClientRect().top;
 				move.ismove = true;
 			}
 		}
-	}
+	};
 
 	function onMouseMove(event) {
 		if(move.ismove){
@@ -178,11 +192,20 @@
 				};
 			}
 		}
-	}
+	};
 
 	function stopMove() {
 		move.ismove = false;
 		move.background = '#0000';
+	};
+
+	function battonSelect(event){
+		if(event.target.id == 'kiGlobal'){
+			selectButton.kiGlobal = true;
+		}
+		else if(event.target.id == 'kiRadio'){
+			selectButton.kiRadio = true;
+		}
 	}
 </script>
 
@@ -798,6 +821,15 @@
 		left: var(--left);
 		cursor: pointer;
 	}
+	.bactive {
+		text-decoration:none;
+		font: 0.8em TTNorms-Regular;
+		color: #FFFFFF;
+		background-color: #ca314a;
+		border:solid 1px #ca314a;
+		border-radius: 10px;
+		box-shadow: 4px 4px 35px 12px rgba(189,0,40,0.4);
+	}
 </style>
 
 
@@ -943,7 +975,13 @@
 					<div class="inline-block soundvolume">
 						<p class="volume">Громкость звука</p>
 						<div class="volume">
-							<input id="range1" min="0" max="100" bind:value={config.main.soundVolume} type="range" class="slider" style="--columns:{config.main.soundVolume + "%"}">
+							<input
+								id="range1"
+								min="0"
+								max="100"
+								type="range" class="slider"
+								style="--columns:{config.main.soundVolume + "%"}"
+								bind:value={config.main.soundVolume}>
 							<p class="light inline-block">{config.main.soundVolume}</p>
 						</div>
 					</div>
@@ -953,7 +991,14 @@
 					<div class="inline-block soundvolume">
 					<p class="volume">Громкость микрофона</p>
 						<div class="volume">
-							<input id="range2" min="0" max="100" bind:value={config.main.microphoneVolume} type="range" class="slider" style="--columns:{config.main.microphoneVolume + "%"}">
+							<input
+								id="range2"
+								min="0"
+								max="100"
+								type="range"
+								class="slider"
+								style="--columns:{config.main.microphoneVolume + "%"}"
+								bind:value={config.main.microphoneVolume}>
 							<p class="light inline-block">{config.main.microphoneVolume}</p>
 						</div>
 					</div>
@@ -1016,12 +1061,22 @@
 							<tr>
 								<th><img src="img/minmik.png" class="minMic" alt="minMic"></th>
 								<th><p class="button-selection">Говорить</p></th>
-								<th><button class="inputbutton input-text" id="kiGlobal">A</button></th>
+								<th><button
+										class="inputbutton input-text {selectButton.kiGlobal ? 'bactive' : ''}"
+										id="kiGlobal"
+										on:click={(event) => battonSelect(event)}
+										disabled={selectButton.kiRadio}
+										>{selectButton.buttonkiGlobal}</button></th>
 							</tr>
 							<tr>
 								<th><img src="img/radio.png" class="minradio" alt="minradio"></th>
 								<th><p class="button-selection">Говорить в рацию</p></th>
-								<th><button class="inputbutton input-text" id="kiRadio">B</button></th>
+								<th><button
+										class="inputbutton input-text {selectButton.kiRadio ? 'bactive' : ''}"
+										id="kiRadio"
+										on:click={(event) => battonSelect(event)}
+										disabled={selectButton.kiGlobal}
+										>{selectButton.buttonkiRadio}</button></th>
 							</tr>
 						</tbody>
 					</table>
@@ -1032,52 +1087,50 @@
 			</div>
 		</div>
 	{/if}
-	<div>
-		<div
+	<div
 		id="owerlay"
 		class="owerlay ower"
 		style="--left:{move.owerlay.left+'px'};--top:{move.owerlay.top+'px'};background-color:{move.background}">
-			{#each volumeWindowRoom as voiceRoom,id}
-				<table>
-					<thead>
-						<tr>
-							<th><img class="owerlayRadiomin ower" src="img/radiomin.png" alt="owerlayRadiomin"></th>
-							<th><p class="owerlayRoomName ower" id="owerlayRoomName">{voiceRoom}</p></th>
-						</tr>
-					</thead>
-					<tbody>
-						{#each volumeWindowPlayer as players}
-							{#if players.room == id && players.talk}
-								<tr>
-									<th><img class="owerlayRadiominImg ower" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
-									<th><p class="owerlayPlayer ower" id="owerlayPlayer">{players.name}</p></th>
-									<th><p class="owerlayPlayerDistance ower" id="owerlayPlayerDistance">
-									{#if players.text != undefined}
-										{players.text}
-									{:else}
-										{players.distance+'m.'}
-									{/if}
-									</p></th>
-								</tr>
-							{/if}
-						{/each}
-					</tbody>
-				</table>
-			{/each}
-		</div>
-		<img draggable="false"
-			class="owerlayMicrophone"
-			id="owerlayMicrophone"
-			src="img/owerlayMicrophone.png"
-			alt="owerlayMicrophone"
-			style="--left:{move.owerlayMicrophone.left+'px'};--top:{move.owerlayMicrophone.top+'px'}"
-			>
-		<img draggable="false"
-			class="owerlayVolumeOn"
-			id="owerlayVolumeOn"
-			src="img/owerlayVolumeOn.png"
-			alt="owerlayVolumeOn"
-			style="--left:{move.owerlayVolumeOn.left+'px'};--top:{move.owerlayVolumeOn.top+'px'}"
-			>
+		{#each volumeWindowRoom as voiceRoom,id}
+			<table>
+				<thead>
+					<tr>
+						<th><img class="owerlayRadiomin ower" src="img/radiomin.png" alt="owerlayRadiomin"></th>
+						<th><p class="owerlayRoomName ower" id="owerlayRoomName">{voiceRoom}</p></th>
+					</tr>
+				</thead>
+				<tbody>
+					{#each volumeWindowPlayer as players}
+						{#if players.room == id && players.talk}
+							<tr>
+								<th><img class="owerlayRadiominImg ower" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
+								<th><p class="owerlayPlayer ower" id="owerlayPlayer">{players.name}</p></th>
+								<th><p class="owerlayPlayerDistance ower" id="owerlayPlayerDistance">
+								{#if players.text != undefined}
+									{players.text}
+								{:else}
+									{players.distance+'m.'}
+								{/if}
+								</p></th>
+							</tr>
+						{/if}
+					{/each}
+				</tbody>
+			</table>
+		{/each}
 	</div>
+	<img draggable="false"
+		class="owerlayMicrophone"
+		id="owerlayMicrophone"
+		src="img/owerlayMicrophone.png"
+		alt="owerlayMicrophone"
+		style="--left:{move.owerlayMicrophone.left+'px'};--top:{move.owerlayMicrophone.top+'px'}"
+		>
+	<img draggable="false"
+		class="owerlayVolumeOn"
+		id="owerlayVolumeOn"
+		src="img/owerlayVolumeOn.png"
+		alt="owerlayVolumeOn"
+		style="--left:{move.owerlayVolumeOn.left+'px'};--top:{move.owerlayVolumeOn.top+'px'}"
+		>
 </div>
