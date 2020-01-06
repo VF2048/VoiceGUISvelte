@@ -48,21 +48,21 @@
 	  'Рация2',
 	];
 	const volumeWindowPlayer = [
-	  {name: 'Vf1', room: 0, value: 50},
-	  {name: 'Vf2', room: 0, value: 50},
-	  {name: 'Vf3', room: 0, value: 50},
-	  {name: 'Vf4', room: 0, value: 50},
-	  {name: 'Vf5', room: 0, value: 50},
-	  {name: 'Vf6', room: 1, value: 50},
-	  {name: 'Vf7', room: 1, value: 50},
-	  {name: 'Vf8', room: 1, value: 50},
-	  {name: 'Vf9', room: 1, value: 50},
-	  {name: 'Vf10', room: 1, value: 50},
-	  {name: 'Vf11', room: 2, value: 50},
-	  {name: 'Vf12', room: 2, value: 50},
-	  {name: 'Vf13', room: 2, value: 50},
-	  {name: 'Vf14', room: 2, value: 50},
-	  {name: 'Vf15', room: 2, value: 50},
+	  {name: 'Vf1', room: 0, value: 50, distance: 100, talk:false},
+	  {name: 'Vf2', room: 0, value: 50, distance: 10, talk:true},
+	  {name: 'Vf3', room: 0, value: 50, distance: 100, talk:false},
+	  {name: 'Vf4', room: 0, value: 50, distance: 100, talk:false},
+	  {name: 'Vf5', room: 0, value: 50, distance: 200, talk:true},
+	  {name: 'Vf6', room: 1, value: 50, distance: 100, talk:false, text:'[text]'},
+	  {name: 'Vf7', room: 1, value: 50, distance: 100, talk:false},
+	  {name: 'Vf8', room: 1, value: 50, distance: 100, talk:false},
+	  {name: 'Vf9', room: 1, value: 50, distance: 50, talk:true, text:'[text]'},
+	  {name: 'Vf10', room: 1, value: 50, distance: 100, talk:false},
+	  {name: 'Vf11', room: 2, value: 50, distance: 100, talk:false},
+	  {name: 'Vf12', room: 2, value: 50, distance: 100, talk:true},
+	  {name: 'Vf13', room: 2, value: 50, distance: 100, talk:false},
+	  {name: 'Vf14', room: 2, value: 50, distance: 100, talk:false},
+	  {name: 'Vf15', room: 2, value: 50, distance: 100, talk:false},
 	];
 	const gui = {
 	  mainWindowOpen: true,
@@ -1021,61 +1021,33 @@
 	{/if}
 	<div>
 		<div id="owerlay" class="owerlay" style="--left:{move.owerlay.left+'px'};--top:{move.owerlay.top+'px'}">
-			<table>
-				<thead>
-					<tr>
-						<th><img class="owerlayRadiomin" src="img/radiomin.png" alt="owerlayRadiomin"></th>
-						<th><p class="owerlayRoomName" id="owerlayRoomName">Общий</p></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
-						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
-						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">100m.</p></th>
-					</tr>
-					<tr>
-						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
-						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
-						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">100m.</p></th>
-					</tr>
-					<tr>
-						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
-						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
-						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">100m.</p></th>
-					</tr>
-					<tr>
-						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
-						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
-						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">100m.</p></th>
-					</tr>
-					<tr>
-						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
-						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
-						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">100m.</p></th>
-					</tr>
-				</tbody>
-			</table>
-			<table>
-				<thead>
-					<tr>
-						<th><img class="owerlayRadiomin" src="img/radiomin.png" alt="owerlayRadiomin"></th>
-						<th><p class="owerlayRoomName" id="owerlayRoomName">Рация</p></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
-						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
-						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">[текст]</p></th>
-					</tr>
-					<tr>
-						<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
-						<th><p class="owerlayPlayer" id="owerlayPlayer">Vf</p></th>
-						<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">[текст]</p></th>
-					</tr>
-				</tbody>
-			</table>
+			{#each volumeWindowRoom as voiceRoom,id}
+				<table>
+					<thead>
+						<tr>
+							<th><img class="owerlayRadiomin" src="img/radiomin.png" alt="owerlayRadiomin"></th>
+							<th><p class="owerlayRoomName" id="owerlayRoomName">{voiceRoom}</p></th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each volumeWindowPlayer as players}
+							{#if players.room == id && players.talk}
+								<tr>
+									<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
+									<th><p class="owerlayPlayer" id="owerlayPlayer">{players.name}</p></th>
+									<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">
+									{#if players.text != undefined}
+										{players.text}
+									{:else}
+										{players.distance+'m.'}
+									{/if}
+									</p></th>
+								</tr>
+							{/if}
+						{/each}
+					</tbody>
+				</table>
+			{/each}
 		</div>
 		<img draggable="false"
 			class="owerlayMicrophone"
