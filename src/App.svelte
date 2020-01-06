@@ -75,6 +75,7 @@
 	const move = {
 		nowMove:'',
 		ismove: false,
+		background: '#ffffff77',
 		elem: {
 			shiftX:0,
 			shiftY:0,
@@ -132,10 +133,17 @@
 	 * Drag and drop handler.
 	 */
 	function handlerDrag(event) {
+		let arr = event.target.classList;
+		arr.map((e)=> {
+			console.log(e);
+		})
+		console.log(arr)
+		// let classS = arr.filter(item => item == 'ower');
+		// console.log(classS);
 		if(event.which == 1){
 			move.nowMove = event.target.id;
 			let id = event.target.id;
-			if(id =="owerlayMicrophone" || id == "owerlayVolumeOn" || id == "owerlay"){
+			if(id =="owerlayMicrophone" || id == "owerlayVolumeOn" || id == owerlay || event.target.class == "ower"){
 				move.elem.shiftX = event.clientX - event.target.getBoundingClientRect().left;
 				move.elem.shiftY = event.clientY - event.target.getBoundingClientRect().top;
 				move.ismove = true;
@@ -145,9 +153,9 @@
 
 	function onMouseMove(event) {
 		if(move.ismove){
-			console.log(move.nowMove);
 			switch(move.nowMove){
 				case 'owerlay' :{
+					move.background = '#ffffff77';
 					move.owerlay.left = event.pageX - move.elem.shiftX;
 					move.owerlay.top = event.pageY - move.elem.shiftY;
 					break;
@@ -170,6 +178,11 @@
 				};
 			}
 		}
+	}
+
+	function stopMove() {
+		move.ismove = false;
+		move.background = '#0000';
 	}
 </script>
 
@@ -791,7 +804,7 @@
 <svelte:window 
 	on:mousemove="{(event) => onMouseMove(event)}"
 	on:mousedown="{(event) => handlerDrag(event)}"
-	on:mouseup="{() => {move.ismove = false}}"
+	on:mouseup="{stopMove}"
 	on:keydown={keydown}
 />
 
@@ -1020,22 +1033,25 @@
 		</div>
 	{/if}
 	<div>
-		<div id="owerlay" class="owerlay" style="--left:{move.owerlay.left+'px'};--top:{move.owerlay.top+'px'}">
+		<div
+		id="owerlay"
+		class="owerlay ower"
+		style="--left:{move.owerlay.left+'px'};--top:{move.owerlay.top+'px'};background-color:{move.background}">
 			{#each volumeWindowRoom as voiceRoom,id}
 				<table>
 					<thead>
 						<tr>
-							<th><img class="owerlayRadiomin" src="img/radiomin.png" alt="owerlayRadiomin"></th>
-							<th><p class="owerlayRoomName" id="owerlayRoomName">{voiceRoom}</p></th>
+							<th><img class="owerlayRadiomin ower" src="img/radiomin.png" alt="owerlayRadiomin"></th>
+							<th><p class="owerlayRoomName ower" id="owerlayRoomName">{voiceRoom}</p></th>
 						</tr>
 					</thead>
 					<tbody>
 						{#each volumeWindowPlayer as players}
 							{#if players.room == id && players.talk}
 								<tr>
-									<th><img class="owerlayRadiominImg" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
-									<th><p class="owerlayPlayer" id="owerlayPlayer">{players.name}</p></th>
-									<th><p class="owerlayPlayerDistance" id="owerlayPlayerDistance">
+									<th><img class="owerlayRadiominImg ower" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
+									<th><p class="owerlayPlayer ower" id="owerlayPlayer">{players.name}</p></th>
+									<th><p class="owerlayPlayerDistance ower" id="owerlayPlayerDistance">
 									{#if players.text != undefined}
 										{players.text}
 									{:else}
