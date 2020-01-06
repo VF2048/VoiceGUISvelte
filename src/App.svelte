@@ -101,6 +101,12 @@
 		buttonkiRadio:'S',
 	};
 
+	function addRoom(room) {
+		volumeWindowRoom.push(room);
+	};
+	addRoom('Рация3')
+	delete volumeWindowRoom[3];
+
 	/**
 	 * Opens and closes the main window.
 	 * @param {object} event - Event on main window.
