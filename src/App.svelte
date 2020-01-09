@@ -1,15 +1,20 @@
 <script>
+	import { fade } from 'svelte/transition';
 	const config = {
 	  main: {
-	    soundVolume: 50,
-	    microphoneVolume: 50,
+		soundVolume: 50,
+		soundVolumeOff: 50,
+		microphoneVolume: 50,
+		microphoneVolumeOff: 50,
 	    triggerOnOffSound: true,
 	    triggerSound3D: true,
 	    inputmode: false,
 	    inputModeRadio: 1,
 	    inputModeRadioDevice: 1,
-	    kiGlobal: 'A',
-	    kiRadio: 'B',
+		kiGlobal: 'A',
+		kiGlobalOn: false,
+		kiRadio: 'B',
+		kiRadioOn: false,
 	  },
 	  selectDevice: 0,
 	  device: [
@@ -43,9 +48,6 @@
 	  'Vf5',
 	];
 	const volumeWindowRoom = [
-	  'Общий',
-	  'Рация1',
-	  'Рация2',
 	];
 	const volumeWindowPlayer = [
 	  {name: 'Vf1', room: 0, value: 50, distance: 100, talk:false},
@@ -75,20 +77,23 @@
 	const move = {
 		nowMove:'',
 		ismove: false,
+		domove:false,
 		background: '#ffffff77',
 		elem: {
 			shiftX:0,
 			shiftY:0,
 		},
 		owerlay: {
-			left: 122,
-			top: 19,
+			left: 858,
+			top: 178,
 		},
 		owerlayMicrophone: {
+			click: false,
 			left: 78,
 			top: 20,
 		},
 		owerlayVolumeOn: {
+			click: false,
 			left: 25,
 			top: 19,
 		},
@@ -101,11 +106,23 @@
 		buttonkiRadio:'S',
 	};
 
-	function addRoom(room) {
-		volumeWindowRoom.push(room);
+	presentation();
+
+	function presentation(){
+		addRoom('Общий');
+		addRoom('Рация1');
+		addRoom('Рация2');
+		addRoom('Рация3');
+		addRoom('Рация4');
+		deleteRoom(3);
 	};
-	addRoom('Рация3')
-	delete volumeWindowRoom[3];
+
+	function addRoom(roomID) {
+		volumeWindowRoom.push({name:roomID,open:true});
+	};
+	function deleteRoom(roomID) {
+		delete volumeWindowRoom[roomID];
+	};
 
 	/**
 	 * Opens and closes the main window.
@@ -120,19 +137,39 @@
 	  ) {
 	    closeMainWindow();
 	  };
+		let key = event.key;
+		key = key.length == 1 ? key.toUpperCase() : key;
 		if(selectButton.kiGlobal){
-			let key = event.key;
-        	key = key.length == 1 ? key.toUpperCase() : key;
 			selectButton.buttonkiGlobal = key;
 			selectButton.kiGlobal = false;
-		}
-		else if(selectButton.kiRadio){
-			let key = event.key;
-        	key = key.length == 1 ? key.toUpperCase() : key;
+		}else if(selectButton.kiRadio) {
 			selectButton.buttonkiRadio = key;
 			selectButton.kiRadio = false;
-		};
+		}else if (!selectButton.kiGlobal && key == selectButton.buttonkiGlobal && (config.main.inputModeRadio == 2 || config.main.inputModeRadio == 3) && config.main.kiGlobalOn == false) {
+			config.main.kiGlobalOn = true;
+			console.log('Говорю!')
+		}else if (!selectButton.kiGlobal && key == selectButton.buttonkiGlobal && config.main.inputModeRadio == 3 && config.main.kiGlobalOn == true) {
+			config.main.kiGlobalOn = false;
+			console.log('Не говорю!')
+		}else if (!selectButton.kiRadio && key == selectButton.buttonkiRadio && (config.main.inputModeRadio == 2 || config.main.inputModeRadio == 3) && config.main.kiRadioOn == false) {
+			config.main.kiRadioOn = true;
+			console.log('Говорю в рацию!')
+		}else if (!selectButton.kiRadio && key == selectButton.buttonkiRadio && config.main.inputModeRadio == 3 && config.main.kiRadioOn == true) {
+			config.main.kiRadioOn = false;
+			console.log('Не говорю в рацию!')
+		}
 	};
+	function keyup(event) {
+		let key = event.key;
+		key = key.length == 1 ? key.toUpperCase() : key;
+		if (!selectButton.kiGlobal && key == selectButton.buttonkiGlobal && config.main.inputModeRadio == 2) {
+			config.main.kiGlobalOn = false;
+			console.log('Не говорю!')
+		}else if (!selectButton.kiRadio && key == selectButton.buttonkiRadio  && config.main.inputModeRadio == 2) {
+			config.main.kiRadioOn = false;
+			console.log('Не говорю в рацию!')
+		}
+	}
 
 	/**
 	 * Close main window.
@@ -153,17 +190,27 @@
 	  gui.mainWindowOpen = true;
 	};
 
+	let owerlay;
+
 	/**
 	 * Drag and drop handler.
 	 */
-	function handlerDrag(event) {
+	function onMouseDown(event) {
+		let a = false;
 		let arr = event.target.classList;
-		// let classS = arr.filter(item => item == 'ower');
-		// console.log(classS);
+		let iterator = arr.values();
 		if(event.which == 1){
 			move.nowMove = event.target.id;
 			let id = event.target.id;
-			if(id =="owerlayMicrophone" || id == "owerlayVolumeOn" || id == "owerlay"){
+			for(var value of iterator) {
+				if(value == 'ower'){
+					move.nowMove = 'owerlay';
+					move.elem.shiftX = event.clientX - owerlay.getBoundingClientRect().left;
+					move.elem.shiftY = event.clientY - owerlay.getBoundingClientRect().top;
+					move.ismove = true;
+				}
+			}
+			if(id =="owerlayMicrophone" || id == "owerlayVolumeOn" || id == "owerlay" || a){
 				move.elem.shiftX = event.clientX - event.target.getBoundingClientRect().left;
 				move.elem.shiftY = event.clientY - event.target.getBoundingClientRect().top;
 				move.ismove = true;
@@ -183,26 +230,56 @@
 				case 'owerlayVolumeOn' :{
 					move.owerlayVolumeOn.left = event.pageX - move.elem.shiftX;
 					move.owerlayVolumeOn.top = event.pageY - move.elem.shiftY;
+					move.domove = true;
 					move.owerlayVolumeOn.ondragstart = function() {
-        			return false;
-    			}; 
+        				return false;
+    				}; 
 					break;
 				};
 				case 'owerlayMicrophone' :{
 					move.owerlayMicrophone.left = event.pageX - move.elem.shiftX;
 					move.owerlayMicrophone.top = event.pageY - move.elem.shiftY;
+					move.domove = true;
 					move.owerlayMicrophone.ondragstart = function() {
-        			return false;
-    			}; 
+        				return false;
+    				}; 
 					break;
 				};
 			}
 		}
 	};
 
-	function stopMove() {
+	function onMouseUp() {
+		if(!move.domove){
+			switch(move.nowMove){
+				case 'owerlayVolumeOn': {
+					if(move.owerlayVolumeOn.click){
+						move.owerlayVolumeOn.click = !move.owerlayVolumeOn.click;
+						config.main.soundVolume = config.main.soundVolumeOff;
+					}else {
+						move.owerlayVolumeOn.click = !move.owerlayVolumeOn.click;
+						config.main.soundVolumeOff = config.main.soundVolume;
+						config.main.soundVolume = 0;
+					}
+					break;
+				};
+				case 'owerlayMicrophone': {
+					if(move.owerlayMicrophone.click){
+						move.owerlayMicrophone.click = !move.owerlayMicrophone.click;
+						config.main.microphoneVolume = config.main.microphoneVolumeOff;
+					}else {
+						move.owerlayMicrophone.click = !move.owerlayMicrophone.click;
+						config.main.microphoneVolumeOff = config.main.microphoneVolume;
+						config.main.microphoneVolume = 0;
+					}
+					break;
+				};
+			}
+			move.domove = false;
+		}
 		move.ismove = false;
 		move.background = '#0000';
+		move.domove = false;
 	};
 
 	function battonSelect(event){
@@ -277,10 +354,9 @@
 		width: 58vh;
 		height: 67vh;
 		min-width: 443px;
-		min-height: 603px;
+		min-height: 672px;
 		background: radial-gradient(circle farthest-corner at 180% 200%, #eb2e4a 0%, #000000 100%);
 		padding: 1% 52px;
-    	padding-bottom: 24px;
 	}
 	.white {
 		color: white;
@@ -661,7 +737,7 @@
 	.voiceroom {
 		margin-left: 5vh;
 		margin-top: 5vh;
-		height: 20vh;
+		height: var(--heights);
 		width: 60vh;
 		min-width: 483px;
 		background: radial-gradient(farthest-corner at 78% 128%, #eb2e4a -138%, #000000 116%);
@@ -694,7 +770,7 @@
 		border-radius: 9px;
 		cursor: pointer;
 	}
-	#hiddenSetting:checked + .hiddenSetting {
+	.hiddenSettingOff {
 		margin-left: 2vh;
 		height: 1vh;
 		width: 1vh;
@@ -784,6 +860,7 @@
 		cursor: pointer;
 		background-color: #ffffff77;
 		z-index: 1000;
+		padding: 0 11px;
 	}
 	.owerlayRadiomin {
 		height: 2.3vh;
@@ -841,14 +918,15 @@
 
 <svelte:window 
 	on:mousemove="{(event) => onMouseMove(event)}"
-	on:mousedown="{(event) => handlerDrag(event)}"
-	on:mouseup="{stopMove}"
+	on:mousedown="{(event) => onMouseDown(event)}"
+	on:mouseup="{onMouseUp}"
 	on:keydown={keydown}
+	on:keyup={keyup}
 />
 
 <div id="mainWindow" style="background-image: url(img/dsfghdfshsdg.png);" oncontextmenu="return false">
 	{#if gui.deviceSelectOpen}
-		<div id="floatwindow" >
+		<div id="floatwindow" transition:fade>
 			<div class="mutlist">
 				<p class="leaf">Выберите устройство</p>
 				<div id="mutListPlayers" class="deviceListPlayers deviceSelectButton">
@@ -868,7 +946,7 @@
 		</div>
 	{/if}
 	{#if gui.mutList}
-		<div id="floatwindow">
+		<div id="floatwindow" transition:fade>
 			<div class="mutlist">
 				<p class="leaf">Мут лист игроков:</p>
 				<input class="input-text leaf mut-leaf" type="text" placeholder="Введите никнейм">
@@ -884,7 +962,7 @@
 		</div>
 	{/if}
 	{#if gui.roomSelectOpen}
-		<div id="floatwindow" >
+		<div id="floatwindow" transition:fade>
 			<div id="roomSelect">
                 <div class="mutlist">
                         <p class="leaf">Выберите комнату</p>
@@ -906,7 +984,7 @@
 		</div>
 	{/if}
 	{#if gui.channelSelectOpen}
-		<div id="floatwindow" >
+		<div id="floatwindow" transition:fade>
 			<div id="channelSelect">
                 <div class="mutlist">
                         <p class="leaf">Выберите канал</p>
@@ -933,47 +1011,51 @@
 		</div>
 	{/if}
 	{#if gui.volumeMainWindow}
-		<div class="volumeMainWindow" id="volumeMainWindow">
+		<div class="volumeMainWindow" id="volumeMainWindow" transition:fade>
 			{#each volumeWindowRoom as room,id}
-				<div id="voiceroom{id}" class="voiceroom">
-					<div class="voiceroomlogo">
-						<img class="radiomin" src="img/radiomin.png" alt="PicturaCka">
-						<p class="voiceroomlogotext">{room}</p>
-						<input id="hiddenSetting" type="checkbox">
-						<label for="hiddenSetting" class="hiddenSetting"></label>
+				{#if room != undefined}
+					<div id="voiceroom{id}" class="voiceroom"  style="--heights:{room.open ? "20vh" : "6vh"}">
+						<div class="voiceroomlogo">
+							<img class="radiomin" src="img/radiomin.png" alt="PicturaCka">
+							<p class="voiceroomlogotext">{room.name}</p>
+							<input id="hiddenSetting{id}" type="checkbox" on:click={()=>{room.open = !room.open}}>
+							<label for="hiddenSetting{id}" class="{room.open ? "hiddenSetting" : "hiddenSettingOff"}"></label>
+						</div>
+						{#if room.open}
+							<div id="voiceRoom1PlayerList" class="voiceRoomPlayerList">
+								<table id="voiceRoomPlayerSettings1">
+									<tbody>
+										{#each volumeWindowPlayer as {name, room, value}}
+										{#if room == id}
+											<tr class="voiceRoomPlayerSettings">
+												<th class="th">
+													<img src="img/userloc.png" class="userloc" alt="userloc">
+													<p class="userName">{name}</p>
+												</th>
+												<th class="th">
+													<img src="img/distance.png" class="imgdistance" alt="distance">
+													<p id="userName{id}Distance" class="userName">1000</p>
+													<p class="userName margin">m.</p>
+												</th>
+												<th id="grid" class="th">
+													<img src="img/micSettings.png" class="micSettings" alt="micSettings">
+													<input id="sliderP{id}" min="0" max="100" bind:value={value} type="range" class="sliderP" style="--columnsP:{value + "%"}">
+													<p id="sliderP{id}volume" class="userName">{value}</p>
+												</th>
+											</tr>
+										{/if}
+										{/each}
+									</tbody>
+								</table>
+							</div>
+						{/if}
 					</div>
-					<div id="voiceRoom1PlayerList" class="voiceRoomPlayerList">
-						<table id="voiceRoomPlayerSettings1">
-							<tbody>
-								{#each volumeWindowPlayer as {name, room, value}}
-								{#if room == id}
-									 <tr class="voiceRoomPlayerSettings">
-										<th class="th">
-											<img src="img/userloc.png" class="userloc" alt="userloc">
-											<p class="userName">{name}</p>
-										</th>
-										<th class="th">
-											<img src="img/distance.png" class="imgdistance" alt="distance">
-											<p id="userName{id}Distance" class="userName">1000</p>
-											<p class="userName margin">m.</p>
-										</th>
-										<th id="grid" class="th">
-											<img src="img/micSettings.png" class="micSettings" alt="micSettings">
-											<input id="sliderP{id}" min="0" max="100" bind:value={value} type="range" class="sliderP" style="--columnsP:{value + "%"}">
-											<p id="sliderP{id}volume" class="userName">{value}</p>
-										</th>
-									</tr>
-								{/if}
-								{/each}
-							</tbody>
-						</table>
-					</div>
-				</div>
+				{/if}
 			{/each}
 		</div>
 	{/if}
 	{#if gui.mainWindowOpen}
-		<div id="container">
+		<div id="container" transition:fade>
 			<h1 id="logo"><img class="mainImg" src="img/logo.png" alt="Logo"></h1>
 			<div id="boxvoice">
 				<div class="sound">
@@ -985,9 +1067,16 @@
 								id="range1"
 								min="0"
 								max="100"
-								type="range" class="slider"
+								type="range"
+								class="slider"
 								style="--columns:{config.main.soundVolume + "%"}"
-								bind:value={config.main.soundVolume}>
+								bind:value={config.main.soundVolume}
+								on:input={() => {
+									if(move.owerlayVolumeOn.click){
+										move.owerlayVolumeOn.click = !move.owerlayVolumeOn.click
+									}
+								}}
+							>
 							<p class="light inline-block">{config.main.soundVolume}</p>
 						</div>
 					</div>
@@ -1004,7 +1093,13 @@
 								type="range"
 								class="slider"
 								style="--columns:{config.main.microphoneVolume + "%"}"
-								bind:value={config.main.microphoneVolume}>
+								bind:value={config.main.microphoneVolume}
+								on:input={() => {
+									if(move.owerlayMicrophone.click){
+										move.owerlayMicrophone.click = !move.owerlayMicrophone.click
+									}
+								}}
+							>
 							<p class="light inline-block">{config.main.microphoneVolume}</p>
 						</div>
 					</div>
@@ -1094,49 +1189,73 @@
 		</div>
 	{/if}
 	<div
+		bind:this={owerlay}
 		id="owerlay"
 		class="owerlay ower"
 		style="--left:{move.owerlay.left+'px'};--top:{move.owerlay.top+'px'};background-color:{move.background}">
-		{#each volumeWindowRoom as voiceRoom,id}
-			<table>
-				<thead>
-					<tr>
-						<th><img class="owerlayRadiomin ower" src="img/radiomin.png" alt="owerlayRadiomin"></th>
-						<th><p class="owerlayRoomName ower" id="owerlayRoomName">{voiceRoom}</p></th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each volumeWindowPlayer as players}
-						{#if players.room == id && players.talk}
-							<tr>
-								<th><img class="owerlayRadiominImg ower" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
-								<th><p class="owerlayPlayer ower" id="owerlayPlayer">{players.name}</p></th>
-								<th><p class="owerlayPlayerDistance ower" id="owerlayPlayerDistance">
-								{#if players.text != undefined}
-									{players.text}
-								{:else}
-									{players.distance+'m.'}
-								{/if}
-								</p></th>
-							</tr>
-						{/if}
-					{/each}
-				</tbody>
-			</table>
+		{#each volumeWindowRoom as room,id}
+			{#if room != undefined}
+				<table class="ower">
+					<thead class="ower">
+						<tr>
+							<th class="ower"><img draggable="false" class="owerlayRadiomin ower" src="img/radiomin.png" alt="owerlayRadiomin"></th>
+							<th class="ower"><p class="owerlayRoomName ower" id="owerlayRoomName">{room.name}</p></th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each volumeWindowPlayer as players}
+							{#if players.room == id && players.talk}
+								<tr>
+									<th class="ower"><img draggable="false" class="owerlayRadiominImg ower" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
+									<th class="ower"><p class="owerlayPlayer ower" id="owerlayPlayer">{players.name}</p></th>
+									<th class="ower"><p class="owerlayPlayerDistance ower" id="owerlayPlayerDistance">
+									{#if players.text != undefined}
+										{players.text}
+									{:else}
+										{players.distance+'m.'}
+									{/if}
+									</p></th>
+								</tr>
+							{/if}
+						{/each}
+					</tbody>
+				</table>
+			{/if}
 		{/each}
 	</div>
-	<img draggable="false"
-		class="owerlayMicrophone"
-		id="owerlayMicrophone"
-		src="img/owerlayMicrophone.png"
-		alt="owerlayMicrophone"
-		style="--left:{move.owerlayMicrophone.left+'px'};--top:{move.owerlayMicrophone.top+'px'}"
+	{#if !move.owerlayMicrophone.click}
+		<img draggable="false"
+			class="owerlayMicrophone"
+			id="owerlayMicrophone"
+			src="img/owerlayMicrophone.png"
+			alt="owerlayMicrophone"
+			style="--left:{move.owerlayMicrophone.left+'px'};--top:{move.owerlayMicrophone.top+'px'}"
 		>
-	<img draggable="false"
-		class="owerlayVolumeOn"
-		id="owerlayVolumeOn"
-		src="img/owerlayVolumeOn.png"
-		alt="owerlayVolumeOn"
-		style="--left:{move.owerlayVolumeOn.left+'px'};--top:{move.owerlayVolumeOn.top+'px'}"
+	{:else}
+		<img draggable="false"
+			class="owerlayMicrophone"
+			id="owerlayMicrophone"
+			src="img/owerlayMicrophoneOff.png"
+			alt="owerlayMicrophone"
+			style="--left:{move.owerlayMicrophone.left+'px'};--top:{move.owerlayMicrophone.top+'px'}"
 		>
+	{/if}
+	{#if !move.owerlayVolumeOn.click}
+		<img draggable="false"
+			class="owerlayVolumeOn"
+			id="owerlayVolumeOn"
+			src="img/owerlayVolumeOn.png"
+			alt="owerlayVolumeOn"
+			style="--left:{move.owerlayVolumeOn.left+'px'};--top:{move.owerlayVolumeOn.top+'px'}"
+		>
+	{:else}
+		<img draggable="false"
+			class="owerlayVolumeOn"
+			id="owerlayVolumeOn"
+			src="img/owerlayVolumeOff.png"
+			alt="owerlayVolumeOn"
+			style="--left:{move.owerlayVolumeOn.left+'px'};--top:{move.owerlayVolumeOn.top+'px'}"
+		>
+	{/if}
+	
 </div>
