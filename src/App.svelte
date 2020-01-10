@@ -1,5 +1,51 @@
 <script>
 	import { fade } from 'svelte/transition';
+	import { onMount } from 'svelte';
+
+	let canvas;
+	let owerlay;
+	let global;
+	let radio;
+	let radioInput0;
+	let radioInput1;
+	let radioInput2;
+
+	onMount(() => {
+		let frame;
+		let i = 0;
+
+		(function loop() {
+			frame = requestAnimationFrame(loop);
+				if(move.owerlay.move && i<0.457){
+					i += 0.005
+					move.background = "rgba(255, 255, 255, " + i + ")";
+				}
+				else if(!move.owerlay.move && i>0){
+					i -= 0.005
+					move.background = "rgba(255, 255, 255, " + i + ")";
+				};
+				if(config.main.ki.global.select){
+					config.main.ki.global.color += 5;
+				}else{
+					config.main.ki.global.color = 5;
+				};
+				if(config.main.ki.radio.select){
+					config.main.ki.radio.color += 5;
+				}else{
+					config.main.ki.radio.color = 5;
+				};
+				if(config.main.inputmodeon.click){
+					config.main.inputmodeon.click = false;
+					config.main.inputmodeon.color = 5;
+				}else if(config.main.inputmodeon.color >= 5 && config.main.inputmodeon.color < 100){
+					config.main.inputmodeon.color += 5;
+				};
+		}());
+
+		return () => {
+			cancelAnimationFrame(frame);
+		};
+	});
 	const config = {
 	  main: {
 		soundVolume: 50,
@@ -8,13 +54,33 @@
 		microphoneVolumeOff: 50,
 	    triggerOnOffSound: true,
 	    triggerSound3D: true,
-	    inputmode: false,
+		inputmode: false,
+		inputmodeon: {
+			click:false,
+			height: 10,
+			width: 10,
+			color: 5,
+		},
 	    inputModeRadio: 1,
-	    inputModeRadioDevice: 1,
-		kiGlobal: 'A',
-		kiGlobalOn: false,
-		kiRadio: 'B',
-		kiRadioOn: false,
+		inputModeRadioDevice: 1,
+		ki: {
+			global: {
+				key:'A'	,
+				on: false,
+				select:false,
+				height: 10,
+				width: 10,
+				color: 5,
+			},
+			radio: {
+				key:'B',
+				on: false,
+				select:false,
+				height: 10,
+				width: 10,
+				color: 5,
+			},
+		}
 	  },
 	  selectDevice: 0,
 	  device: [
@@ -47,8 +113,7 @@
 	  'Vf4',
 	  'Vf5',
 	];
-	const volumeWindowRoom = [
-	];
+	const volumeWindowRoom = [];
 	const volumeWindowPlayer = [
 	  {name: 'Vf1', room: 0, value: 50, distance: 100, talk:false},
 	  {name: 'Vf2', room: 0, value: 50, distance: 10, talk:true},
@@ -78,14 +143,15 @@
 		nowMove:'',
 		ismove: false,
 		domove:false,
-		background: '#ffffff77',
+		background: '',
 		elem: {
 			shiftX:0,
 			shiftY:0,
 		},
 		owerlay: {
-			left: 858,
-			top: 178,
+			move:false,
+			left: 330,
+			top: 18,
 		},
 		owerlayMicrophone: {
 			click: false,
@@ -98,12 +164,6 @@
 			top: 19,
 		},
 
-	};
-	const selectButton = {
-		kiGlobal: false,
-		buttonkiGlobal:'A',
-		kiRadio: false,
-		buttonkiRadio:'S',
 	};
 
 	presentation();
@@ -139,34 +199,34 @@
 	  };
 		let key = event.key;
 		key = key.length == 1 ? key.toUpperCase() : key;
-		if(selectButton.kiGlobal){
-			selectButton.buttonkiGlobal = key;
-			selectButton.kiGlobal = false;
-		}else if(selectButton.kiRadio) {
-			selectButton.buttonkiRadio = key;
-			selectButton.kiRadio = false;
-		}else if (!selectButton.kiGlobal && key == selectButton.buttonkiGlobal && (config.main.inputModeRadio == 2 || config.main.inputModeRadio == 3) && config.main.kiGlobalOn == false) {
-			config.main.kiGlobalOn = true;
+		if(config.main.ki.global.select){
+			config.main.ki.global.key = key;
+			config.main.ki.global.select = false;
+		}else if(config.main.ki.radio.select) {
+			config.main.ki.radio.key = key;
+			config.main.ki.radio.select = false;
+		}else if (!config.main.ki.global.on && key == config.main.ki.global.key && (config.main.inputModeRadio == 2 || config.main.inputModeRadio == 3)) {
+			config.main.ki.global.on = true;
 			console.log('Говорю!')
-		}else if (!selectButton.kiGlobal && key == selectButton.buttonkiGlobal && config.main.inputModeRadio == 3 && config.main.kiGlobalOn == true) {
-			config.main.kiGlobalOn = false;
+		}else if (config.main.ki.global.on && key == config.main.ki.global.key && config.main.inputModeRadio == 3) {
+			config.main.ki.global.on = false;
 			console.log('Не говорю!')
-		}else if (!selectButton.kiRadio && key == selectButton.buttonkiRadio && (config.main.inputModeRadio == 2 || config.main.inputModeRadio == 3) && config.main.kiRadioOn == false) {
-			config.main.kiRadioOn = true;
+		}else if (!config.main.ki.radio.on && key == config.main.ki.radio.key && (config.main.inputModeRadio == 2 || config.main.inputModeRadio == 3)) {
+			config.main.ki.radio.on = true;
 			console.log('Говорю в рацию!')
-		}else if (!selectButton.kiRadio && key == selectButton.buttonkiRadio && config.main.inputModeRadio == 3 && config.main.kiRadioOn == true) {
-			config.main.kiRadioOn = false;
+		}else if (config.main.ki.radio.on && key == config.main.ki.radio.key && config.main.inputModeRadio == 3) {
+			config.main.ki.radio.on = false;
 			console.log('Не говорю в рацию!')
 		}
 	};
 	function keyup(event) {
 		let key = event.key;
 		key = key.length == 1 ? key.toUpperCase() : key;
-		if (!selectButton.kiGlobal && key == selectButton.buttonkiGlobal && config.main.inputModeRadio == 2) {
-			config.main.kiGlobalOn = false;
+		if (config.main.ki.global.on && key == config.main.ki.global.key && config.main.inputModeRadio == 2) {
+			config.main.ki.global.on = false;
 			console.log('Не говорю!')
-		}else if (!selectButton.kiRadio && key == selectButton.buttonkiRadio  && config.main.inputModeRadio == 2) {
-			config.main.kiRadioOn = false;
+		}else if (config.main.ki.radio.on && key == config.main.ki.radio.key  && config.main.inputModeRadio == 2) {
+			config.main.ki.radio.on = false;
 			console.log('Не говорю в рацию!')
 		}
 	}
@@ -175,22 +235,22 @@
 	 * Close main window.
 	 */
 	function closeMainWindow() {
-	  gui.mainWindowOpen = false;
-	  gui.deviceSelectOpen = false;
-	  gui.roomSelectOpen = false;
-	  gui.channelSelectOpen = false;
-	  gui.mutList = false;
-	  gui.volumeMainWindow = false;
+		window.SetCursorVisible(false);
+		gui.mainWindowOpen = false;
+		gui.deviceSelectOpen = false;
+		gui.roomSelectOpen = false;
+		gui.channelSelectOpen = false;
+		gui.mutList = false;
+		gui.volumeMainWindow = false;
 	};
 
 	/**
 	 * Open main window.
 	 */
 	function openMainWindow() {
-	  gui.mainWindowOpen = true;
+		window.SetCursorVisible(true);
+	  	gui.mainWindowOpen = true;
 	};
-
-	let owerlay;
 
 	/**
 	 * Drag and drop handler.
@@ -203,14 +263,15 @@
 			move.nowMove = event.target.id;
 			let id = event.target.id;
 			for(var value of iterator) {
-				if(value == 'ower'){
+				if(value == 'ower'|| id == "owerlay"){
 					move.nowMove = 'owerlay';
 					move.elem.shiftX = event.clientX - owerlay.getBoundingClientRect().left;
 					move.elem.shiftY = event.clientY - owerlay.getBoundingClientRect().top;
 					move.ismove = true;
+					move.owerlay.move = true;
 				}
 			}
-			if(id =="owerlayMicrophone" || id == "owerlayVolumeOn" || id == "owerlay" || a){
+			if(id =="owerlayMicrophone" || id == "owerlayVolumeOn"){
 				move.elem.shiftX = event.clientX - event.target.getBoundingClientRect().left;
 				move.elem.shiftY = event.clientY - event.target.getBoundingClientRect().top;
 				move.ismove = true;
@@ -222,7 +283,7 @@
 		if(move.ismove){
 			switch(move.nowMove){
 				case 'owerlay' :{
-					move.background = '#ffffff77';
+
 					move.owerlay.left = event.pageX - move.elem.shiftX;
 					move.owerlay.top = event.pageY - move.elem.shiftY;
 					break;
@@ -231,18 +292,12 @@
 					move.owerlayVolumeOn.left = event.pageX - move.elem.shiftX;
 					move.owerlayVolumeOn.top = event.pageY - move.elem.shiftY;
 					move.domove = true;
-					move.owerlayVolumeOn.ondragstart = function() {
-        				return false;
-    				}; 
 					break;
 				};
 				case 'owerlayMicrophone' :{
 					move.owerlayMicrophone.left = event.pageX - move.elem.shiftX;
 					move.owerlayMicrophone.top = event.pageY - move.elem.shiftY;
 					move.domove = true;
-					move.owerlayMicrophone.ondragstart = function() {
-        				return false;
-    				}; 
 					break;
 				};
 			}
@@ -275,19 +330,22 @@
 					break;
 				};
 			}
-			move.domove = false;
 		}
 		move.ismove = false;
-		move.background = '#0000';
 		move.domove = false;
+		move.owerlay.move = false;
 	};
 
 	function battonSelect(event){
 		if(event.target.id == 'kiGlobal'){
-			selectButton.kiGlobal = true;
+			config.main.ki.global.select = true;
+			config.main.ki.global.height = event.clientX - global.getBoundingClientRect().x;
+			config.main.ki.global.width = event.clientY - global.getBoundingClientRect().y;
 		}
 		else if(event.target.id == 'kiRadio'){
-			selectButton.kiRadio = true;
+			config.main.ki.radio.select = true;
+			config.main.ki.radio.height = event.clientX - radio.getBoundingClientRect().x;
+			config.main.ki.radio.width = event.clientY - radio.getBoundingClientRect().y;
 		}
 	}
 </script>
@@ -591,7 +649,7 @@
 		border-radius: 10px;
 		font: 0.7em TTNorms-Regular;
 		color: #FFFFFF;
-		background-color: #eb2e4a;
+		background: radial-gradient(circle farthest-corner at var(--height) var(--width), #eb2e4a var(--color), #0000 0%);
 		border: solid 1px #eb2e4a;
 		box-shadow: 4px 4px 35px 12px rgba(189,0,40,0.4);
 		white-space: nowrap;
@@ -858,7 +916,6 @@
 		top: var(--top);
 		left: var(--left);
 		cursor: pointer;
-		background-color: #ffffff77;
 		z-index: 1000;
 		padding: 0 11px;
 	}
@@ -912,6 +969,7 @@
 		border:solid 1px #ca314a;
 		border-radius: 10px;
 		box-shadow: 4px 4px 35px 12px rgba(189,0,40,0.4);
+		background: radial-gradient(circle farthest-corner at var(--height) var(--width), #eb2e4a var(--color), #0000 0%);
 	}
 </style>
 
@@ -1025,22 +1083,21 @@
 							<div id="voiceRoom1PlayerList" class="voiceRoomPlayerList">
 								<table id="voiceRoomPlayerSettings1">
 									<tbody>
-										{#each volumeWindowPlayer as {name, room, value}}
-										{#if room == id}
+										{#each volumeWindowPlayer as Player}
+										{#if Player.room == id}
 											<tr class="voiceRoomPlayerSettings">
 												<th class="th">
 													<img src="img/userloc.png" class="userloc" alt="userloc">
-													<p class="userName">{name}</p>
+													<p class="userName">{Player.name}</p>
 												</th>
 												<th class="th">
 													<img src="img/distance.png" class="imgdistance" alt="distance">
-													<p id="userName{id}Distance" class="userName">1000</p>
-													<p class="userName margin">m.</p>
+													<p id="userName{id}Distance" class="userName">{Player.distance + ' m.'}</p>
 												</th>
 												<th id="grid" class="th">
 													<img src="img/micSettings.png" class="micSettings" alt="micSettings">
-													<input id="sliderP{id}" min="0" max="100" bind:value={value} type="range" class="sliderP" style="--columnsP:{value + "%"}">
-													<p id="sliderP{id}volume" class="userName">{value}</p>
+													<input id="sliderP{id}" min="0" max="100" bind:value={Player.value} type="range" class="sliderP" style="--columnsP:{Player.value + "%"}">
+													<p id="sliderP{id}volume" class="userName">{Player.value}</p>
 												</th>
 											</tr>
 										{/if}
@@ -1072,6 +1129,7 @@
 								style="--columns:{config.main.soundVolume + "%"}"
 								bind:value={config.main.soundVolume}
 								on:input={() => {
+									window.SetPlayVolume(config.main.soundVolume/100);
 									if(move.owerlayVolumeOn.click){
 										move.owerlayVolumeOn.click = !move.owerlayVolumeOn.click
 									}
@@ -1095,6 +1153,7 @@
 								style="--columns:{config.main.microphoneVolume + "%"}"
 								bind:value={config.main.microphoneVolume}
 								on:input={() => {
+									window.SetRecordVolume(config.main.microphoneVolume/100);
 									if(move.owerlayMicrophone.click){
 										move.owerlayMicrophone.click = !move.owerlayMicrophone.click
 									}
@@ -1116,12 +1175,12 @@
 			<div class="boxmodes alignment">
 				<div class="alignment">
 					<p>Включение звука</p>
-					<input id="triggerOnOffSound" type="checkbox" bind:checked={config.main.triggerOnOffSound}>
+					<input id="triggerOnOffSound" type="checkbox" bind:checked={config.main.triggerOnOffSound} on:click={() => window.EnableVoice(config.main.triggerOnOffSound)}>
 					<label for="triggerOnOffSound" class="checker onoff-sound"></label>
 				</div>
 				<div class="sound3D alignment">
 					<p>3D Звук</p>
-					<input id="triggerSound3D" type="checkbox" bind:checked={config.main.triggerSound3D}>
+					<input id="triggerSound3D" type="checkbox" bind:checked={config.main.triggerSound3D} on:click={() => window.enable_3d_voice(config.main.triggerSound3D)}>
 					<label for="triggerSound3D" class="checker checker-sound3D"></label>
 				</div>
 			</div>
@@ -1136,16 +1195,54 @@
 					<div id="inputmode" class="inputmode">
 						<ul class="ul">
 							<li class="li">
-								<input type="radio" value={1} bind:group={config.main.inputModeRadio} id="radio1" name="radio" class="input">
-								<label for="radio1"><div class="button selector A">По голосу</div></label>
+								<input
+									type="radio" value={1} bind:group={config.main.inputModeRadio} id="radio1" name="radio" class="input">
+								<label
+									bind:this={radioInput0}
+									on:click={(event) => {
+										config.main.inputmodeon.height = event.clientX - radioInput0.getBoundingClientRect().x;
+										config.main.inputmodeon.width = event.clientY - radioInput0.getBoundingClientRect().y;
+										config.main.inputmodeon.click = true;
+										}}
+									style="
+											--height:{config.main.inputmodeon.height + 'px'};
+											--width:{config.main.inputmodeon.width + 'px'};
+											--color:{config.main.inputmodeon.color + '%'}"
+									for="radio1"><div class="button selector A">По голосу</div></label>
 							</li>
 							<li class="li">
-								<input type="radio" value={2} bind:group={config.main.inputModeRadio} id="radio2" name="radio" class="input">
-								<label for="radio2"><div class="button selector A">При удердании</div></label>
+								<input
+									on:click={config.main.inputmodeon.click = true}
+									type="radio" value={2} bind:group={config.main.inputModeRadio} id="radio2" name="radio" class="input">
+								<label
+									bind:this={radioInput1}
+									on:click={(event) => {
+										config.main.inputmodeon.height = event.clientX - radioInput1.getBoundingClientRect().x;
+										config.main.inputmodeon.width = event.clientY - radioInput1.getBoundingClientRect().y;
+										config.main.inputmodeon.click = true;
+									}}
+									style="
+											--height:{config.main.inputmodeon.height + 'px'};
+											--width:{config.main.inputmodeon.width + 'px'};
+											--color:{config.main.inputmodeon.color + '%'}"
+									for="radio2"><div class="button selector A">При удердании</div></label>
 							</li>
 							<li class="li">
-								<input type="radio" value={3} bind:group={config.main.inputModeRadio} id="radio3" name="radio" class="input">
-								<label for="radio3"><div class="button selector A">Переключение по клавише</div></label>
+								<input
+									on:click={config.main.inputmodeon.click = true}
+									type="radio" value={3} bind:group={config.main.inputModeRadio} id="radio3" name="radio" class="input">
+								<label
+									bind:this={radioInput2}
+									on:click={(event) => {
+										config.main.inputmodeon.height = event.clientX - radioInput2.getBoundingClientRect().x;
+										config.main.inputmodeon.width = event.clientY - radioInput2.getBoundingClientRect().y;
+										config.main.inputmodeon.click = true;
+									}}
+									style="
+											--height:{config.main.inputmodeon.height + 'px'};
+											--width:{config.main.inputmodeon.width + 'px'};
+											--color:{config.main.inputmodeon.color + '%'}"
+									for="radio3"><div class="button selector A">Переключение по клавише</div></label>
 							</li>
 						</ul>
 					</div>
@@ -1163,21 +1260,33 @@
 								<th><img src="img/minmik.png" class="minMic" alt="minMic"></th>
 								<th><p class="button-selection">Говорить</p></th>
 								<th><button
-										class="inputbutton input-text {selectButton.kiGlobal ? 'bactive' : ''}"
+										style="
+											--height:{config.main.ki.global.height + 'px'};
+											--width:{config.main.ki.global.width + 'px'};
+											--color:{config.main.ki.global.color + '%'}"
+										bind:this={global}
+										class="inputbutton input-text {config.main.ki.global.select ? 'bactive' : ''}"
 										id="kiGlobal"
 										on:click={(event) => battonSelect(event)}
-										disabled={selectButton.kiRadio}
-										>{selectButton.buttonkiGlobal}</button></th>
+										disabled={config.main.ki.radio.on}
+									>
+									{config.main.ki.global.key}</button></th>
 							</tr>
 							<tr>
 								<th><img src="img/radio.png" class="minradio" alt="minradio"></th>
 								<th><p class="button-selection">Говорить в рацию</p></th>
 								<th><button
-										class="inputbutton input-text {selectButton.kiRadio ? 'bactive' : ''}"
+										style="
+											--height:{config.main.ki.radio.height + 'px'};
+											--width:{config.main.ki.radio.width + 'px'};
+											--color:{config.main.ki.radio.color + '%'}"
+										bind:this={radio}
+										class="inputbutton input-text {config.main.ki.radio.select ? 'bactive' : ''}"
 										id="kiRadio"
 										on:click={(event) => battonSelect(event)}
-										disabled={selectButton.kiGlobal}
-										>{selectButton.buttonkiRadio}</button></th>
+										disabled={config.main.ki.global.on}
+									>
+									{config.main.ki.radio.key}</button></th>
 							</tr>
 						</tbody>
 					</table>
