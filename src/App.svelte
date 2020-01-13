@@ -176,7 +176,15 @@
 	};
 
 	presentation();
+	onload();
 
+	function onload() {
+		window.SetPlayVolume(config.main.soundVolume/100);
+		window.SetRecordVolume(config.main.microphoneVolume/100);
+		window.EnableVoice(config.main.triggerOnOffSound);
+		window.Enable3DVoice(config.main.triggerSound3D);
+	}
+	
 	function presentation(){
 		addRoom('Общий');
 		addRoom('Рация1');

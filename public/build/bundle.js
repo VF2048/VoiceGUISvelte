@@ -593,61 +593,61 @@ var app = (function () {
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[60] = list[i];
+    	child_ctx[61] = list[i];
     	return child_ctx;
     }
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[57] = list[i];
-    	child_ctx[59] = i;
+    	child_ctx[58] = list[i];
+    	child_ctx[60] = i;
     	return child_ctx;
     }
 
     function get_each_context_3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[64] = list[i];
-    	child_ctx[65] = list;
-    	child_ctx[66] = i;
+    	child_ctx[65] = list[i];
+    	child_ctx[66] = list;
+    	child_ctx[67] = i;
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[57] = list[i];
-    	child_ctx[59] = i;
+    	child_ctx[58] = list[i];
+    	child_ctx[60] = i;
     	return child_ctx;
     }
 
     function get_each_context_4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[67] = list[i];
-    	child_ctx[59] = i;
+    	child_ctx[68] = list[i];
+    	child_ctx[60] = i;
     	return child_ctx;
     }
 
     function get_each_context_5(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[57] = list[i];
-    	child_ctx[59] = i;
+    	child_ctx[58] = list[i];
+    	child_ctx[60] = i;
     	return child_ctx;
     }
 
     function get_each_context_6(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[70] = list[i];
-    	child_ctx[59] = i;
+    	child_ctx[71] = list[i];
+    	child_ctx[60] = i;
     	return child_ctx;
     }
 
     function get_each_context_7(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[72] = list[i];
-    	child_ctx[59] = i;
+    	child_ctx[73] = list[i];
+    	child_ctx[60] = i;
     	return child_ctx;
     }
 
-    // (1025:1) {#if gui.deviceSelectOpen}
+    // (1033:1) {#if gui.deviceSelectOpen}
     function create_if_block_14(ctx) {
     	let div3;
     	let div2;
@@ -687,25 +687,25 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Закрыть";
     			attr_dev(p, "class", "leaf svelte-1li6s1q");
-    			add_location(p, file, 1027, 4, 23254);
+    			add_location(p, file, 1035, 4, 23517);
     			attr_dev(ul, "class", "ul svelte-1li6s1q");
     			attr_dev(ul, "id", "deviceSelectList");
-    			add_location(ul, file, 1029, 5, 23376);
+    			add_location(ul, file, 1037, 5, 23639);
     			attr_dev(div0, "id", "mutListPlayers");
     			attr_dev(div0, "class", "deviceListPlayers deviceSelectButton svelte-1li6s1q");
-    			add_location(div0, file, 1028, 4, 23299);
+    			add_location(div0, file, 1036, 4, 23562);
     			attr_dev(button, "anim", "anim");
     			attr_dev(button, "id", "deviceSelectCloseButton");
     			attr_dev(button, "class", "button svelte-1li6s1q");
-    			add_location(button, file, 1050, 5, 24402);
+    			add_location(button, file, 1058, 5, 24665);
     			attr_dev(div1, "class", "deviceSelectCloseButton svelte-1li6s1q");
-    			add_location(div1, file, 1049, 4, 24358);
+    			add_location(div1, file, 1057, 4, 24621);
     			attr_dev(div2, "class", "mutlist svelte-1li6s1q");
-    			add_location(div2, file, 1026, 3, 23227);
+    			add_location(div2, file, 1034, 3, 23490);
     			attr_dev(div3, "id", "floatwindow");
     			attr_dev(div3, "class", "svelte-1li6s1q");
-    			add_location(div3, file, 1025, 2, 23184);
-    			dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[23], false, false, false);
+    			add_location(div3, file, 1033, 2, 23447);
+    			dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[24], false, false, false);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -775,14 +775,14 @@ var app = (function () {
     		block,
     		id: create_if_block_14.name,
     		type: "if",
-    		source: "(1025:1) {#if gui.deviceSelectOpen}",
+    		source: "(1033:1) {#if gui.deviceSelectOpen}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1031:6) {#each config.device as device,id}
+    // (1039:6) {#each config.device as device,id}
     function create_each_block_7(ctx) {
     	let li;
     	let input;
@@ -791,7 +791,7 @@ var app = (function () {
     	let t0;
     	let label;
     	let div;
-    	let t1_value = /*device*/ ctx[72] + "";
+    	let t1_value = /*device*/ ctx[73] + "";
     	let t1;
     	let label_for_value;
     	let t2;
@@ -807,27 +807,27 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = space();
     			attr_dev(input, "type", "radio");
-    			input.__value = input_value_value = /*id*/ ctx[59];
+    			input.__value = input_value_value = /*id*/ ctx[60];
     			input.value = input.__value;
-    			attr_dev(input, "id", input_id_value = "radioDevice" + /*id*/ ctx[59]);
+    			attr_dev(input, "id", input_id_value = "radioDevice" + /*id*/ ctx[60]);
     			attr_dev(input, "name", "radioDevice");
     			attr_dev(input, "class", "inputDevice svelte-1li6s1q");
-    			/*$$binding_groups*/ ctx[21][3].push(input);
-    			add_location(input, file, 1032, 8, 23489);
+    			/*$$binding_groups*/ ctx[22][3].push(input);
+    			add_location(input, file, 1040, 8, 23752);
     			set_style(div, "--height", /*config*/ ctx[1].main.inputModeRadioDeviceOn.height + "px");
     			set_style(div, "--width", /*config*/ ctx[1].main.inputModeRadioDeviceOn.width + "px");
     			set_style(div, "--color", /*config*/ ctx[1].main.inputModeRadioDeviceOn.color + "%");
     			attr_dev(div, "class", "button selectorDevice svelte-1li6s1q");
-    			add_location(div, file, 1034, 31, 23662);
-    			attr_dev(label, "for", label_for_value = "radioDevice" + /*id*/ ctx[59]);
+    			add_location(div, file, 1042, 31, 23925);
+    			attr_dev(label, "for", label_for_value = "radioDevice" + /*id*/ ctx[60]);
     			attr_dev(label, "class", "svelte-1li6s1q");
-    			add_location(label, file, 1033, 8, 23623);
+    			add_location(label, file, 1041, 8, 23886);
     			attr_dev(li, "class", "li svelte-1li6s1q");
-    			add_location(li, file, 1031, 7, 23464);
+    			add_location(li, file, 1039, 7, 23727);
 
     			dispose = [
-    				listen_dev(input, "change", /*input_change_handler*/ ctx[20]),
-    				listen_dev(div, "click", /*click_handler*/ ctx[22], false, false, false)
+    				listen_dev(input, "change", /*input_change_handler*/ ctx[21]),
+    				listen_dev(div, "click", /*click_handler*/ ctx[23], false, false, false)
     			];
     		},
     		m: function mount(target, anchor) {
@@ -845,7 +845,7 @@ var app = (function () {
     				input.checked = input.__value === /*config*/ ctx[1].selectDevice;
     			}
 
-    			if (dirty[0] & /*config*/ 2 && t1_value !== (t1_value = /*device*/ ctx[72] + "")) set_data_dev(t1, t1_value);
+    			if (dirty[0] & /*config*/ 2 && t1_value !== (t1_value = /*device*/ ctx[73] + "")) set_data_dev(t1, t1_value);
 
     			if (dirty[0] & /*config*/ 2) {
     				set_style(div, "--height", /*config*/ ctx[1].main.inputModeRadioDeviceOn.height + "px");
@@ -861,7 +861,7 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(li);
-    			/*$$binding_groups*/ ctx[21][3].splice(/*$$binding_groups*/ ctx[21][3].indexOf(input), 1);
+    			/*$$binding_groups*/ ctx[22][3].splice(/*$$binding_groups*/ ctx[22][3].indexOf(input), 1);
     			run_all(dispose);
     		}
     	};
@@ -870,14 +870,14 @@ var app = (function () {
     		block,
     		id: create_each_block_7.name,
     		type: "each",
-    		source: "(1031:6) {#each config.device as device,id}",
+    		source: "(1039:6) {#each config.device as device,id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1061:1) {#if gui.mutList}
+    // (1069:1) {#if gui.mutList}
     function create_if_block_13(ctx) {
     	let div3;
     	let div2;
@@ -919,27 +919,27 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Закрыть";
     			attr_dev(p, "class", "leaf svelte-1li6s1q");
-    			add_location(p, file, 1063, 4, 24723);
+    			add_location(p, file, 1071, 4, 24986);
     			attr_dev(input, "class", "input-text leaf mut-leaf svelte-1li6s1q");
     			attr_dev(input, "type", "text");
     			attr_dev(input, "placeholder", "Введите никнейм");
-    			add_location(input, file, 1064, 4, 24766);
+    			add_location(input, file, 1072, 4, 25029);
     			attr_dev(div0, "id", "mutListPlayers");
     			attr_dev(div0, "class", "mutListPlayers svelte-1li6s1q");
-    			add_location(div0, file, 1065, 4, 24854);
+    			add_location(div0, file, 1073, 4, 25117);
     			attr_dev(button, "anim", "anim");
     			attr_dev(button, "id", "mutListCloseButton");
     			attr_dev(button, "class", "button svelte-1li6s1q");
-    			add_location(button, file, 1071, 5, 25085);
+    			add_location(button, file, 1079, 5, 25348);
     			set_style(div1, "text-align", "center");
     			attr_dev(div1, "class", "svelte-1li6s1q");
-    			add_location(div1, file, 1070, 4, 25045);
+    			add_location(div1, file, 1078, 4, 25308);
     			attr_dev(div2, "class", "mutlist svelte-1li6s1q");
-    			add_location(div2, file, 1062, 3, 24696);
+    			add_location(div2, file, 1070, 3, 24959);
     			attr_dev(div3, "id", "floatwindow");
     			attr_dev(div3, "class", "svelte-1li6s1q");
-    			add_location(div3, file, 1061, 2, 24653);
-    			dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[24], false, false, false);
+    			add_location(div3, file, 1069, 2, 24916);
+    			dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[25], false, false, false);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -1010,17 +1010,17 @@ var app = (function () {
     		block,
     		id: create_if_block_13.name,
     		type: "if",
-    		source: "(1061:1) {#if gui.mutList}",
+    		source: "(1069:1) {#if gui.mutList}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1067:5) {#each mutList as name,id}
+    // (1075:5) {#each mutList as name,id}
     function create_each_block_6(ctx) {
     	let button;
-    	let t_value = /*name*/ ctx[70] + "";
+    	let t_value = /*name*/ ctx[71] + "";
     	let t;
     	let button_id_value;
 
@@ -1028,9 +1028,9 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			t = text(t_value);
-    			attr_dev(button, "id", button_id_value = "1" + /*id*/ ctx[59] + "Vf");
+    			attr_dev(button, "id", button_id_value = "1" + /*id*/ ctx[60] + "Vf");
     			attr_dev(button, "class", "button selector mut-leaf svelte-1li6s1q");
-    			add_location(button, file, 1067, 7, 24944);
+    			add_location(button, file, 1075, 7, 25207);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1046,14 +1046,14 @@ var app = (function () {
     		block,
     		id: create_each_block_6.name,
     		type: "each",
-    		source: "(1067:5) {#each mutList as name,id}",
+    		source: "(1075:5) {#each mutList as name,id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1082:1) {#if gui.roomSelectOpen}
+    // (1090:1) {#if gui.roomSelectOpen}
     function create_if_block_12(ctx) {
     	let div4;
     	let div3;
@@ -1095,28 +1095,28 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Закрыть";
     			attr_dev(p, "class", "leaf svelte-1li6s1q");
-    			add_location(p, file, 1085, 24, 25459);
+    			add_location(p, file, 1093, 24, 25722);
     			attr_dev(ul, "class", "ul svelte-1li6s1q");
     			attr_dev(ul, "id", "roomSelectList");
-    			add_location(ul, file, 1087, 28, 25621);
+    			add_location(ul, file, 1095, 28, 25884);
     			attr_dev(div0, "id", "mutListPlayers");
     			attr_dev(div0, "class", "deviceListPlayers deviceSelectButton svelte-1li6s1q");
-    			add_location(div0, file, 1086, 24, 25521);
+    			add_location(div0, file, 1094, 24, 25784);
     			attr_dev(button, "anim", "anim");
     			attr_dev(button, "id", "roomSelectCloseButton");
     			attr_dev(button, "class", "button svelte-1li6s1q");
-    			add_location(button, file, 1107, 28, 26729);
+    			add_location(button, file, 1115, 28, 26992);
     			attr_dev(div1, "class", "deviceSelectCloseButton svelte-1li6s1q");
-    			add_location(div1, file, 1106, 24, 26662);
+    			add_location(div1, file, 1114, 24, 26925);
     			attr_dev(div2, "class", "mutlist svelte-1li6s1q");
-    			add_location(div2, file, 1084, 16, 25412);
+    			add_location(div2, file, 1092, 16, 25675);
     			attr_dev(div3, "id", "roomSelect");
     			attr_dev(div3, "class", "svelte-1li6s1q");
-    			add_location(div3, file, 1083, 3, 25373);
+    			add_location(div3, file, 1091, 3, 25636);
     			attr_dev(div4, "id", "floatwindow");
     			attr_dev(div4, "class", "svelte-1li6s1q");
-    			add_location(div4, file, 1082, 2, 25330);
-    			dispose = listen_dev(button, "click", /*click_handler_4*/ ctx[27], false, false, false);
+    			add_location(div4, file, 1090, 2, 25593);
+    			dispose = listen_dev(button, "click", /*click_handler_4*/ ctx[28], false, false, false);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div4, anchor);
@@ -1187,14 +1187,14 @@ var app = (function () {
     		block,
     		id: create_if_block_12.name,
     		type: "if",
-    		source: "(1082:1) {#if gui.roomSelectOpen}",
+    		source: "(1090:1) {#if gui.roomSelectOpen}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1089:8) {#each config.room as room,id}
+    // (1097:8) {#each config.room as room,id}
     function create_each_block_5(ctx) {
     	let li;
     	let input;
@@ -1203,7 +1203,7 @@ var app = (function () {
     	let t0;
     	let label;
     	let div;
-    	let t1_value = /*room*/ ctx[57] + "";
+    	let t1_value = /*room*/ ctx[58] + "";
     	let t1;
     	let label_for_value;
     	let t2;
@@ -1219,27 +1219,27 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = space();
     			attr_dev(input, "type", "radio");
-    			input.__value = input_value_value = /*id*/ ctx[59];
+    			input.__value = input_value_value = /*id*/ ctx[60];
     			input.value = input.__value;
-    			attr_dev(input, "id", input_id_value = "radioRoom" + /*id*/ ctx[59]);
+    			attr_dev(input, "id", input_id_value = "radioRoom" + /*id*/ ctx[60]);
     			attr_dev(input, "name", "radioRoom");
     			attr_dev(input, "class", "inputDevice svelte-1li6s1q");
-    			/*$$binding_groups*/ ctx[21][2].push(input);
-    			add_location(input, file, 1090, 10, 25734);
+    			/*$$binding_groups*/ ctx[22][2].push(input);
+    			add_location(input, file, 1098, 10, 25997);
     			set_style(div, "--height", /*config*/ ctx[1].main.inputModeRadioDeviceOn.height + "px");
     			set_style(div, "--width", /*config*/ ctx[1].main.inputModeRadioDeviceOn.width + "px");
     			set_style(div, "--color", /*config*/ ctx[1].main.inputModeRadioDeviceOn.color + "%");
     			attr_dev(div, "class", "button selectorDevice svelte-1li6s1q");
-    			add_location(div, file, 1091, 37, 25891);
-    			attr_dev(label, "for", label_for_value = "radioRoom" + /*id*/ ctx[59]);
+    			add_location(div, file, 1099, 37, 26154);
+    			attr_dev(label, "for", label_for_value = "radioRoom" + /*id*/ ctx[60]);
     			attr_dev(label, "class", "svelte-1li6s1q");
-    			add_location(label, file, 1091, 10, 25864);
+    			add_location(label, file, 1099, 10, 26127);
     			attr_dev(li, "class", "li svelte-1li6s1q");
-    			add_location(li, file, 1089, 9, 25707);
+    			add_location(li, file, 1097, 9, 25970);
 
     			dispose = [
-    				listen_dev(input, "change", /*input_change_handler_1*/ ctx[25]),
-    				listen_dev(div, "click", /*click_handler_3*/ ctx[26], false, false, false)
+    				listen_dev(input, "change", /*input_change_handler_1*/ ctx[26]),
+    				listen_dev(div, "click", /*click_handler_3*/ ctx[27], false, false, false)
     			];
     		},
     		m: function mount(target, anchor) {
@@ -1257,7 +1257,7 @@ var app = (function () {
     				input.checked = input.__value === /*config*/ ctx[1].selectRoom;
     			}
 
-    			if (dirty[0] & /*config*/ 2 && t1_value !== (t1_value = /*room*/ ctx[57] + "")) set_data_dev(t1, t1_value);
+    			if (dirty[0] & /*config*/ 2 && t1_value !== (t1_value = /*room*/ ctx[58] + "")) set_data_dev(t1, t1_value);
 
     			if (dirty[0] & /*config*/ 2) {
     				set_style(div, "--height", /*config*/ ctx[1].main.inputModeRadioDeviceOn.height + "px");
@@ -1273,7 +1273,7 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(li);
-    			/*$$binding_groups*/ ctx[21][2].splice(/*$$binding_groups*/ ctx[21][2].indexOf(input), 1);
+    			/*$$binding_groups*/ ctx[22][2].splice(/*$$binding_groups*/ ctx[22][2].indexOf(input), 1);
     			run_all(dispose);
     		}
     	};
@@ -1282,14 +1282,14 @@ var app = (function () {
     		block,
     		id: create_each_block_5.name,
     		type: "each",
-    		source: "(1089:8) {#each config.room as room,id}",
+    		source: "(1097:8) {#each config.room as room,id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1119:1) {#if gui.channelSelectOpen}
+    // (1127:1) {#if gui.channelSelectOpen}
     function create_if_block_11(ctx) {
     	let div4;
     	let div3;
@@ -1331,28 +1331,28 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Закрыть";
     			attr_dev(p, "class", "leaf svelte-1li6s1q");
-    			add_location(p, file, 1122, 24, 27182);
+    			add_location(p, file, 1130, 24, 27445);
     			attr_dev(ul, "class", "ul svelte-1li6s1q");
     			attr_dev(ul, "id", "channelSelectList");
-    			add_location(ul, file, 1124, 28, 27342);
+    			add_location(ul, file, 1132, 28, 27605);
     			attr_dev(div0, "id", "mutListPlayers");
     			attr_dev(div0, "class", "deviceListPlayers deviceSelectButton svelte-1li6s1q");
-    			add_location(div0, file, 1123, 24, 27242);
+    			add_location(div0, file, 1131, 24, 27505);
     			attr_dev(button, "anim", "anim");
     			attr_dev(button, "id", "channelSelectCloseButton");
     			attr_dev(button, "class", "button svelte-1li6s1q");
-    			add_location(button, file, 1143, 28, 28421);
+    			add_location(button, file, 1151, 28, 28684);
     			attr_dev(div1, "class", "deviceSelectCloseButton svelte-1li6s1q");
-    			add_location(div1, file, 1142, 24, 28354);
+    			add_location(div1, file, 1150, 24, 28617);
     			attr_dev(div2, "class", "mutlist svelte-1li6s1q");
-    			add_location(div2, file, 1121, 16, 27135);
+    			add_location(div2, file, 1129, 16, 27398);
     			attr_dev(div3, "id", "channelSelect");
     			attr_dev(div3, "class", "svelte-1li6s1q");
-    			add_location(div3, file, 1120, 3, 27093);
+    			add_location(div3, file, 1128, 3, 27356);
     			attr_dev(div4, "id", "floatwindow");
     			attr_dev(div4, "class", "svelte-1li6s1q");
-    			add_location(div4, file, 1119, 2, 27050);
-    			dispose = listen_dev(button, "click", /*click_handler_6*/ ctx[30], false, false, false);
+    			add_location(div4, file, 1127, 2, 27313);
+    			dispose = listen_dev(button, "click", /*click_handler_6*/ ctx[31], false, false, false);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div4, anchor);
@@ -1423,14 +1423,14 @@ var app = (function () {
     		block,
     		id: create_if_block_11.name,
     		type: "if",
-    		source: "(1119:1) {#if gui.channelSelectOpen}",
+    		source: "(1127:1) {#if gui.channelSelectOpen}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1126:7) {#each config.channel as channel,id}
+    // (1134:7) {#each config.channel as channel,id}
     function create_each_block_4(ctx) {
     	let li;
     	let input;
@@ -1439,7 +1439,7 @@ var app = (function () {
     	let t0;
     	let label;
     	let div;
-    	let t1_value = /*channel*/ ctx[67] + "";
+    	let t1_value = /*channel*/ ctx[68] + "";
     	let t1;
     	let label_for_value;
     	let t2;
@@ -1455,27 +1455,27 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = space();
     			attr_dev(input, "type", "radio");
-    			input.__value = input_value_value = /*id*/ ctx[59];
+    			input.__value = input_value_value = /*id*/ ctx[60];
     			input.value = input.__value;
-    			attr_dev(input, "id", input_id_value = "radioChanne" + /*id*/ ctx[59]);
+    			attr_dev(input, "id", input_id_value = "radioChanne" + /*id*/ ctx[60]);
     			attr_dev(input, "name", "radioChannel");
     			attr_dev(input, "class", "inputDevice svelte-1li6s1q");
-    			/*$$binding_groups*/ ctx[21][1].push(input);
-    			add_location(input, file, 1127, 9, 27461);
+    			/*$$binding_groups*/ ctx[22][1].push(input);
+    			add_location(input, file, 1135, 9, 27724);
     			set_style(div, "--height", /*config*/ ctx[1].main.inputModeRadioDeviceOn.height + "px");
     			set_style(div, "--width", /*config*/ ctx[1].main.inputModeRadioDeviceOn.width + "px");
     			set_style(div, "--color", /*config*/ ctx[1].main.inputModeRadioDeviceOn.color + "%");
     			attr_dev(div, "class", "button selectorDevice svelte-1li6s1q");
-    			add_location(div, file, 1128, 38, 27627);
-    			attr_dev(label, "for", label_for_value = "radioChanne" + /*id*/ ctx[59]);
+    			add_location(div, file, 1136, 38, 27890);
+    			attr_dev(label, "for", label_for_value = "radioChanne" + /*id*/ ctx[60]);
     			attr_dev(label, "class", "svelte-1li6s1q");
-    			add_location(label, file, 1128, 9, 27598);
+    			add_location(label, file, 1136, 9, 27861);
     			attr_dev(li, "class", "li svelte-1li6s1q");
-    			add_location(li, file, 1126, 8, 27435);
+    			add_location(li, file, 1134, 8, 27698);
 
     			dispose = [
-    				listen_dev(input, "change", /*input_change_handler_2*/ ctx[28]),
-    				listen_dev(div, "click", /*click_handler_5*/ ctx[29], false, false, false)
+    				listen_dev(input, "change", /*input_change_handler_2*/ ctx[29]),
+    				listen_dev(div, "click", /*click_handler_5*/ ctx[30], false, false, false)
     			];
     		},
     		m: function mount(target, anchor) {
@@ -1493,7 +1493,7 @@ var app = (function () {
     				input.checked = input.__value === /*config*/ ctx[1].selectchannel;
     			}
 
-    			if (dirty[0] & /*config*/ 2 && t1_value !== (t1_value = /*channel*/ ctx[67] + "")) set_data_dev(t1, t1_value);
+    			if (dirty[0] & /*config*/ 2 && t1_value !== (t1_value = /*channel*/ ctx[68] + "")) set_data_dev(t1, t1_value);
 
     			if (dirty[0] & /*config*/ 2) {
     				set_style(div, "--height", /*config*/ ctx[1].main.inputModeRadioDeviceOn.height + "px");
@@ -1509,7 +1509,7 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(li);
-    			/*$$binding_groups*/ ctx[21][1].splice(/*$$binding_groups*/ ctx[21][1].indexOf(input), 1);
+    			/*$$binding_groups*/ ctx[22][1].splice(/*$$binding_groups*/ ctx[22][1].indexOf(input), 1);
     			run_all(dispose);
     		}
     	};
@@ -1518,14 +1518,14 @@ var app = (function () {
     		block,
     		id: create_each_block_4.name,
     		type: "each",
-    		source: "(1126:7) {#each config.channel as channel,id}",
+    		source: "(1134:7) {#each config.channel as channel,id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1155:1) {#if gui.volumeMainWindow}
+    // (1163:1) {#if gui.volumeMainWindow}
     function create_if_block_7(ctx) {
     	let div;
     	let div_transition;
@@ -1547,7 +1547,7 @@ var app = (function () {
 
     			attr_dev(div, "class", "volumeMainWindow svelte-1li6s1q");
     			attr_dev(div, "id", "volumeMainWindow");
-    			add_location(div, file, 1155, 2, 28747);
+    			add_location(div, file, 1163, 2, 29010);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1608,14 +1608,14 @@ var app = (function () {
     		block,
     		id: create_if_block_7.name,
     		type: "if",
-    		source: "(1155:1) {#if gui.volumeMainWindow}",
+    		source: "(1163:1) {#if gui.volumeMainWindow}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1158:4) {#if room != undefined}
+    // (1166:4) {#if room != undefined}
     function create_if_block_8(ctx) {
     	let div1;
     	let div0;
@@ -1623,7 +1623,7 @@ var app = (function () {
     	let img_src_value;
     	let t0;
     	let p;
-    	let t1_value = /*room*/ ctx[57].name + "";
+    	let t1_value = /*room*/ ctx[58].name + "";
     	let t1;
     	let t2;
     	let input;
@@ -1638,10 +1638,10 @@ var app = (function () {
     	let dispose;
 
     	function click_handler_7(...args) {
-    		return /*click_handler_7*/ ctx[31](/*room*/ ctx[57], ...args);
+    		return /*click_handler_7*/ ctx[32](/*room*/ ctx[58], ...args);
     	}
 
-    	let if_block = /*room*/ ctx[57].open && create_if_block_9(ctx);
+    	let if_block = /*room*/ ctx[58].open && create_if_block_9(ctx);
 
     	const block = {
     		c: function create() {
@@ -1661,26 +1661,26 @@ var app = (function () {
     			attr_dev(img, "class", "radiomin svelte-1li6s1q");
     			if (img.src !== (img_src_value = "img/radiomin.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "PicturaCka");
-    			add_location(img, file, 1160, 7, 29025);
+    			add_location(img, file, 1168, 7, 29288);
     			attr_dev(p, "class", "voiceroomlogotext svelte-1li6s1q");
-    			add_location(p, file, 1161, 7, 29096);
-    			attr_dev(input, "id", input_id_value = "hiddenSetting" + /*id*/ ctx[59]);
+    			add_location(p, file, 1169, 7, 29359);
+    			attr_dev(input, "id", input_id_value = "hiddenSetting" + /*id*/ ctx[60]);
     			attr_dev(input, "type", "checkbox");
     			attr_dev(input, "class", "svelte-1li6s1q");
-    			add_location(input, file, 1162, 7, 29149);
-    			attr_dev(label, "for", label_for_value = "hiddenSetting" + /*id*/ ctx[59]);
+    			add_location(input, file, 1170, 7, 29412);
+    			attr_dev(label, "for", label_for_value = "hiddenSetting" + /*id*/ ctx[60]);
 
-    			attr_dev(label, "class", label_class_value = "" + (null_to_empty(/*room*/ ctx[57].open
+    			attr_dev(label, "class", label_class_value = "" + (null_to_empty(/*room*/ ctx[58].open
     			? "hiddenSetting"
     			: "hiddenSettingOff") + " svelte-1li6s1q"));
 
-    			add_location(label, file, 1163, 7, 29244);
+    			add_location(label, file, 1171, 7, 29507);
     			attr_dev(div0, "class", "voiceroomlogo svelte-1li6s1q");
-    			add_location(div0, file, 1159, 6, 28989);
-    			attr_dev(div1, "id", div1_id_value = "voiceroom" + /*id*/ ctx[59]);
+    			add_location(div0, file, 1167, 6, 29252);
+    			attr_dev(div1, "id", div1_id_value = "voiceroom" + /*id*/ ctx[60]);
     			attr_dev(div1, "class", "voiceroom svelte-1li6s1q");
-    			set_style(div1, "--heights", /*room*/ ctx[57].open ? "20vh" : "6vh");
-    			add_location(div1, file, 1158, 5, 28891);
+    			set_style(div1, "--heights", /*room*/ ctx[58].open ? "20vh" : "6vh");
+    			add_location(div1, file, 1166, 5, 29154);
     			dispose = listen_dev(input, "click", click_handler_7, false, false, false);
     		},
     		m: function mount(target, anchor) {
@@ -1700,15 +1700,15 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*volumeWindowRoom*/ 4 && t1_value !== (t1_value = /*room*/ ctx[57].name + "")) set_data_dev(t1, t1_value);
+    			if (dirty[0] & /*volumeWindowRoom*/ 4 && t1_value !== (t1_value = /*room*/ ctx[58].name + "")) set_data_dev(t1, t1_value);
 
-    			if (dirty[0] & /*volumeWindowRoom*/ 4 && label_class_value !== (label_class_value = "" + (null_to_empty(/*room*/ ctx[57].open
+    			if (dirty[0] & /*volumeWindowRoom*/ 4 && label_class_value !== (label_class_value = "" + (null_to_empty(/*room*/ ctx[58].open
     			? "hiddenSetting"
     			: "hiddenSettingOff") + " svelte-1li6s1q"))) {
     				attr_dev(label, "class", label_class_value);
     			}
 
-    			if (/*room*/ ctx[57].open) {
+    			if (/*room*/ ctx[58].open) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
@@ -1722,7 +1722,7 @@ var app = (function () {
     			}
 
     			if (dirty[0] & /*volumeWindowRoom*/ 4) {
-    				set_style(div1, "--heights", /*room*/ ctx[57].open ? "20vh" : "6vh");
+    				set_style(div1, "--heights", /*room*/ ctx[58].open ? "20vh" : "6vh");
     			}
     		},
     		d: function destroy(detaching) {
@@ -1736,14 +1736,14 @@ var app = (function () {
     		block,
     		id: create_if_block_8.name,
     		type: "if",
-    		source: "(1158:4) {#if room != undefined}",
+    		source: "(1166:4) {#if room != undefined}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1166:6) {#if room.open}
+    // (1174:6) {#if room.open}
     function create_if_block_9(ctx) {
     	let div;
     	let table;
@@ -1766,13 +1766,13 @@ var app = (function () {
     			}
 
     			attr_dev(tbody, "class", "svelte-1li6s1q");
-    			add_location(tbody, file, 1168, 9, 29505);
+    			add_location(tbody, file, 1176, 9, 29768);
     			attr_dev(table, "id", "voiceRoomPlayerSettings1");
     			attr_dev(table, "class", "svelte-1li6s1q");
-    			add_location(table, file, 1167, 8, 29457);
+    			add_location(table, file, 1175, 8, 29720);
     			attr_dev(div, "id", "voiceRoom1PlayerList");
     			attr_dev(div, "class", "voiceRoomPlayerList svelte-1li6s1q");
-    			add_location(div, file, 1166, 7, 29388);
+    			add_location(div, file, 1174, 7, 29651);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1817,14 +1817,14 @@ var app = (function () {
     		block,
     		id: create_if_block_9.name,
     		type: "if",
-    		source: "(1166:6) {#if room.open}",
+    		source: "(1174:6) {#if room.open}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1171:10) {#if Player.room == id}
+    // (1179:10) {#if Player.room == id}
     function create_if_block_10(ctx) {
     	let tr;
     	let th0;
@@ -1832,7 +1832,7 @@ var app = (function () {
     	let img0_src_value;
     	let t0;
     	let p0;
-    	let t1_value = /*Player*/ ctx[64].name + "";
+    	let t1_value = /*Player*/ ctx[65].name + "";
     	let t1;
     	let t2;
     	let th1;
@@ -1840,7 +1840,7 @@ var app = (function () {
     	let img1_src_value;
     	let t3;
     	let p1;
-    	let t4_value = /*Player*/ ctx[64].distance + " m." + "";
+    	let t4_value = /*Player*/ ctx[65].distance + " m." + "";
     	let t4;
     	let p1_id_value;
     	let t5;
@@ -1852,14 +1852,14 @@ var app = (function () {
     	let input_id_value;
     	let t7;
     	let p2;
-    	let t8_value = /*Player*/ ctx[64].value + "";
+    	let t8_value = /*Player*/ ctx[65].value + "";
     	let t8;
     	let p2_id_value;
     	let t9;
     	let dispose;
 
     	function input_change_input_handler() {
-    		/*input_change_input_handler*/ ctx[32].call(input, /*Player*/ ctx[64]);
+    		/*input_change_input_handler*/ ctx[33].call(input, /*Player*/ ctx[65]);
     	}
 
     	const block = {
@@ -1888,39 +1888,39 @@ var app = (function () {
     			if (img0.src !== (img0_src_value = "img/userloc.png")) attr_dev(img0, "src", img0_src_value);
     			attr_dev(img0, "class", "userloc svelte-1li6s1q");
     			attr_dev(img0, "alt", "userloc");
-    			add_location(img0, file, 1173, 13, 29688);
+    			add_location(img0, file, 1181, 13, 29951);
     			attr_dev(p0, "class", "userName svelte-1li6s1q");
-    			add_location(p0, file, 1174, 13, 29760);
+    			add_location(p0, file, 1182, 13, 30023);
     			attr_dev(th0, "class", "th svelte-1li6s1q");
-    			add_location(th0, file, 1172, 12, 29658);
+    			add_location(th0, file, 1180, 12, 29921);
     			if (img1.src !== (img1_src_value = "img/distance.png")) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "class", "imgdistance svelte-1li6s1q");
     			attr_dev(img1, "alt", "distance");
-    			add_location(img1, file, 1177, 13, 29860);
-    			attr_dev(p1, "id", p1_id_value = "userName" + /*id*/ ctx[59] + "Distance");
+    			add_location(img1, file, 1185, 13, 30123);
+    			attr_dev(p1, "id", p1_id_value = "userName" + /*id*/ ctx[60] + "Distance");
     			attr_dev(p1, "class", "userName svelte-1li6s1q");
-    			add_location(p1, file, 1178, 13, 29938);
+    			add_location(p1, file, 1186, 13, 30201);
     			attr_dev(th1, "class", "th svelte-1li6s1q");
-    			add_location(th1, file, 1176, 12, 29830);
+    			add_location(th1, file, 1184, 12, 30093);
     			if (img2.src !== (img2_src_value = "img/micSettings.png")) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "class", "micSettings svelte-1li6s1q");
     			attr_dev(img2, "alt", "micSettings");
-    			add_location(img2, file, 1181, 13, 30086);
-    			attr_dev(input, "id", input_id_value = "sliderP" + /*id*/ ctx[59]);
+    			add_location(img2, file, 1189, 13, 30349);
+    			attr_dev(input, "id", input_id_value = "sliderP" + /*id*/ ctx[60]);
     			attr_dev(input, "min", "0");
     			attr_dev(input, "max", "100");
     			attr_dev(input, "type", "range");
     			attr_dev(input, "class", "sliderP svelte-1li6s1q");
-    			set_style(input, "--columnsP", /*Player*/ ctx[64].value + "%");
-    			add_location(input, file, 1182, 13, 30170);
-    			attr_dev(p2, "id", p2_id_value = "sliderP" + /*id*/ ctx[59] + "volume");
+    			set_style(input, "--columnsP", /*Player*/ ctx[65].value + "%");
+    			add_location(input, file, 1190, 13, 30433);
+    			attr_dev(p2, "id", p2_id_value = "sliderP" + /*id*/ ctx[60] + "volume");
     			attr_dev(p2, "class", "userName svelte-1li6s1q");
-    			add_location(p2, file, 1183, 13, 30322);
+    			add_location(p2, file, 1191, 13, 30585);
     			attr_dev(th2, "id", "grid");
     			attr_dev(th2, "class", "th svelte-1li6s1q");
-    			add_location(th2, file, 1180, 12, 30046);
+    			add_location(th2, file, 1188, 12, 30309);
     			attr_dev(tr, "class", "voiceRoomPlayerSettings svelte-1li6s1q");
-    			add_location(tr, file, 1171, 11, 29608);
+    			add_location(tr, file, 1179, 11, 29871);
 
     			dispose = [
     				listen_dev(input, "change", input_change_input_handler),
@@ -1945,7 +1945,7 @@ var app = (function () {
     			append_dev(th2, img2);
     			append_dev(th2, t6);
     			append_dev(th2, input);
-    			set_input_value(input, /*Player*/ ctx[64].value);
+    			set_input_value(input, /*Player*/ ctx[65].value);
     			append_dev(th2, t7);
     			append_dev(th2, p2);
     			append_dev(p2, t8);
@@ -1953,18 +1953,18 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*volumeWindowPlayer*/ 8 && t1_value !== (t1_value = /*Player*/ ctx[64].name + "")) set_data_dev(t1, t1_value);
-    			if (dirty[0] & /*volumeWindowPlayer*/ 8 && t4_value !== (t4_value = /*Player*/ ctx[64].distance + " m." + "")) set_data_dev(t4, t4_value);
+    			if (dirty[0] & /*volumeWindowPlayer*/ 8 && t1_value !== (t1_value = /*Player*/ ctx[65].name + "")) set_data_dev(t1, t1_value);
+    			if (dirty[0] & /*volumeWindowPlayer*/ 8 && t4_value !== (t4_value = /*Player*/ ctx[65].distance + " m." + "")) set_data_dev(t4, t4_value);
 
     			if (dirty[0] & /*volumeWindowPlayer*/ 8) {
-    				set_style(input, "--columnsP", /*Player*/ ctx[64].value + "%");
+    				set_style(input, "--columnsP", /*Player*/ ctx[65].value + "%");
     			}
 
     			if (dirty[0] & /*volumeWindowPlayer*/ 8) {
-    				set_input_value(input, /*Player*/ ctx[64].value);
+    				set_input_value(input, /*Player*/ ctx[65].value);
     			}
 
-    			if (dirty[0] & /*volumeWindowPlayer*/ 8 && t8_value !== (t8_value = /*Player*/ ctx[64].value + "")) set_data_dev(t8, t8_value);
+    			if (dirty[0] & /*volumeWindowPlayer*/ 8 && t8_value !== (t8_value = /*Player*/ ctx[65].value + "")) set_data_dev(t8, t8_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(tr);
@@ -1976,17 +1976,17 @@ var app = (function () {
     		block,
     		id: create_if_block_10.name,
     		type: "if",
-    		source: "(1171:10) {#if Player.room == id}",
+    		source: "(1179:10) {#if Player.room == id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1170:10) {#each volumeWindowPlayer as Player}
+    // (1178:10) {#each volumeWindowPlayer as Player}
     function create_each_block_3(ctx) {
     	let if_block_anchor;
-    	let if_block = /*Player*/ ctx[64].room == /*id*/ ctx[59] && create_if_block_10(ctx);
+    	let if_block = /*Player*/ ctx[65].room == /*id*/ ctx[60] && create_if_block_10(ctx);
 
     	const block = {
     		c: function create() {
@@ -1998,7 +1998,7 @@ var app = (function () {
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (/*Player*/ ctx[64].room == /*id*/ ctx[59]) {
+    			if (/*Player*/ ctx[65].room == /*id*/ ctx[60]) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
@@ -2021,17 +2021,17 @@ var app = (function () {
     		block,
     		id: create_each_block_3.name,
     		type: "each",
-    		source: "(1170:10) {#each volumeWindowPlayer as Player}",
+    		source: "(1178:10) {#each volumeWindowPlayer as Player}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1157:3) {#each volumeWindowRoom as room,id}
+    // (1165:3) {#each volumeWindowRoom as room,id}
     function create_each_block_2(ctx) {
     	let if_block_anchor;
-    	let if_block = /*room*/ ctx[57] != undefined && create_if_block_8(ctx);
+    	let if_block = /*room*/ ctx[58] != undefined && create_if_block_8(ctx);
 
     	const block = {
     		c: function create() {
@@ -2043,7 +2043,7 @@ var app = (function () {
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (/*room*/ ctx[57] != undefined) {
+    			if (/*room*/ ctx[58] != undefined) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
@@ -2066,14 +2066,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(1157:3) {#each volumeWindowRoom as room,id}",
+    		source: "(1165:3) {#each volumeWindowRoom as room,id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1198:1) {#if gui.mainWindowOpen}
+    // (1206:1) {#if gui.mainWindowOpen}
     function create_if_block_5(ctx) {
     	let div18;
     	let h1;
@@ -2328,198 +2328,198 @@ var app = (function () {
     			attr_dev(img0, "class", "mainImg svelte-1li6s1q");
     			if (img0.src !== (img0_src_value = "img/logo.png")) attr_dev(img0, "src", img0_src_value);
     			attr_dev(img0, "alt", "Logo");
-    			add_location(img0, file, 1199, 17, 30661);
+    			add_location(img0, file, 1207, 17, 30924);
     			attr_dev(h1, "id", "logo");
     			attr_dev(h1, "class", "svelte-1li6s1q");
-    			add_location(h1, file, 1199, 3, 30647);
+    			add_location(h1, file, 1207, 3, 30910);
     			if (img1.src !== (img1_src_value = "img/headphones.png")) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "Headphones");
     			attr_dev(img1, "class", "inline-block headphones shadow svelte-1li6s1q");
-    			add_location(img1, file, 1202, 5, 30773);
+    			add_location(img1, file, 1210, 5, 31036);
     			attr_dev(p0, "class", "volume svelte-1li6s1q");
-    			add_location(p0, file, 1204, 6, 30912);
+    			add_location(p0, file, 1212, 6, 31175);
     			attr_dev(input0, "id", "range1");
     			attr_dev(input0, "min", "0");
     			attr_dev(input0, "max", "100");
     			attr_dev(input0, "type", "range");
     			attr_dev(input0, "class", "slider svelte-1li6s1q");
     			set_style(input0, "--columns", /*config*/ ctx[1].main.soundVolume + "%");
-    			add_location(input0, file, 1206, 7, 30986);
+    			add_location(input0, file, 1214, 7, 31249);
     			attr_dev(p1, "class", "light inline-block svelte-1li6s1q");
-    			add_location(p1, file, 1221, 7, 31441);
+    			add_location(p1, file, 1229, 7, 31704);
     			attr_dev(div0, "class", "volume svelte-1li6s1q");
-    			add_location(div0, file, 1205, 6, 30957);
+    			add_location(div0, file, 1213, 6, 31220);
     			attr_dev(div1, "class", "inline-block soundvolume svelte-1li6s1q");
-    			add_location(div1, file, 1203, 5, 30866);
+    			add_location(div1, file, 1211, 5, 31129);
     			attr_dev(div2, "class", "sound svelte-1li6s1q");
-    			add_location(div2, file, 1201, 4, 30747);
+    			add_location(div2, file, 1209, 4, 31010);
     			if (img2.src !== (img2_src_value = "img/mic.png")) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "alt", "Mic");
     			attr_dev(img2, "class", "mic inline-block shadow svelte-1li6s1q");
-    			add_location(img2, file, 1226, 5, 31571);
+    			add_location(img2, file, 1234, 5, 31834);
     			attr_dev(p2, "class", "volume svelte-1li6s1q");
-    			add_location(p2, file, 1228, 5, 31688);
+    			add_location(p2, file, 1236, 5, 31951);
     			attr_dev(input1, "id", "range2");
     			attr_dev(input1, "min", "0");
     			attr_dev(input1, "max", "100");
     			attr_dev(input1, "type", "range");
     			attr_dev(input1, "class", "slider svelte-1li6s1q");
     			set_style(input1, "--columns", /*config*/ ctx[1].main.microphoneVolume + "%");
-    			add_location(input1, file, 1230, 7, 31766);
+    			add_location(input1, file, 1238, 7, 32029);
     			attr_dev(p3, "class", "light inline-block svelte-1li6s1q");
-    			add_location(p3, file, 1245, 7, 32244);
+    			add_location(p3, file, 1253, 7, 32507);
     			attr_dev(div3, "class", "volume svelte-1li6s1q");
-    			add_location(div3, file, 1229, 6, 31737);
+    			add_location(div3, file, 1237, 6, 32000);
     			attr_dev(div4, "class", "inline-block soundvolume svelte-1li6s1q");
-    			add_location(div4, file, 1227, 5, 31643);
+    			add_location(div4, file, 1235, 5, 31906);
     			attr_dev(div5, "class", "sound svelte-1li6s1q");
-    			add_location(div5, file, 1225, 4, 31545);
+    			add_location(div5, file, 1233, 4, 31808);
     			attr_dev(div6, "id", "boxvoice");
     			attr_dev(div6, "class", "svelte-1li6s1q");
-    			add_location(div6, file, 1200, 3, 30722);
+    			add_location(div6, file, 1208, 3, 30985);
     			attr_dev(p4, "class", "regular svelte-1li6s1q");
-    			add_location(p4, file, 1251, 4, 32392);
+    			add_location(p4, file, 1259, 4, 32655);
     			attr_dev(button0, "class", "input-text deviceSelectOpen svelte-1li6s1q");
     			attr_dev(button0, "id", "deviceSelectOpenButton");
-    			add_location(button0, file, 1253, 5, 32450);
+    			add_location(button0, file, 1261, 5, 32713);
     			attr_dev(button1, "anim", "anim");
     			attr_dev(button1, "class", "button mut shadow svelte-1li6s1q");
     			attr_dev(button1, "id", "mutListOpenButton");
-    			add_location(button1, file, 1257, 5, 32693);
+    			add_location(button1, file, 1265, 5, 32956);
     			attr_dev(button2, "anim", "anim");
     			attr_dev(button2, "class", "button mut shadow svelte-1li6s1q");
     			attr_dev(button2, "id", "volumePlayersButton");
-    			add_location(button2, file, 1263, 5, 32883);
+    			add_location(button2, file, 1271, 5, 33146);
     			attr_dev(div7, "class", "svelte-1li6s1q");
-    			add_location(div7, file, 1252, 4, 32438);
+    			add_location(div7, file, 1260, 4, 32701);
     			attr_dev(div8, "class", "boxdevice svelte-1li6s1q");
-    			add_location(div8, file, 1250, 3, 32363);
+    			add_location(div8, file, 1258, 3, 32626);
     			attr_dev(p5, "class", "svelte-1li6s1q");
-    			add_location(p5, file, 1273, 5, 33182);
+    			add_location(p5, file, 1281, 5, 33445);
     			attr_dev(input2, "id", "triggerOnOffSound");
     			attr_dev(input2, "type", "checkbox");
     			attr_dev(input2, "class", "svelte-1li6s1q");
-    			add_location(input2, file, 1274, 5, 33211);
+    			add_location(input2, file, 1282, 5, 33474);
     			attr_dev(label0, "for", "triggerOnOffSound");
     			attr_dev(label0, "class", "checker onoff-sound svelte-1li6s1q");
-    			add_location(label0, file, 1275, 5, 33376);
+    			add_location(label0, file, 1283, 5, 33639);
     			attr_dev(div9, "class", "alignment svelte-1li6s1q");
-    			add_location(div9, file, 1272, 4, 33152);
+    			add_location(div9, file, 1280, 4, 33415);
     			attr_dev(p6, "class", "svelte-1li6s1q");
-    			add_location(p6, file, 1278, 5, 33499);
+    			add_location(p6, file, 1286, 5, 33762);
     			attr_dev(input3, "id", "triggerSound3D");
     			attr_dev(input3, "type", "checkbox");
     			attr_dev(input3, "class", "svelte-1li6s1q");
-    			add_location(input3, file, 1279, 5, 33520);
+    			add_location(input3, file, 1287, 5, 33783);
     			attr_dev(label1, "for", "triggerSound3D");
     			attr_dev(label1, "class", "checker checker-sound3D svelte-1li6s1q");
-    			add_location(label1, file, 1280, 5, 33678);
+    			add_location(label1, file, 1288, 5, 33941);
     			attr_dev(div10, "class", "sound3D alignment svelte-1li6s1q");
-    			add_location(div10, file, 1277, 4, 33461);
+    			add_location(div10, file, 1285, 4, 33724);
     			attr_dev(div11, "class", "boxmodes alignment svelte-1li6s1q");
-    			add_location(div11, file, 1271, 3, 33114);
+    			add_location(div11, file, 1279, 3, 33377);
     			attr_dev(p7, "class", "white svelte-1li6s1q");
-    			add_location(p7, file, 1286, 6, 33888);
+    			add_location(p7, file, 1294, 6, 34151);
     			attr_dev(input4, "id", "triggerInputMode");
     			attr_dev(input4, "type", "checkbox");
     			attr_dev(input4, "class", "svelte-1li6s1q");
-    			add_location(input4, file, 1287, 6, 33928);
+    			add_location(input4, file, 1295, 6, 34191);
     			attr_dev(label2, "for", "triggerInputMode");
     			attr_dev(label2, "class", "checker input-mode svelte-1li6s1q");
-    			add_location(label2, file, 1288, 6, 34018);
+    			add_location(label2, file, 1296, 6, 34281);
     			attr_dev(div12, "class", "margin-bottom alignment svelte-1li6s1q");
-    			add_location(div12, file, 1285, 5, 33843);
+    			add_location(div12, file, 1293, 5, 34106);
     			attr_dev(div13, "class", "upinputmode svelte-1li6s1q");
-    			add_location(div13, file, 1284, 4, 33811);
+    			add_location(div13, file, 1292, 4, 34074);
     			attr_dev(button3, "class", "input-text channelSelectOpen svelte-1li6s1q");
     			attr_dev(button3, "id", "roomSelectOpenButton");
-    			add_location(button3, file, 1345, 5, 36692);
+    			add_location(button3, file, 1353, 5, 36955);
     			attr_dev(button4, "class", "input-text channelSelectOpen svelte-1li6s1q");
     			attr_dev(button4, "id", "channelSelectOpenButton");
-    			add_location(button4, file, 1349, 5, 36933);
+    			add_location(button4, file, 1357, 5, 37196);
     			attr_dev(p8, "class", "white svelte-1li6s1q");
-    			add_location(p8, file, 1354, 6, 37201);
+    			add_location(p8, file, 1362, 6, 37464);
     			attr_dev(div14, "class", "alignmentKey svelte-1li6s1q");
-    			add_location(div14, file, 1353, 5, 37167);
+    			add_location(div14, file, 1361, 5, 37430);
     			if (img3.src !== (img3_src_value = "img/minmik.png")) attr_dev(img3, "src", img3_src_value);
     			attr_dev(img3, "class", "minMic svelte-1li6s1q");
     			attr_dev(img3, "alt", "minMic");
-    			add_location(img3, file, 1359, 12, 37339);
+    			add_location(img3, file, 1367, 12, 37602);
     			attr_dev(th0, "class", "svelte-1li6s1q");
-    			add_location(th0, file, 1359, 8, 37335);
+    			add_location(th0, file, 1367, 8, 37598);
     			attr_dev(p9, "class", "button-selection svelte-1li6s1q");
-    			add_location(p9, file, 1360, 12, 37412);
+    			add_location(p9, file, 1368, 12, 37675);
     			attr_dev(th1, "class", "svelte-1li6s1q");
-    			add_location(th1, file, 1360, 8, 37408);
+    			add_location(th1, file, 1368, 8, 37671);
     			set_style(button5, "--height", /*config*/ ctx[1].main.ki.global.height + "px");
     			set_style(button5, "--width", /*config*/ ctx[1].main.ki.global.width + "px");
     			set_style(button5, "--color", /*config*/ ctx[1].main.ki.global.color + "%");
     			attr_dev(button5, "class", button5_class_value = "inputbutton input-text " + (/*config*/ ctx[1].main.ki.global.select ? "bactive" : "") + " svelte-1li6s1q");
     			attr_dev(button5, "id", "kiGlobal");
     			button5.disabled = button5_disabled_value = /*config*/ ctx[1].main.ki.radio.on;
-    			add_location(button5, file, 1361, 12, 37471);
+    			add_location(button5, file, 1369, 12, 37734);
     			attr_dev(th2, "class", "svelte-1li6s1q");
-    			add_location(th2, file, 1361, 8, 37467);
+    			add_location(th2, file, 1369, 8, 37730);
     			attr_dev(tr0, "class", "svelte-1li6s1q");
-    			add_location(tr0, file, 1358, 7, 37321);
+    			add_location(tr0, file, 1366, 7, 37584);
     			if (img4.src !== (img4_src_value = "img/radio.png")) attr_dev(img4, "src", img4_src_value);
     			attr_dev(img4, "class", "minradio svelte-1li6s1q");
     			attr_dev(img4, "alt", "minradio");
-    			add_location(img4, file, 1378, 12, 38217);
+    			add_location(img4, file, 1386, 12, 38480);
     			attr_dev(th3, "class", "svelte-1li6s1q");
-    			add_location(th3, file, 1378, 8, 38213);
+    			add_location(th3, file, 1386, 8, 38476);
     			attr_dev(p10, "class", "button-selection svelte-1li6s1q");
-    			add_location(p10, file, 1379, 12, 38293);
+    			add_location(p10, file, 1387, 12, 38556);
     			attr_dev(th4, "class", "svelte-1li6s1q");
-    			add_location(th4, file, 1379, 8, 38289);
+    			add_location(th4, file, 1387, 8, 38552);
     			set_style(button6, "--height", /*config*/ ctx[1].main.ki.radio.height + "px");
     			set_style(button6, "--width", /*config*/ ctx[1].main.ki.radio.width + "px");
     			set_style(button6, "--color", /*config*/ ctx[1].main.ki.radio.color + "%");
     			attr_dev(button6, "class", button6_class_value = "inputbutton input-text " + (/*config*/ ctx[1].main.ki.radio.select ? "bactive" : "") + " svelte-1li6s1q");
     			attr_dev(button6, "id", "kiRadio");
     			button6.disabled = button6_disabled_value = /*config*/ ctx[1].main.ki.global.on;
-    			add_location(button6, file, 1380, 12, 38360);
+    			add_location(button6, file, 1388, 12, 38623);
     			attr_dev(th5, "class", "svelte-1li6s1q");
-    			add_location(th5, file, 1380, 8, 38356);
+    			add_location(th5, file, 1388, 8, 38619);
     			attr_dev(tr1, "class", "svelte-1li6s1q");
-    			add_location(tr1, file, 1377, 7, 38199);
+    			add_location(tr1, file, 1385, 7, 38462);
     			attr_dev(tbody, "class", "svelte-1li6s1q");
-    			add_location(tbody, file, 1357, 6, 37305);
+    			add_location(tbody, file, 1365, 6, 37568);
     			attr_dev(table, "class", "keyname-space-between svelte-1li6s1q");
-    			add_location(table, file, 1356, 5, 37260);
+    			add_location(table, file, 1364, 5, 37523);
     			attr_dev(div15, "class", "inline-block margin svelte-1li6s1q");
-    			add_location(div15, file, 1344, 4, 36652);
+    			add_location(div15, file, 1352, 4, 36915);
     			attr_dev(div16, "class", "boxmodes box-flex svelte-1li6s1q");
-    			add_location(div16, file, 1283, 3, 33774);
+    			add_location(div16, file, 1291, 3, 34037);
     			attr_dev(button7, "anim", "anim");
     			attr_dev(button7, "class", "button shadow svelte-1li6s1q");
-    			add_location(button7, file, 1401, 4, 39163);
+    			add_location(button7, file, 1409, 4, 39426);
     			attr_dev(div17, "class", "boxmodes end svelte-1li6s1q");
-    			add_location(div17, file, 1400, 3, 39131);
+    			add_location(div17, file, 1408, 3, 39394);
     			attr_dev(div18, "id", "container");
     			attr_dev(div18, "class", "svelte-1li6s1q");
-    			add_location(div18, file, 1198, 2, 30606);
+    			add_location(div18, file, 1206, 2, 30869);
 
     			dispose = [
-    				listen_dev(input0, "change", /*input0_change_input_handler*/ ctx[33]),
-    				listen_dev(input0, "input", /*input0_change_input_handler*/ ctx[33]),
-    				listen_dev(input0, "input", /*input_handler*/ ctx[34], false, false, false),
-    				listen_dev(input1, "change", /*input1_change_input_handler*/ ctx[35]),
-    				listen_dev(input1, "input", /*input1_change_input_handler*/ ctx[35]),
-    				listen_dev(input1, "input", /*input_handler_1*/ ctx[36], false, false, false),
-    				listen_dev(button0, "click", /*click_handler_8*/ ctx[37], false, false, false),
-    				listen_dev(button1, "click", /*click_handler_9*/ ctx[38], false, false, false),
-    				listen_dev(button2, "click", /*click_handler_10*/ ctx[39], false, false, false),
-    				listen_dev(input2, "change", /*input2_change_handler*/ ctx[40]),
-    				listen_dev(input2, "click", /*click_handler_11*/ ctx[41], false, false, false),
-    				listen_dev(input3, "change", /*input3_change_handler*/ ctx[42]),
-    				listen_dev(input3, "click", /*click_handler_12*/ ctx[43], false, false, false),
-    				listen_dev(input4, "change", /*input4_change_handler*/ ctx[44]),
-    				listen_dev(button3, "click", /*click_handler_16*/ ctx[51], false, false, false),
-    				listen_dev(button4, "click", /*click_handler_17*/ ctx[52], false, false, false),
-    				listen_dev(button5, "click", /*click_handler_18*/ ctx[53], false, false, false),
-    				listen_dev(button6, "click", /*click_handler_19*/ ctx[54], false, false, false),
-    				listen_dev(button7, "click", /*click_handler_20*/ ctx[55], false, false, false)
+    				listen_dev(input0, "change", /*input0_change_input_handler*/ ctx[34]),
+    				listen_dev(input0, "input", /*input0_change_input_handler*/ ctx[34]),
+    				listen_dev(input0, "input", /*input_handler*/ ctx[35], false, false, false),
+    				listen_dev(input1, "change", /*input1_change_input_handler*/ ctx[36]),
+    				listen_dev(input1, "input", /*input1_change_input_handler*/ ctx[36]),
+    				listen_dev(input1, "input", /*input_handler_1*/ ctx[37], false, false, false),
+    				listen_dev(button0, "click", /*click_handler_8*/ ctx[38], false, false, false),
+    				listen_dev(button1, "click", /*click_handler_9*/ ctx[39], false, false, false),
+    				listen_dev(button2, "click", /*click_handler_10*/ ctx[40], false, false, false),
+    				listen_dev(input2, "change", /*input2_change_handler*/ ctx[41]),
+    				listen_dev(input2, "click", /*click_handler_11*/ ctx[42], false, false, false),
+    				listen_dev(input3, "change", /*input3_change_handler*/ ctx[43]),
+    				listen_dev(input3, "click", /*click_handler_12*/ ctx[44], false, false, false),
+    				listen_dev(input4, "change", /*input4_change_handler*/ ctx[45]),
+    				listen_dev(button3, "click", /*click_handler_16*/ ctx[52], false, false, false),
+    				listen_dev(button4, "click", /*click_handler_17*/ ctx[53], false, false, false),
+    				listen_dev(button5, "click", /*click_handler_18*/ ctx[54], false, false, false),
+    				listen_dev(button6, "click", /*click_handler_19*/ ctx[55], false, false, false),
+    				listen_dev(button7, "click", /*click_handler_20*/ ctx[56], false, false, false)
     			];
     		},
     		m: function mount(target, anchor) {
@@ -2761,14 +2761,14 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(1198:1) {#if gui.mainWindowOpen}",
+    		source: "(1206:1) {#if gui.mainWindowOpen}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1291:5) {#if !config.main.inputmode}
+    // (1299:5) {#if !config.main.inputmode}
     function create_if_block_6(ctx) {
     	let div3;
     	let ul;
@@ -2824,63 +2824,63 @@ var app = (function () {
     			attr_dev(input0, "id", "radio1");
     			attr_dev(input0, "name", "radio");
     			attr_dev(input0, "class", "input svelte-1li6s1q");
-    			/*$$binding_groups*/ ctx[21][0].push(input0);
-    			add_location(input0, file, 1294, 8, 34233);
+    			/*$$binding_groups*/ ctx[22][0].push(input0);
+    			add_location(input0, file, 1302, 8, 34496);
     			attr_dev(div0, "class", "button selector A svelte-1li6s1q");
-    			add_location(div0, file, 1306, 22, 34886);
+    			add_location(div0, file, 1314, 22, 35149);
     			set_style(label0, "--height", /*config*/ ctx[1].main.inputmodeon.height + "px");
     			set_style(label0, "--width", /*config*/ ctx[1].main.inputmodeon.width + "px");
     			set_style(label0, "--color", /*config*/ ctx[1].main.inputmodeon.color + "%");
     			attr_dev(label0, "for", "radio1");
     			attr_dev(label0, "class", "svelte-1li6s1q");
-    			add_location(label0, file, 1296, 8, 34362);
+    			add_location(label0, file, 1304, 8, 34625);
     			attr_dev(li0, "class", "li svelte-1li6s1q");
-    			add_location(li0, file, 1293, 7, 34208);
+    			add_location(li0, file, 1301, 7, 34471);
     			attr_dev(input1, "type", "radio");
     			input1.__value = input1_value_value = 2;
     			input1.value = input1.__value;
     			attr_dev(input1, "id", "radio2");
     			attr_dev(input1, "name", "radio");
     			attr_dev(input1, "class", "input svelte-1li6s1q");
-    			/*$$binding_groups*/ ctx[21][0].push(input1);
-    			add_location(input1, file, 1309, 8, 34988);
+    			/*$$binding_groups*/ ctx[22][0].push(input1);
+    			add_location(input1, file, 1317, 8, 35251);
     			attr_dev(div1, "class", "button selector A svelte-1li6s1q");
-    			add_location(div1, file, 1322, 22, 35698);
+    			add_location(div1, file, 1330, 22, 35961);
     			set_style(label1, "--height", /*config*/ ctx[1].main.inputmodeon.height + "px");
     			set_style(label1, "--width", /*config*/ ctx[1].main.inputmodeon.width + "px");
     			set_style(label1, "--color", /*config*/ ctx[1].main.inputmodeon.color + "%");
     			attr_dev(label1, "for", "radio2");
     			attr_dev(label1, "class", "svelte-1li6s1q");
-    			add_location(label1, file, 1312, 8, 35175);
+    			add_location(label1, file, 1320, 8, 35438);
     			attr_dev(li1, "class", "li svelte-1li6s1q");
-    			add_location(li1, file, 1308, 7, 34963);
+    			add_location(li1, file, 1316, 7, 35226);
     			attr_dev(input2, "type", "radio");
     			input2.__value = input2_value_value = 3;
     			input2.value = input2.__value;
     			attr_dev(input2, "id", "radio3");
     			attr_dev(input2, "name", "radio");
     			attr_dev(input2, "class", "input svelte-1li6s1q");
-    			/*$$binding_groups*/ ctx[21][0].push(input2);
-    			add_location(input2, file, 1325, 8, 35804);
+    			/*$$binding_groups*/ ctx[22][0].push(input2);
+    			add_location(input2, file, 1333, 8, 36067);
     			attr_dev(div2, "class", "button selector A svelte-1li6s1q");
-    			add_location(div2, file, 1338, 22, 36514);
+    			add_location(div2, file, 1346, 22, 36777);
     			set_style(label2, "--height", /*config*/ ctx[1].main.inputmodeon.height + "px");
     			set_style(label2, "--width", /*config*/ ctx[1].main.inputmodeon.width + "px");
     			set_style(label2, "--color", /*config*/ ctx[1].main.inputmodeon.color + "%");
     			attr_dev(label2, "for", "radio3");
     			attr_dev(label2, "class", "svelte-1li6s1q");
-    			add_location(label2, file, 1328, 8, 35991);
+    			add_location(label2, file, 1336, 8, 36254);
     			attr_dev(li2, "class", "li svelte-1li6s1q");
-    			add_location(li2, file, 1324, 7, 35779);
+    			add_location(li2, file, 1332, 7, 36042);
     			attr_dev(ul, "class", "ul svelte-1li6s1q");
-    			add_location(ul, file, 1292, 6, 34184);
+    			add_location(ul, file, 1300, 6, 34447);
     			attr_dev(div3, "id", "inputmode");
     			attr_dev(div3, "class", "inputmode svelte-1li6s1q");
-    			add_location(div3, file, 1291, 5, 34138);
+    			add_location(div3, file, 1299, 5, 34401);
 
     			dispose = [
-    				listen_dev(input0, "change", /*input0_change_handler*/ ctx[45]),
-    				listen_dev(label0, "click", /*click_handler_13*/ ctx[46], false, false, false),
+    				listen_dev(input0, "change", /*input0_change_handler*/ ctx[46]),
+    				listen_dev(label0, "click", /*click_handler_13*/ ctx[47], false, false, false),
     				listen_dev(
     					input1,
     					"click",
@@ -2891,8 +2891,8 @@ var app = (function () {
     					false,
     					false
     				),
-    				listen_dev(input1, "change", /*input1_change_handler*/ ctx[47]),
-    				listen_dev(label1, "click", /*click_handler_14*/ ctx[48], false, false, false),
+    				listen_dev(input1, "change", /*input1_change_handler*/ ctx[48]),
+    				listen_dev(label1, "click", /*click_handler_14*/ ctx[49], false, false, false),
     				listen_dev(
     					input2,
     					"click",
@@ -2903,8 +2903,8 @@ var app = (function () {
     					false,
     					false
     				),
-    				listen_dev(input2, "change", /*input2_change_handler_1*/ ctx[49]),
-    				listen_dev(label2, "click", /*click_handler_15*/ ctx[50], false, false, false)
+    				listen_dev(input2, "change", /*input2_change_handler_1*/ ctx[50]),
+    				listen_dev(label2, "click", /*click_handler_15*/ ctx[51], false, false, false)
     			];
     		},
     		m: function mount(target, anchor) {
@@ -2984,9 +2984,9 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div3);
-    			/*$$binding_groups*/ ctx[21][0].splice(/*$$binding_groups*/ ctx[21][0].indexOf(input0), 1);
-    			/*$$binding_groups*/ ctx[21][0].splice(/*$$binding_groups*/ ctx[21][0].indexOf(input1), 1);
-    			/*$$binding_groups*/ ctx[21][0].splice(/*$$binding_groups*/ ctx[21][0].indexOf(input2), 1);
+    			/*$$binding_groups*/ ctx[22][0].splice(/*$$binding_groups*/ ctx[22][0].indexOf(input0), 1);
+    			/*$$binding_groups*/ ctx[22][0].splice(/*$$binding_groups*/ ctx[22][0].indexOf(input1), 1);
+    			/*$$binding_groups*/ ctx[22][0].splice(/*$$binding_groups*/ ctx[22][0].indexOf(input2), 1);
     			run_all(dispose);
     		}
     	};
@@ -2995,14 +2995,14 @@ var app = (function () {
     		block,
     		id: create_if_block_6.name,
     		type: "if",
-    		source: "(1291:5) {#if !config.main.inputmode}",
+    		source: "(1299:5) {#if !config.main.inputmode}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1417:3) {#if room != undefined}
+    // (1425:3) {#if room != undefined}
     function create_if_block_2(ctx) {
     	let table;
     	let thead;
@@ -3013,7 +3013,7 @@ var app = (function () {
     	let t0;
     	let th1;
     	let p;
-    	let t1_value = /*room*/ ctx[57].name + "";
+    	let t1_value = /*room*/ ctx[58].name + "";
     	let t1;
     	let t2;
     	let tbody;
@@ -3048,22 +3048,22 @@ var app = (function () {
     			attr_dev(img, "class", "owerlayRadiomin ower svelte-1li6s1q");
     			if (img.src !== (img_src_value = "img/radiomin.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "owerlayRadiomin");
-    			add_location(img, file, 1420, 24, 39677);
+    			add_location(img, file, 1428, 24, 39940);
     			attr_dev(th0, "class", "ower svelte-1li6s1q");
-    			add_location(th0, file, 1420, 7, 39660);
+    			add_location(th0, file, 1428, 7, 39923);
     			attr_dev(p, "class", "owerlayRoomName ower svelte-1li6s1q");
     			attr_dev(p, "id", "owerlayRoomName");
-    			add_location(p, file, 1421, 24, 39805);
+    			add_location(p, file, 1429, 24, 40068);
     			attr_dev(th1, "class", "ower svelte-1li6s1q");
-    			add_location(th1, file, 1421, 7, 39788);
+    			add_location(th1, file, 1429, 7, 40051);
     			attr_dev(tr, "class", "svelte-1li6s1q");
-    			add_location(tr, file, 1419, 6, 39647);
+    			add_location(tr, file, 1427, 6, 39910);
     			attr_dev(thead, "class", "ower svelte-1li6s1q");
-    			add_location(thead, file, 1418, 5, 39619);
+    			add_location(thead, file, 1426, 5, 39882);
     			attr_dev(tbody, "class", "svelte-1li6s1q");
-    			add_location(tbody, file, 1424, 5, 39913);
+    			add_location(tbody, file, 1432, 5, 40176);
     			attr_dev(table, "class", "ower svelte-1li6s1q");
-    			add_location(table, file, 1417, 4, 39592);
+    			add_location(table, file, 1425, 4, 39855);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, table, anchor);
@@ -3085,7 +3085,7 @@ var app = (function () {
     			append_dev(table, t3);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*volumeWindowRoom*/ 4 && t1_value !== (t1_value = /*room*/ ctx[57].name + "")) set_data_dev(t1, t1_value);
+    			if (dirty[0] & /*volumeWindowRoom*/ 4 && t1_value !== (t1_value = /*room*/ ctx[58].name + "")) set_data_dev(t1, t1_value);
 
     			if (dirty[0] & /*volumeWindowPlayer*/ 8) {
     				each_value_1 = /*volumeWindowPlayer*/ ctx[3];
@@ -3120,14 +3120,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(1417:3) {#if room != undefined}",
+    		source: "(1425:3) {#if room != undefined}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1427:7) {#if players.room == id && players.talk}
+    // (1435:7) {#if players.room == id && players.talk}
     function create_if_block_3(ctx) {
     	let tr;
     	let th0;
@@ -3136,7 +3136,7 @@ var app = (function () {
     	let t0;
     	let th1;
     	let p0;
-    	let t1_value = /*players*/ ctx[60].name + "";
+    	let t1_value = /*players*/ ctx[61].name + "";
     	let t1;
     	let t2;
     	let th2;
@@ -3144,7 +3144,7 @@ var app = (function () {
     	let t3;
 
     	function select_block_type(ctx, dirty) {
-    		if (/*players*/ ctx[60].text != undefined) return create_if_block_4;
+    		if (/*players*/ ctx[61].text != undefined) return create_if_block_4;
     		return create_else_block_2;
     	}
 
@@ -3169,21 +3169,21 @@ var app = (function () {
     			attr_dev(img, "class", "owerlayRadiominImg ower svelte-1li6s1q");
     			if (img.src !== (img_src_value = "img/owerlayVolume.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "owerlayRadiomin");
-    			add_location(img, file, 1428, 26, 40056);
+    			add_location(img, file, 1436, 26, 40319);
     			attr_dev(th0, "class", "ower svelte-1li6s1q");
-    			add_location(th0, file, 1428, 9, 40039);
+    			add_location(th0, file, 1436, 9, 40302);
     			attr_dev(p0, "class", "owerlayPlayer ower svelte-1li6s1q");
     			attr_dev(p0, "id", "owerlayPlayer");
-    			add_location(p0, file, 1429, 26, 40194);
+    			add_location(p0, file, 1437, 26, 40457);
     			attr_dev(th1, "class", "ower svelte-1li6s1q");
-    			add_location(th1, file, 1429, 9, 40177);
+    			add_location(th1, file, 1437, 9, 40440);
     			attr_dev(p1, "class", "owerlayPlayerDistance ower svelte-1li6s1q");
     			attr_dev(p1, "id", "owerlayPlayerDistance");
-    			add_location(p1, file, 1430, 26, 40294);
+    			add_location(p1, file, 1438, 26, 40557);
     			attr_dev(th2, "class", "ower svelte-1li6s1q");
-    			add_location(th2, file, 1430, 9, 40277);
+    			add_location(th2, file, 1438, 9, 40540);
     			attr_dev(tr, "class", "svelte-1li6s1q");
-    			add_location(tr, file, 1427, 8, 40024);
+    			add_location(tr, file, 1435, 8, 40287);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -3200,7 +3200,7 @@ var app = (function () {
     			append_dev(tr, t3);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*volumeWindowPlayer*/ 8 && t1_value !== (t1_value = /*players*/ ctx[60].name + "")) set_data_dev(t1, t1_value);
+    			if (dirty[0] & /*volumeWindowPlayer*/ 8 && t1_value !== (t1_value = /*players*/ ctx[61].name + "")) set_data_dev(t1, t1_value);
 
     			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block) {
     				if_block.p(ctx, dirty);
@@ -3224,16 +3224,16 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(1427:7) {#if players.room == id && players.talk}",
+    		source: "(1435:7) {#if players.room == id && players.talk}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1434:9) {:else}
+    // (1442:9) {:else}
     function create_else_block_2(ctx) {
-    	let t_value = /*players*/ ctx[60].distance + "m." + "";
+    	let t_value = /*players*/ ctx[61].distance + "m." + "";
     	let t;
 
     	const block = {
@@ -3244,7 +3244,7 @@ var app = (function () {
     			insert_dev(target, t, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*volumeWindowPlayer*/ 8 && t_value !== (t_value = /*players*/ ctx[60].distance + "m." + "")) set_data_dev(t, t_value);
+    			if (dirty[0] & /*volumeWindowPlayer*/ 8 && t_value !== (t_value = /*players*/ ctx[61].distance + "m." + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(t);
@@ -3255,16 +3255,16 @@ var app = (function () {
     		block,
     		id: create_else_block_2.name,
     		type: "else",
-    		source: "(1434:9) {:else}",
+    		source: "(1442:9) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1432:9) {#if players.text != undefined}
+    // (1440:9) {#if players.text != undefined}
     function create_if_block_4(ctx) {
-    	let t_value = /*players*/ ctx[60].text + "";
+    	let t_value = /*players*/ ctx[61].text + "";
     	let t;
 
     	const block = {
@@ -3275,7 +3275,7 @@ var app = (function () {
     			insert_dev(target, t, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*volumeWindowPlayer*/ 8 && t_value !== (t_value = /*players*/ ctx[60].text + "")) set_data_dev(t, t_value);
+    			if (dirty[0] & /*volumeWindowPlayer*/ 8 && t_value !== (t_value = /*players*/ ctx[61].text + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(t);
@@ -3286,17 +3286,17 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(1432:9) {#if players.text != undefined}",
+    		source: "(1440:9) {#if players.text != undefined}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1426:6) {#each volumeWindowPlayer as players}
+    // (1434:6) {#each volumeWindowPlayer as players}
     function create_each_block_1(ctx) {
     	let if_block_anchor;
-    	let if_block = /*players*/ ctx[60].room == /*id*/ ctx[59] && /*players*/ ctx[60].talk && create_if_block_3(ctx);
+    	let if_block = /*players*/ ctx[61].room == /*id*/ ctx[60] && /*players*/ ctx[61].talk && create_if_block_3(ctx);
 
     	const block = {
     		c: function create() {
@@ -3308,7 +3308,7 @@ var app = (function () {
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (/*players*/ ctx[60].room == /*id*/ ctx[59] && /*players*/ ctx[60].talk) {
+    			if (/*players*/ ctx[61].room == /*id*/ ctx[60] && /*players*/ ctx[61].talk) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
@@ -3331,17 +3331,17 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(1426:6) {#each volumeWindowPlayer as players}",
+    		source: "(1434:6) {#each volumeWindowPlayer as players}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1416:2) {#each volumeWindowRoom as room,id}
+    // (1424:2) {#each volumeWindowRoom as room,id}
     function create_each_block(ctx) {
     	let if_block_anchor;
-    	let if_block = /*room*/ ctx[57] != undefined && create_if_block_2(ctx);
+    	let if_block = /*room*/ ctx[58] != undefined && create_if_block_2(ctx);
 
     	const block = {
     		c: function create() {
@@ -3353,7 +3353,7 @@ var app = (function () {
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (/*room*/ ctx[57] != undefined) {
+    			if (/*room*/ ctx[58] != undefined) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
@@ -3376,14 +3376,14 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(1416:2) {#each volumeWindowRoom as room,id}",
+    		source: "(1424:2) {#each volumeWindowRoom as room,id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1454:1) {:else}
+    // (1462:1) {:else}
     function create_else_block_1(ctx) {
     	let img;
     	let img_src_value;
@@ -3398,7 +3398,7 @@ var app = (function () {
     			attr_dev(img, "alt", "owerlayMicrophone");
     			set_style(img, "--left", /*move*/ ctx[5].owerlayMicrophone.left + "px");
     			set_style(img, "--top", /*move*/ ctx[5].owerlayMicrophone.top + "px");
-    			add_location(img, file, 1454, 2, 40917);
+    			add_location(img, file, 1462, 2, 41180);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -3421,14 +3421,14 @@ var app = (function () {
     		block,
     		id: create_else_block_1.name,
     		type: "else",
-    		source: "(1454:1) {:else}",
+    		source: "(1462:1) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1446:1) {#if !move.owerlayMicrophone.click}
+    // (1454:1) {#if !move.owerlayMicrophone.click}
     function create_if_block_1(ctx) {
     	let img;
     	let img_src_value;
@@ -3443,7 +3443,7 @@ var app = (function () {
     			attr_dev(img, "alt", "owerlayMicrophone");
     			set_style(img, "--left", /*move*/ ctx[5].owerlayMicrophone.left + "px");
     			set_style(img, "--top", /*move*/ ctx[5].owerlayMicrophone.top + "px");
-    			add_location(img, file, 1446, 2, 40661);
+    			add_location(img, file, 1454, 2, 40924);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -3466,14 +3466,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(1446:1) {#if !move.owerlayMicrophone.click}",
+    		source: "(1454:1) {#if !move.owerlayMicrophone.click}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1471:1) {:else}
+    // (1479:1) {:else}
     function create_else_block(ctx) {
     	let img;
     	let img_src_value;
@@ -3488,7 +3488,7 @@ var app = (function () {
     			attr_dev(img, "alt", "owerlayVolumeOn");
     			set_style(img, "--left", /*move*/ ctx[5].owerlayVolumeOn.left + "px");
     			set_style(img, "--top", /*move*/ ctx[5].owerlayVolumeOn.top + "px");
-    			add_location(img, file, 1471, 2, 41454);
+    			add_location(img, file, 1479, 2, 41717);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -3511,14 +3511,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(1471:1) {:else}",
+    		source: "(1479:1) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1463:1) {#if !move.owerlayVolumeOn.click}
+    // (1471:1) {#if !move.owerlayVolumeOn.click}
     function create_if_block(ctx) {
     	let img;
     	let img_src_value;
@@ -3533,7 +3533,7 @@ var app = (function () {
     			attr_dev(img, "alt", "owerlayVolumeOn");
     			set_style(img, "--left", /*move*/ ctx[5].owerlayVolumeOn.left + "px");
     			set_style(img, "--top", /*move*/ ctx[5].owerlayVolumeOn.top + "px");
-    			add_location(img, file, 1463, 2, 41210);
+    			add_location(img, file, 1471, 2, 41473);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -3556,7 +3556,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(1463:1) {#if !move.owerlayVolumeOn.click}",
+    		source: "(1471:1) {#if !move.owerlayVolumeOn.click}",
     		ctx
     	});
 
@@ -3635,16 +3635,16 @@ var app = (function () {
     			set_style(div0, "--left", /*move*/ ctx[5].owerlay.left + "px");
     			set_style(div0, "--top", /*move*/ ctx[5].owerlay.top + "px");
     			set_style(div0, "background-color", /*move*/ ctx[5].background);
-    			add_location(div0, file, 1410, 1, 39343);
+    			add_location(div0, file, 1418, 1, 39606);
     			attr_dev(div1, "id", "mainWindow");
     			set_style(div1, "background-image", "url(img/dsfghdfshsdg.png)");
     			attr_dev(div1, "oncontextmenu", "return false");
     			attr_dev(div1, "class", "svelte-1li6s1q");
-    			add_location(div1, file, 1023, 0, 23048);
+    			add_location(div1, file, 1031, 0, 23311);
 
     			dispose = [
-    				listen_dev(window_1, "mousemove", /*mousemove_handler*/ ctx[18], false, false, false),
-    				listen_dev(window_1, "mousedown", /*mousedown_handler*/ ctx[19], false, false, false),
+    				listen_dev(window_1, "mousemove", /*mousemove_handler*/ ctx[19], false, false, false),
+    				listen_dev(window_1, "mousedown", /*mousedown_handler*/ ctx[20], false, false, false),
     				listen_dev(window_1, "mouseup", /*onMouseUp*/ ctx[12], false, false, false),
     				listen_dev(window_1, "keydown", /*keydown*/ ctx[7], false, false, false),
     				listen_dev(window_1, "keyup", /*keyup*/ ctx[8], false, false, false)
@@ -3673,7 +3673,7 @@ var app = (function () {
     				each_blocks[i].m(div0, null);
     			}
 
-    			/*div0_binding*/ ctx[56](div0);
+    			/*div0_binding*/ ctx[57](div0);
     			append_dev(div1, t6);
     			if_block6.m(div1, null);
     			append_dev(div1, t7);
@@ -3888,7 +3888,7 @@ var app = (function () {
     			if (if_block4) if_block4.d();
     			if (if_block5) if_block5.d();
     			destroy_each(each_blocks, detaching);
-    			/*div0_binding*/ ctx[56](null);
+    			/*div0_binding*/ ctx[57](null);
     			if_block6.d();
     			if_block7.d();
     			run_all(dispose);
@@ -4159,6 +4159,14 @@ var app = (function () {
     	};
 
     	presentation();
+    	onload();
+
+    	function onload() {
+    		window.SetPlayVolume(config.main.soundVolume / 100);
+    		window.SetRecordVolume(config.main.microphoneVolume / 100);
+    		window.EnableVoice(config.main.triggerOnOffSound);
+    		window.Enable3DVoice(config.main.triggerSound3D);
+    	}
 
     	function presentation() {
     		addRoom("Общий");
@@ -4566,6 +4574,7 @@ var app = (function () {
     		onMouseMove,
     		onMouseUp,
     		battonSelect,
+    		onload,
     		presentation,
     		addRoom,
     		deleteRoom,
