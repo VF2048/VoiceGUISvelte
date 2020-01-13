@@ -1,14 +1,9 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import { tick } from 'svelte';
 
-	let canvas;
 	let owerlay;
-	let global;
-	let radio;
-	let radioInput0;
-	let radioInput1;
-	let radioInput2;
 
 	onMount(() => {
 		let frame;
@@ -40,6 +35,12 @@
 				}else if(config.main.inputmodeon.color >= 5 && config.main.inputmodeon.color < 100){
 					config.main.inputmodeon.color += 5;
 				};
+				if(config.main.inputModeRadioDeviceOn.click){
+					config.main.inputModeRadioDeviceOn.click = false;
+					config.main.inputModeRadioDeviceOn.color = 5;
+				}else if(config.main.inputModeRadioDeviceOn.color >= 5 && config.main.inputModeRadioDeviceOn.color < 100){
+					config.main.inputModeRadioDeviceOn.color += 5;
+				};
 		}());
 
 		return () => {
@@ -63,9 +64,16 @@
 		},
 	    inputModeRadio: 1,
 		inputModeRadioDevice: 1,
+		inputModeRadioDeviceOn: {
+			click:false,
+			height: 10,
+			width: 10,
+			color: 5,
+		},
 		ki: {
 			global: {
-				key:'A'	,
+				key:65,
+				name:'A',
 				on: false,
 				select:false,
 				height: 10,
@@ -73,7 +81,8 @@
 				color: 5,
 			},
 			radio: {
-				key:'B',
+				key:83,
+				name:'S',
 				on: false,
 				select:false,
 				height: 10,
@@ -82,7 +91,7 @@
 			},
 		}
 	  },
-	  selectDevice: 0,
+	  selectDevice: null,
 	  device: [
 	    'microphone1',
 	    'microphone2',
@@ -90,14 +99,14 @@
 	    'microphone4',
 	    'microphone5',
 	  ],
-	  selectRoom: 0,
+	  selectRoom: null,
 	  room: [
 	    'Room1',
 	    'Room2',
 	    'Room3',
 	    'Room4',
 	  ],
-	  selectchannel: 0,
+	  selectchannel: null,
 	  channel: [
 	    'Channel1',
 	    'Channel2',
@@ -189,21 +198,21 @@
 	 * @param {object} event - Event on main window.
 	 */
 	function keydown(event) {
-	  if (gui.mainWindowOpen == false && event.key == 'Insert') {
-	    openMainWindow();
-	  } else if (
-	    gui.mainWindowOpen == true &&
-	   (event.key == 'Escape' || event.key == 'Insert')
-	  ) {
-	    closeMainWindow();
-	  };
-		let key = event.key;
-		key = key.length == 1 ? key.toUpperCase() : key;
+		if (gui.mainWindowOpen == false && event.key == 'Insert') {
+			openMainWindow();
+		} else if (gui.mainWindowOpen == true && (event.key == 'Escape' || event.key == 'Insert')) {
+			closeMainWindow();
+		};
+		let key = event.keyCode;
+		let name = event.key;
+		name = name.length == 1 ? name.toUpperCase() : name;
 		if(config.main.ki.global.select){
 			config.main.ki.global.key = key;
+			config.main.ki.global.name = name;
 			config.main.ki.global.select = false;
 		}else if(config.main.ki.radio.select) {
 			config.main.ki.radio.key = key;
+			config.main.ki.radio.name = name;
 			config.main.ki.radio.select = false;
 		}else if (!config.main.ki.global.on && key == config.main.ki.global.key && (config.main.inputModeRadio == 2 || config.main.inputModeRadio == 3)) {
 			config.main.ki.global.on = true;
@@ -219,8 +228,9 @@
 			console.log('Не говорю в рацию!')
 		}
 	};
+
 	function keyup(event) {
-		let key = event.key;
+		let key = event.keyCode;
 		key = key.length == 1 ? key.toUpperCase() : key;
 		if (config.main.ki.global.on && key == config.main.ki.global.key && config.main.inputModeRadio == 2) {
 			config.main.ki.global.on = false;
@@ -337,16 +347,19 @@
 	};
 
 	function battonSelect(event){
-		if(event.target.id == 'kiGlobal'){
+		if(event.target.id == 'kiGlobal' && !config.main.ki.radio.select){
 			config.main.ki.global.select = true;
-			config.main.ki.global.height = event.clientX - global.getBoundingClientRect().x;
-			config.main.ki.global.width = event.clientY - global.getBoundingClientRect().y;
 		}
-		else if(event.target.id == 'kiRadio'){
+		else if(event.target.id == 'kiRadio' && !config.main.ki.global.select){
 			config.main.ki.radio.select = true;
-			config.main.ki.radio.height = event.clientX - radio.getBoundingClientRect().x;
-			config.main.ki.radio.width = event.clientY - radio.getBoundingClientRect().y;
 		}
+	}
+
+	async function click(event) {
+		event.target.style.cssText = "--s: 0; --o: 1; --d: 0;";
+		let x = event.clientX - event.target.getBoundingClientRect().x;
+		let y = event.clientY - event.target.getBoundingClientRect().y;
+		event.target.style.cssText = "--t: 1; --o: 0; --d: 600; --x: " + x + "; --y: " + y + ";";
 	}
 </script>
 
@@ -543,7 +556,7 @@
 		font: 0.8em TTNorms-Regular;
 		color: #FFFFFF;
 		background: radial-gradient(circle, #ff2a4a 0%, #eb2e4a 100%);
-		border: solid 4px #eb2e4a;
+		border: solid 1px #eb2e4a;
 		cursor: pointer;
 	}
 	div.boxmodes {
@@ -697,6 +710,7 @@
 		justify-content: center;
 	}
 	#floatwindow {
+		z-index: 2;
 		width: 100%;
 		height: 100%;
 		position: absolute;
@@ -754,9 +768,8 @@
 		border-radius: 10px;
 		font: 0.7em TTNorms-Regular;
 		color: #FFFFFF;
-		background-color: #eb2e4a;
+		background: radial-gradient(circle farthest-corner at var(--height) var(--width), #eb2e4a var(--color), #0000 0%);
 		border: solid 1px #eb2e4a;
-		/* box-shadow: 4px 4px 35px 12px rgba(189,0,40,0.4); */
 		white-space: nowrap;
 	}
 	.mut-leaf {
@@ -778,6 +791,7 @@
 		padding: 0 4%;
 	}
 	.volumeMainWindow {
+		z-index: 2;
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -912,12 +926,11 @@
 	}
 	.owerlay {
 		position: absolute;
-		min-width: 125px;
+		min-width: 137px;
 		top: var(--top);
 		left: var(--left);
 		cursor: pointer;
 		z-index: 1000;
-		padding: 0 11px;
 	}
 	.owerlayRadiomin {
 		height: 2.3vh;
@@ -971,6 +984,30 @@
 		box-shadow: 4px 4px 35px 12px rgba(189,0,40,0.4);
 		background: radial-gradient(circle farthest-corner at var(--height) var(--width), #eb2e4a var(--color), #0000 0%);
 	}
+	[anim="anim"]:before {
+		--ripple-background: white;
+		--ripple-opacity: 0.3;
+		--ripple-duration: 600ms;
+		content: '';
+		position: absolute;
+		display: block;
+		background: var(--ripple-background, white);
+		border-radius: 50%;
+		pointer-events: none;
+		top: calc(var(--y) * 1px);
+		left: calc(var(--x) * 1px);
+		width: calc(var(--d) * 1px);
+		height: calc(var(--d) * 1px);
+		opacity: calc(var(--o, 1) * var(--ripple-opacity, 0.3));
+		transition: calc(var(--t, 0) * var(--ripple-duration, 600ms)) var(--ripple-easing, linear);
+		transform: translate(-50%, -50%) scale(var(--s, 1));
+		transform-origin: center;
+	}
+	[anim="anim"] {
+		position: relative;
+		overflow: hidden;
+	}
+	[anim="anim"]:hover { background-color: darken(skyblue, 10%); color: rgba(white, 1);}
 </style>
 
 
@@ -992,13 +1029,29 @@
 						{#each config.device as device,id}
 							<li class="li">
 								<input type="radio" value={id} id="radioDevice{id}" name="radioDevice" class="inputDevice" bind:group={config.selectDevice}>
-								<label for="radioDevice{id}"><div class="button selectorDevice">{device}</div></label>
+								<label
+									for="radioDevice{id}"><div
+										on:click={(event) => {
+											config.main.inputModeRadioDeviceOn.height = event.clientX - event.target.getBoundingClientRect().x;
+											config.main.inputModeRadioDeviceOn.width = event.clientY - event.target.getBoundingClientRect().y;
+											config.main.inputModeRadioDeviceOn.click = true;
+											}}
+										style="
+												--height:{config.main.inputModeRadioDeviceOn.height + 'px'};
+												--width:{config.main.inputModeRadioDeviceOn.width + 'px'};
+												--color:{config.main.inputModeRadioDeviceOn.color + '%'}"
+										class="button selectorDevice">{device}</div></label>
 							</li>
 						{/each}
 					</ul>
 				</div>
 				<div class="deviceSelectCloseButton">
-					<button id="deviceSelectCloseButton" class="button" on:click={() => gui.deviceSelectOpen = false}>Закрыть</button>
+					<button
+						anim="anim" id="deviceSelectCloseButton" class="button"
+						on:click={(event) => {
+							gui.deviceSelectOpen = false
+							click(event);
+						}}>Закрыть</button>
 				</div>
 			</div>
 		</div>
@@ -1014,7 +1067,12 @@
 					{/each}
 				</div>
 				<div style="text-align: center;">
-					<button id="mutListCloseButton" class="button" on:click={() => gui.mutList = false}>Закрыть</button>
+					<button
+						anim="anim" id="mutListCloseButton" class="button"
+						on:click={(event) => {
+							gui.mutList = false;
+							click(event);
+						}}>Закрыть</button>
 				</div>
 			</div>
 		</div>
@@ -1029,13 +1087,28 @@
 								{#each config.room as room,id}
 									<li class="li">
 										<input type="radio" value={id} id="radioRoom{id}" name="radioRoom" class="inputDevice" bind:group={config.selectRoom}>
-										<label for="radioRoom{id}"><div class="button selectorDevice">{room}</div></label>
+										<label for="radioRoom{id}"><div
+											on:click={(event) => {
+												config.main.inputModeRadioDeviceOn.height = event.clientX - event.target.getBoundingClientRect().x;
+												config.main.inputModeRadioDeviceOn.width = event.clientY - event.target.getBoundingClientRect().y;
+												config.main.inputModeRadioDeviceOn.click = true;
+												}}
+											style="
+													--height:{config.main.inputModeRadioDeviceOn.height + 'px'};
+													--width:{config.main.inputModeRadioDeviceOn.width + 'px'};
+													--color:{config.main.inputModeRadioDeviceOn.color + '%'}"
+											class="button selectorDevice">{room}</div></label>
 									</li>
 								{/each}
                             </ul>
                         </div>
                         <div class="deviceSelectCloseButton">
-                            <button id="roomSelectCloseButton" class="button" on:click={() => gui.roomSelectOpen = false}>Закрыть</button>
+                            <button
+								anim="anim" id="roomSelectCloseButton" class="button"
+								on:click={(event) => {
+									gui.roomSelectOpen = false;
+									click(event);
+								}}>Закрыть</button>
                         </div>
                 </div>
             </div>
@@ -1051,18 +1124,27 @@
 							{#each config.channel as channel,id}
 								<li class="li">
 									<input type="radio" value={id} id="radioChanne{id}" name="radioChannel" class="inputDevice" bind:group={config.selectchannel}>
-									<label for="radioChanne{id}"><div class="button selectorDevice">{channel}</div></label>
+									<label for="radioChanne{id}"><div
+										on:click={(event) => {
+											config.main.inputModeRadioDeviceOn.height = event.clientX - event.target.getBoundingClientRect().x;
+											config.main.inputModeRadioDeviceOn.width = event.clientY - event.target.getBoundingClientRect().y;
+											config.main.inputModeRadioDeviceOn.click = true;
+											}}
+										style="
+												--height:{config.main.inputModeRadioDeviceOn.height + 'px'};
+												--width:{config.main.inputModeRadioDeviceOn.width + 'px'};
+												--color:{config.main.inputModeRadioDeviceOn.color + '%'}"
+										class="button selectorDevice">{channel}</div></label>
 								</li>
 							{/each}
-                            <li class="li">
-								<input type="radio" value="0" id="radioChannel0" name="radioChannel" class="inputDevice">
-								<label for="radioChannel0"><div class="button selectorDevice">Channel1</div></label>
-							</li>
-							<li class="li"><input type="radio" value="1" id="radioChannel1" name="radioChannel" class="inputDevice"><label for="radioChannel1"><div class="button selectorDevice">Channel2</div></label></li><li class="li"><input type="radio" value="2" id="radioChannel2" name="radioChannel" class="inputDevice"><label for="radioChannel2"><div class="button selectorDevice">Channel3</div></label></li><li class="li"><input type="radio" value="3" id="radioChannel3" name="radioChannel" class="inputDevice"><label for="radioChannel3"><div class="button selectorDevice">Channel4</div></label></li>
-							</ul>
                         </div>
                         <div class="deviceSelectCloseButton">
-                            <button id="channelSelectCloseButton" class="button" on:click={() => gui.channelSelectOpen = false}>Закрыть</button>
+                            <button
+								anim="anim" id="channelSelectCloseButton" class="button"
+								on:click={(event) => {
+									gui.channelSelectOpen = false;
+									click(event);
+								}}>Закрыть</button>
                         </div>
                 </div>
             </div>
@@ -1167,9 +1249,22 @@
 			<div class="boxdevice">
 				<p class="regular">Устройство ввода:</p>
 				<div>
-					<button class="input-text deviceSelectOpen" id="deviceSelectOpenButton" on:click={() => gui.deviceSelectOpen = true}>Микрофон</button>
-					<button class="button mut shadow" id="mutListOpenButton" on:click={() => gui.mutList = true}>Мут лист</button>
-					<button class="button mut shadow" id="volumePlayersButton" on:click={() => gui.volumeMainWindow = true}>Громкость игроков</button>
+					<button
+						class="input-text deviceSelectOpen" id="deviceSelectOpenButton"
+						on:click={() => gui.deviceSelectOpen = true}>
+						{config.selectDevice == null ? 'Выберите микрофон' : config.device[config.selectDevice]}</button>
+					<button
+						anim="anim" class="button mut shadow" id="mutListOpenButton"
+						on:click={(event) => {
+							gui.mutList = true;
+							click(event);
+						}}>Мут лист</button>
+					<button
+						anim="anim" class="button mut shadow" id="volumePlayersButton"
+						on:click={(event) => {
+							gui.volumeMainWindow = true;
+							click(event);
+						}}>Громкость игроков</button>
 				</div>
 			</div>
 			<div class="boxmodes alignment">
@@ -1180,7 +1275,7 @@
 				</div>
 				<div class="sound3D alignment">
 					<p>3D Звук</p>
-					<input id="triggerSound3D" type="checkbox" bind:checked={config.main.triggerSound3D} on:click={() => window.enable_3d_voice(config.main.triggerSound3D)}>
+					<input id="triggerSound3D" type="checkbox" bind:checked={config.main.triggerSound3D} on:click={() => window.Enable3DVoice(config.main.triggerSound3D)}>
 					<label for="triggerSound3D" class="checker checker-sound3D"></label>
 				</div>
 			</div>
@@ -1198,10 +1293,9 @@
 								<input
 									type="radio" value={1} bind:group={config.main.inputModeRadio} id="radio1" name="radio" class="input">
 								<label
-									bind:this={radioInput0}
 									on:click={(event) => {
-										config.main.inputmodeon.height = event.clientX - radioInput0.getBoundingClientRect().x;
-										config.main.inputmodeon.width = event.clientY - radioInput0.getBoundingClientRect().y;
+										config.main.inputmodeon.height = event.clientX - event.target.getBoundingClientRect().x;
+										config.main.inputmodeon.width = event.clientY - event.target.getBoundingClientRect().y;
 										config.main.inputmodeon.click = true;
 										}}
 									style="
@@ -1215,10 +1309,9 @@
 									on:click={config.main.inputmodeon.click = true}
 									type="radio" value={2} bind:group={config.main.inputModeRadio} id="radio2" name="radio" class="input">
 								<label
-									bind:this={radioInput1}
 									on:click={(event) => {
-										config.main.inputmodeon.height = event.clientX - radioInput1.getBoundingClientRect().x;
-										config.main.inputmodeon.width = event.clientY - radioInput1.getBoundingClientRect().y;
+										config.main.inputmodeon.height = event.clientX - event.target.getBoundingClientRect().x;
+										config.main.inputmodeon.width = event.clientY - event.target.getBoundingClientRect().y;
 										config.main.inputmodeon.click = true;
 									}}
 									style="
@@ -1232,10 +1325,9 @@
 									on:click={config.main.inputmodeon.click = true}
 									type="radio" value={3} bind:group={config.main.inputModeRadio} id="radio3" name="radio" class="input">
 								<label
-									bind:this={radioInput2}
 									on:click={(event) => {
-										config.main.inputmodeon.height = event.clientX - radioInput2.getBoundingClientRect().x;
-										config.main.inputmodeon.width = event.clientY - radioInput2.getBoundingClientRect().y;
+										config.main.inputmodeon.height = event.clientX - event.target.getBoundingClientRect().x;
+										config.main.inputmodeon.width = event.clientY - event.target.getBoundingClientRect().y;
 										config.main.inputmodeon.click = true;
 									}}
 									style="
@@ -1249,8 +1341,14 @@
 					{/if}
 				</div>
 				<div class="inline-block margin">
-					<button class="input-text channelSelectOpen" id="roomSelectOpenButton" on:click={() => gui.roomSelectOpen = true}>Выбор чата</button>
-					<button class="input-text channelSelectOpen" id="channelSelectOpenButton" on:click={() => gui.channelSelectOpen = true}>Выбор канала</button>
+					<button
+						class="input-text channelSelectOpen" id="roomSelectOpenButton"
+						on:click={() => gui.channelSelectOpen = true}>
+						{config.selectchannel == null ? 'Выберите чат' : config.channel[config.selectchannel]}</button>
+					<button
+						class="input-text channelSelectOpen" id="channelSelectOpenButton"
+						on:click={() => gui.roomSelectOpen = true}>
+						{config.selectRoom == null ? 'Выберите канал' : config.room[config.selectRoom]}</button>
 					<div class="alignmentKey">
 						<p class="white">Назначение клавиш:</p>
 					</div>
@@ -1264,13 +1362,16 @@
 											--height:{config.main.ki.global.height + 'px'};
 											--width:{config.main.ki.global.width + 'px'};
 											--color:{config.main.ki.global.color + '%'}"
-										bind:this={global}
 										class="inputbutton input-text {config.main.ki.global.select ? 'bactive' : ''}"
 										id="kiGlobal"
-										on:click={(event) => battonSelect(event)}
+										on:click={(event) => {
+											battonSelect(event)
+											config.main.ki.global.height = event.clientX - event.target.getBoundingClientRect().x;
+											config.main.ki.global.width = event.clientY - event.target.getBoundingClientRect().y;
+											}}
 										disabled={config.main.ki.radio.on}
 									>
-									{config.main.ki.global.key}</button></th>
+									{config.main.ki.global.name}</button></th>
 							</tr>
 							<tr>
 								<th><img src="img/radio.png" class="minradio" alt="minradio"></th>
@@ -1280,20 +1381,28 @@
 											--height:{config.main.ki.radio.height + 'px'};
 											--width:{config.main.ki.radio.width + 'px'};
 											--color:{config.main.ki.radio.color + '%'}"
-										bind:this={radio}
 										class="inputbutton input-text {config.main.ki.radio.select ? 'bactive' : ''}"
 										id="kiRadio"
-										on:click={(event) => battonSelect(event)}
+										on:click={(event) => {
+											config.main.ki.radio.height = event.clientX - event.target.getBoundingClientRect().x;
+											config.main.ki.radio.width = event.clientY - event.target.getBoundingClientRect().y;
+											battonSelect(event)
+											}}
 										disabled={config.main.ki.global.on}
 									>
-									{config.main.ki.radio.key}</button></th>
+									{config.main.ki.radio.name}</button></th>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
 			<div class="boxmodes end">
-				<button class="button shadow closebuttonwidth" on:click={closeMainWindow}>Закрыть</button>
+				<button anim="anim" class="button shadow"
+					on:click={(event) => {
+					closeMainWindow();
+					click(event);
+					}
+					}>Закрыть</button>
 			</div>
 		</div>
 	{/if}
