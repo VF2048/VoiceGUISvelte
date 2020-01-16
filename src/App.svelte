@@ -124,24 +124,24 @@
 	];
 	const volumeWindowRoom = [];
 	const volumeWindowPlayer = [
-	  {name: 'Vf1', room: 0, value: 50, distance: 100, talk:false},
-	  {name: 'Vf2', room: 0, value: 50, distance: 10, talk:true},
-	  {name: 'Vf3', room: 0, value: 50, distance: 100, talk:false},
-	  {name: 'Vf4', room: 0, value: 50, distance: 100, talk:false},
-	  {name: 'Vf5', room: 0, value: 50, distance: 200, talk:true},
-	  {name: 'Vf6', room: 1, value: 50, distance: 100, talk:false, text:'[text]'},
-	  {name: 'Vf7', room: 1, value: 50, distance: 100, talk:false},
-	  {name: 'Vf8', room: 1, value: 50, distance: 100, talk:false},
-	  {name: 'Vf9', room: 1, value: 50, distance: 50, talk:true, text:'[text]'},
-	  {name: 'Vf10', room: 1, value: 50, distance: 100, talk:false},
-	  {name: 'Vf11', room: 2, value: 50, distance: 100, talk:false},
-	  {name: 'Vf12', room: 2, value: 50, distance: 100, talk:true},
-	  {name: 'Vf13', room: 2, value: 50, distance: 100, talk:false},
-	  {name: 'Vf14', room: 2, value: 50, distance: 100, talk:false},
-	  {name: 'Vf15', room: 2, value: 50, distance: 100, talk:false},
+	  {id:1, name: 'Vf1', room: 0, value: 50, distance: 100, talk:false},
+	  {id:2, name: 'Vf2', room: 0, value: 50, distance: 10, talk:true},
+	  {id:3, name: 'Vf3', room: 0, value: 50, distance: 100, talk:false},
+	  {id:4, name: 'Vf4', room: 0, value: 50, distance: 100, talk:false},
+	  {id:5, name: 'Vf5', room: 0, value: 50, distance: 200, talk:true},
+	  {id:6, name: 'Vf6', room: 1, value: 50, distance: 100, talk:false, text:'[text]'},
+	  {id:7, name: 'Vf7', room: 1, value: 50, distance: 100, talk:false},
+	  {id:8, name: 'Vf8', room: 1, value: 50, distance: 100, talk:false},
+	  {id:9, name: 'Vf9', room: 1, value: 50, distance: 50, talk:true, text:'[text]'},
+	  {id:10, name: 'Vf10', room: 1, value: 50, distance: 100, talk:false},
+	  {id:11, name: 'Vf11', room: 2, value: 50, distance: 100, talk:false},
+	  {id:12, name: 'Vf12', room: 2, value: 50, distance: 100, talk:true},
+	  {id:13, name: 'Vf13', room: 2, value: 50, distance: 100, talk:false},
+	  {id:14, name: 'Vf14', room: 2, value: 50, distance: 100, talk:false},
+	  {id:15, name: 'Vf15', room: 2, value: 50, distance: 100, talk:false},
 	];
 	const gui = {
-	  mainWindowOpen: true,
+	  mainWindowOpen: false,
 	  deviceSelectOpen: false,
 	  roomSelectOpen: false,
 	  channelSelectOpen: false,
@@ -200,6 +200,9 @@
 	function deleteRoom(roomID) {
 		delete volumeWindowRoom[roomID];
 	};
+	function playerSetDistancePlayer(id, dist) {
+		volumeWindowPlayer[id].distance = dist;
+	}
 
 	/**
 	 * Opens and closes the main window.
@@ -298,7 +301,7 @@
 	};
 
 	function onMouseMove(event) {
-		if(move.ismove){
+		if(move.ismove && gui.mainWindowOpen){
 			switch(move.nowMove){
 				case 'owerlay' :{
 
@@ -434,6 +437,8 @@
 		height: 67vh;
 		min-width: 443px;
 		min-height: 672px;
+		max-width: 564px;
+    	max-height: 690px;
 		background: radial-gradient(circle farthest-corner at 180% 200%, #eb2e4a 0%, #000000 100%);
 		padding: 1% 52px;
 	}
@@ -1278,12 +1283,12 @@
 			<div class="boxmodes alignment">
 				<div class="alignment">
 					<p>Включение звука</p>
-					<input id="triggerOnOffSound" type="checkbox" bind:checked={config.main.triggerOnOffSound} on:click={() => window.EnableVoice(config.main.triggerOnOffSound)}>
+					<input id="triggerOnOffSound" type="checkbox" bind:checked={config.main.triggerOnOffSound} on:click={() => window.EnableVoice(!config.main.triggerOnOffSound)}>
 					<label for="triggerOnOffSound" class="checker onoff-sound"></label>
 				</div>
 				<div class="sound3D alignment">
 					<p>3D Звук</p>
-					<input id="triggerSound3D" type="checkbox" bind:checked={config.main.triggerSound3D} on:click={() => window.Enable3DVoice(config.main.triggerSound3D)}>
+					<input id="triggerSound3D" type="checkbox" bind:checked={config.main.triggerSound3D} on:click={() => window.Enable3DVoice(!config.main.triggerSound3D)}>
 					<label for="triggerSound3D" class="checker checker-sound3D"></label>
 				</div>
 			</div>
