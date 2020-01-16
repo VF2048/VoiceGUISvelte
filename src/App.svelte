@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import { tick } from 'svelte';
 
-	let owerlay;
+	let overlay;
 
 	onMount(() => {
 		let frame;
@@ -11,11 +11,11 @@
 
 		(function loop() {
 			frame = requestAnimationFrame(loop);
-				if(move.owerlay.move && i<0.457){
+				if(move.overlay.move && i<0.457){
 					i += 0.005
 					move.background = "rgba(255, 255, 255, " + i + ")";
 				}
-				else if(!move.owerlay.move && i>0){
+				else if(!move.overlay.move && i>0){
 					i -= 0.005
 					move.background = "rgba(255, 255, 255, " + i + ")";
 				};
@@ -157,17 +157,17 @@
 			shiftX:0,
 			shiftY:0,
 		},
-		owerlay: {
+		overlay: {
 			move:false,
 			left: 330,
 			top: 18,
 		},
-		owerlayMicrophone: {
+		overlayMicrophone: {
 			click: false,
 			left: 78,
 			top: 20,
 		},
-		owerlayVolumeOn: {
+		overlayVolumeOn: {
 			click: false,
 			left: 25,
 			top: 19,
@@ -284,15 +284,15 @@
 			move.nowMove = event.target.id;
 			let id = event.target.id;
 			for(var value of iterator) {
-				if(value == 'ower'|| id == "owerlay"){
-					move.nowMove = 'owerlay';
-					move.elem.shiftX = event.clientX - owerlay.getBoundingClientRect().left;
-					move.elem.shiftY = event.clientY - owerlay.getBoundingClientRect().top;
+				if(value == 'over'|| id == "overlay"){
+					move.nowMove = 'overlay';
+					move.elem.shiftX = event.clientX - overlay.getBoundingClientRect().left;
+					move.elem.shiftY = event.clientY - overlay.getBoundingClientRect().top;
 					move.ismove = true;
-					move.owerlay.move = true;
+					move.overlay.move = true;
 				}
 			}
-			if(id =="owerlayMicrophone" || id == "owerlayVolumeOn"){
+			if(id =="overlayMicrophone" || id == "overlayVolumeOn"){
 				move.elem.shiftX = event.clientX - event.target.getBoundingClientRect().left;
 				move.elem.shiftY = event.clientY - event.target.getBoundingClientRect().top;
 				move.ismove = true;
@@ -303,21 +303,21 @@
 	function onMouseMove(event) {
 		if(move.ismove && gui.mainWindowOpen){
 			switch(move.nowMove){
-				case 'owerlay' :{
+				case 'overlay' :{
 
-					move.owerlay.left = event.pageX - move.elem.shiftX;
-					move.owerlay.top = event.pageY - move.elem.shiftY;
+					move.overlay.left = event.pageX - move.elem.shiftX;
+					move.overlay.top = event.pageY - move.elem.shiftY;
 					break;
 				};
-				case 'owerlayVolumeOn' :{
-					move.owerlayVolumeOn.left = event.pageX - move.elem.shiftX;
-					move.owerlayVolumeOn.top = event.pageY - move.elem.shiftY;
+				case 'overlayVolumeOn' :{
+					move.overlayVolumeOn.left = event.pageX - move.elem.shiftX;
+					move.overlayVolumeOn.top = event.pageY - move.elem.shiftY;
 					move.domove = true;
 					break;
 				};
-				case 'owerlayMicrophone' :{
-					move.owerlayMicrophone.left = event.pageX - move.elem.shiftX;
-					move.owerlayMicrophone.top = event.pageY - move.elem.shiftY;
+				case 'overlayMicrophone' :{
+					move.overlayMicrophone.left = event.pageX - move.elem.shiftX;
+					move.overlayMicrophone.top = event.pageY - move.elem.shiftY;
 					move.domove = true;
 					break;
 				};
@@ -328,23 +328,23 @@
 	function onMouseUp() {
 		if(!move.domove){
 			switch(move.nowMove){
-				case 'owerlayVolumeOn': {
-					if(move.owerlayVolumeOn.click){
-						move.owerlayVolumeOn.click = !move.owerlayVolumeOn.click;
+				case 'overlayVolumeOn': {
+					if(move.overlayVolumeOn.click){
+						move.overlayVolumeOn.click = !move.overlayVolumeOn.click;
 						config.main.soundVolume = config.main.soundVolumeOff;
 					}else {
-						move.owerlayVolumeOn.click = !move.owerlayVolumeOn.click;
+						move.overlayVolumeOn.click = !move.overlayVolumeOn.click;
 						config.main.soundVolumeOff = config.main.soundVolume;
 						config.main.soundVolume = 0;
 					}
 					break;
 				};
-				case 'owerlayMicrophone': {
-					if(move.owerlayMicrophone.click){
-						move.owerlayMicrophone.click = !move.owerlayMicrophone.click;
+				case 'overlayMicrophone': {
+					if(move.overlayMicrophone.click){
+						move.overlayMicrophone.click = !move.overlayMicrophone.click;
 						config.main.microphoneVolume = config.main.microphoneVolumeOff;
 					}else {
-						move.owerlayMicrophone.click = !move.owerlayMicrophone.click;
+						move.overlayMicrophone.click = !move.overlayMicrophone.click;
 						config.main.microphoneVolumeOff = config.main.microphoneVolume;
 						config.main.microphoneVolume = 0;
 					}
@@ -354,7 +354,7 @@
 		}
 		move.ismove = false;
 		move.domove = false;
-		move.owerlay.move = false;
+		move.overlay.move = false;
 	};
 
 	function battonSelect(event){
@@ -584,7 +584,7 @@
 		display: none;
 	}
 	.checker {
-		background-image: url(img/voiceoff.png);
+		background-image: url(../img/voiceoff.png);
 		background-color: #4c2027;
 		background-position: center;
 		background-repeat: no-repeat;
@@ -608,14 +608,14 @@
 		margin-left: 9%;
 	}
 	#triggerOnOffSound:checked + .checker {
-		background-image: url(img/voiceon.png);
+		background-image: url(../img/voiceon.png);
 		background-color: #eb2e4a;
 		border: solid 4px #eb2e4a;
 		background-size: 62%;
 		box-shadow: 4px 4px 35px 12px rgba(189,0,40,0.4);
 	}
 	#triggerSound3D:checked + .checker {
-		background-image: url(img/voiceon.png);
+		background-image: url(../img/voiceon.png);
 		background-color: #eb2e4a;
 		border: solid 4px #eb2e4a;
 		background-size: 62%;
@@ -661,7 +661,7 @@
 		margin-bottom: 2vh;
 	}
 	#triggerInputMode:checked + .checker {
-		background-image: url(img/trigger-input-mode-off.png);
+		background-image: url(../img/trigger-input-mode-off.png);
 		background-color: #eb2e4a;
 		border: solid 4px #eb2e4a;
 		background-size: 62%;
@@ -848,7 +848,7 @@
 		margin-left: 2vh;
 		height: 1vh;
 		width: 1vh;
-		background-image: url(img/hiddenSettingsOn.png);
+		background-image: url(../img/hiddenSettingsOn.png);
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: 80%;
@@ -859,7 +859,7 @@
 		margin-left: 2vh;
 		height: 1vh;
 		width: 1vh;
-		background-image: url(img/hiddenSettingsOff.png);
+		background-image: url(../img/hiddenSettingsOff.png);
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: 80%;
@@ -937,7 +937,7 @@
 		border: 0;
 		margin-left: 1vh;
 	}
-	.owerlay {
+	.overlay {
 		position: absolute;
 		min-width: 137px;
 		top: var(--top);
@@ -945,33 +945,33 @@
 		cursor: pointer;
 		z-index: 1000;
 	}
-	.owerlayRadiomin {
+	.overlayRadiomin {
 		height: 2.3vh;
 		margin-top: 0.3vh;
 		margin-left: 1vh;
 	}
-	.owerlayRoomName {
+	.overlayRoomName {
 		font-family: TTNormal-Light;
 		font-size: 1.6em;
 		margin-left: 1vh;
 		color: #ffffff;
 		width: 0px;
 	}
-	.owerlayRadiominImg {
+	.overlayRadiominImg {
 		height: 1.3vh;
 	}
-	.owerlayPlayer {
+	.overlayPlayer {
 		font-family: TTNorms-Regular;
 		color: #ffffff;
 		font-size: 0.8em;
 		width: 26px;
 	}
-	.owerlayPlayerDistance {
+	.overlayPlayerDistance {
 		font-family: TTNorms-Regular;
 		color: #ffffff;
 		font-size: 0.8em;
 	}
-	.owerlayMicrophone {
+	.overlayMicrophone {
 		height: 5vh;
 		position: absolute;
 		z-index: 1000;
@@ -979,7 +979,7 @@
 		left: var(--left);
 		cursor: pointer;
 	}
-	.owerlayVolumeOn {
+	.overlayVolumeOn {
 		height: 5vh;
 		position: absolute;
 		z-index: 1000;
@@ -1182,15 +1182,15 @@
 										{#if Player.room == id}
 											<tr class="voiceRoomPlayerSettings">
 												<th class="th">
-													<img src="img/userloc.png" class="userloc" alt="userloc">
+													<img src="../img/userloc.png" class="userloc" alt="userloc">
 													<p class="userName">{Player.name}</p>
 												</th>
 												<th class="th">
-													<img src="img/distance.png" class="imgdistance" alt="distance">
+													<img src="../img/distance.png" class="imgdistance" alt="distance">
 													<p id="userName{id}Distance" class="userName">{Player.distance + ' m.'}</p>
 												</th>
 												<th id="grid" class="th">
-													<img src="img/micSettings.png" class="micSettings" alt="micSettings">
+													<img src="../img/micSettings.png" class="micSettings" alt="micSettings">
 													<input id="sliderP{id}" min="0" max="100" bind:value={Player.value} type="range" class="sliderP" style="--columnsP:{Player.value + "%"}">
 													<p id="sliderP{id}volume" class="userName">{Player.value}</p>
 												</th>
@@ -1225,8 +1225,8 @@
 								bind:value={config.main.soundVolume}
 								on:input={() => {
 									window.SetPlayVolume(config.main.soundVolume/100);
-									if(move.owerlayVolumeOn.click){
-										move.owerlayVolumeOn.click = !move.owerlayVolumeOn.click
+									if(move.overlayVolumeOn.click){
+										move.overlayVolumeOn.click = !move.overlayVolumeOn.click
 									}
 								}}
 							>
@@ -1249,8 +1249,8 @@
 								bind:value={config.main.microphoneVolume}
 								on:input={() => {
 									window.SetRecordVolume(config.main.microphoneVolume/100);
-									if(move.owerlayMicrophone.click){
-										move.owerlayMicrophone.click = !move.owerlayMicrophone.click
+									if(move.overlayMicrophone.click){
+										move.overlayMicrophone.click = !move.overlayMicrophone.click
 									}
 								}}
 							>
@@ -1420,26 +1420,26 @@
 		</div>
 	{/if}
 	<div
-		bind:this={owerlay}
-		id="owerlay"
-		class="owerlay ower"
-		style="--left:{move.owerlay.left+'px'};--top:{move.owerlay.top+'px'};background-color:{move.background}">
+		bind:this={overlay}
+		id="overlay"
+		class="overlay over"
+		style="--left:{move.overlay.left+'px'};--top:{move.overlay.top+'px'};background-color:{move.background}">
 		{#each volumeWindowRoom as room,id}
 			{#if room != undefined}
-				<table class="ower">
-					<thead class="ower">
+				<table class="over">
+					<thead class="over">
 						<tr>
-							<th class="ower"><img draggable="false" class="owerlayRadiomin ower" src="img/radiomin.png" alt="owerlayRadiomin"></th>
-							<th class="ower"><p class="owerlayRoomName ower" id="owerlayRoomName">{room.name}</p></th>
+							<th class="over"><img draggable="false" class="overlayRadiomin over" src="img/radiomin.png" alt="overlayRadiomin"></th>
+							<th class="over"><p class="overlayRoomName over" id="overlayRoomName">{room.name}</p></th>
 						</tr>
 					</thead>
 					<tbody>
 						{#each volumeWindowPlayer as players}
 							{#if players.room == id && players.talk}
 								<tr>
-									<th class="ower"><img draggable="false" class="owerlayRadiominImg ower" src="img/owerlayVolume.png" alt="owerlayRadiomin"></th>
-									<th class="ower"><p class="owerlayPlayer ower" id="owerlayPlayer">{players.name}</p></th>
-									<th class="ower"><p class="owerlayPlayerDistance ower" id="owerlayPlayerDistance">
+									<th class="over"><img draggable="false" class="overlayRadiominImg over" src="../img/overlayVolume.png" alt="overlayRadiomin"></th>
+									<th class="over"><p class="overlayPlayer over" id="overlayPlayer">{players.name}</p></th>
+									<th class="over"><p class="overlayPlayerDistance over" id="overlayPlayerDistance">
 									{#if players.text != undefined}
 										{players.text}
 									{:else}
@@ -1454,38 +1454,38 @@
 			{/if}
 		{/each}
 	</div>
-	{#if !move.owerlayMicrophone.click}
+	{#if !move.overlayMicrophone.click}
 		<img draggable="false"
-			class="owerlayMicrophone"
-			id="owerlayMicrophone"
-			src="img/owerlayMicrophone.png"
-			alt="owerlayMicrophone"
-			style="--left:{move.owerlayMicrophone.left+'px'};--top:{move.owerlayMicrophone.top+'px'}"
+			class="overlayMicrophone"
+			id="overlayMicrophone"
+			src="../img/overlayMicrophone.png"
+			alt="overlayMicrophone"
+			style="--left:{move.overlayMicrophone.left+'px'};--top:{move.overlayMicrophone.top+'px'}"
 		>
 	{:else}
 		<img draggable="false"
-			class="owerlayMicrophone"
-			id="owerlayMicrophone"
-			src="img/owerlayMicrophoneOff.png"
-			alt="owerlayMicrophone"
-			style="--left:{move.owerlayMicrophone.left+'px'};--top:{move.owerlayMicrophone.top+'px'}"
+			class="overlayMicrophone"
+			id="overlayMicrophone"
+			src="../img/overlayMicrophoneOff.png"
+			alt="overlayMicrophone"
+			style="--left:{move.overlayMicrophone.left+'px'};--top:{move.overlayMicrophone.top+'px'}"
 		>
 	{/if}
-	{#if !move.owerlayVolumeOn.click}
+	{#if !move.overlayVolumeOn.click}
 		<img draggable="false"
-			class="owerlayVolumeOn"
-			id="owerlayVolumeOn"
-			src="img/owerlayVolumeOn.png"
-			alt="owerlayVolumeOn"
-			style="--left:{move.owerlayVolumeOn.left+'px'};--top:{move.owerlayVolumeOn.top+'px'}"
+			class="overlayVolumeOn"
+			id="overlayVolumeOn"
+			src="../img/overlayVolumeOn.png"
+			alt="overlayVolumeOn"
+			style="--left:{move.overlayVolumeOn.left+'px'};--top:{move.overlayVolumeOn.top+'px'}"
 		>
 	{:else}
 		<img draggable="false"
-			class="owerlayVolumeOn"
-			id="owerlayVolumeOn"
-			src="img/owerlayVolumeOff.png"
-			alt="owerlayVolumeOn"
-			style="--left:{move.owerlayVolumeOn.left+'px'};--top:{move.owerlayVolumeOn.top+'px'}"
+			class="overlayVolumeOn"
+			id="overlayVolumeOn"
+			src="../img/overlayVolumeOff.png"
+			alt="overlayVolumeOn"
+			style="--left:{move.overlayVolumeOn.left+'px'};--top:{move.overlayVolumeOn.top+'px'}"
 		>
 	{/if}
 	
