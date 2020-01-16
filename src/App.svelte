@@ -1368,7 +1368,7 @@
 					<table class="keyname-space-between">
 						<tbody>
 							<tr>
-								<th><img src="img/minmik.png" class="minMic" alt="minMic"></th>
+								<th><img src="img/minmic.png" class="minMic" alt="minMic"></th>
 								<th><p class="button-selection">Говорить</p></th>
 								<th><button
 										style="
