@@ -1,7 +1,6 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
-	import { tick } from 'svelte';
 
 	let overlay;
 
@@ -174,6 +173,8 @@
 		},
 
 	};
+	let mic = {};
+	let arr = [];
 
 	presentation();
 	onload();
@@ -192,6 +193,11 @@
 		addRoom('Рация3');
 		addRoom('Рация4');
 		deleteRoom(3);
+		micOverPlayer(0,66,26,39,true);
+		micOverPlayer(1,106,26,39,true);
+		micOverPlayer(2,206,26,39,true);
+		micOverPlayer(1,206,26,39,false);
+		
 	};
 
 	function addRoom(roomID) {
@@ -202,7 +208,16 @@
 	};
 	function playerSetDistance(id, dist) {
 		volumeWindowPlayer[id].distance = dist;
-	}
+	};
+
+	function micOverPlayer(id,x,y,size,add){
+		if(add){
+			mic[id] = {x:x,y:y,size:size};
+		}else {
+			delete mic[id];
+		}
+		arr = Object.values(mic);
+	};
 
 	/**
 	 * Opens and closes the main window.
@@ -250,7 +265,7 @@
 			config.main.ki.radio.on = false;
 			console.log('Не говорю в рацию!')
 		}
-	}
+	};
 
 	/**
 	 * Close main window.
@@ -270,7 +285,7 @@
 	 */
 	function openMainWindow() {
 		window.SetCursorVisible(true);
-	  	gui.mainWindowOpen = true;
+		gui.mainWindowOpen = true;
 	};
 
 	/**
@@ -1026,6 +1041,12 @@
 		overflow: hidden;
 	}
 	[anim="anim"]:hover { background-color: darken(skyblue, 10%); color: rgba(white, 1);}
+	.micOverPlayer {
+		position: absolute;
+		top: var(--x);
+		left: var(--y);
+		height: var(--size);
+	}
 </style>
 
 
@@ -1485,5 +1506,7 @@
 			style="--left:{move.overlayVolumeOn.left+'px'};--top:{move.overlayVolumeOn.top+'px'}"
 		>
 	{/if}
-	
+	{#each arr as mic}
+			<img class="micOverPlayer" style="--x:{mic.x + "px"};--y:{mic.y + "px"};--size:{mic.size + "px"};" src="img/micSettings.png" alt="micOverPlayer">
+	{/each}
 </div>
