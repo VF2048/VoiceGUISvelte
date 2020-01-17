@@ -435,10 +435,10 @@
 	#container {
 		width: 58vh;
 		height: 67vh;
-		min-width: 443px;
-		min-height: 672px;
+		min-width: 459px;
+		min-height: 606px;
 		max-width: 564px;
-    	max-height: 690px;
+		max-height: 690px;
 		background: radial-gradient(circle farthest-corner at 180% 200%, #eb2e4a 0%, #000000 100%);
 		padding: 1% 52px;
 	}
@@ -498,6 +498,7 @@
     	margin: 0;
 		-webkit-appearance: none;
 		width: 29vh;
+		min-width: 298px;
 		padding: 0;
 		border: 0;
 	}
@@ -555,7 +556,8 @@
 	.deviceSelectOpen {
 		text-align: left;
 		width: 19vh;
-		min-width: 112px;
+		min-width: 161px;
+    	max-width: 200px;
 	}
 	.mut {
 		margin: 0;
@@ -684,6 +686,7 @@
 		width: 21vh;
 		margin-bottom: 1vh;
 		min-width: 170px;
+    	max-width: 200px;
 	}
 	.alignmentKey {
 		display: flex;
@@ -706,6 +709,8 @@
 		text-align: center;
 		width: 7vh;
 		height: 25px;
+		max-width: 66px;
+    	min-width: 40px;
 		margin-bottom: 4%;
 		margin-left: 3vh;
 		color: #ca314a;
@@ -1371,10 +1376,6 @@
 								<th><img src="img/minmic.png" class="minMic" alt="minMic"></th>
 								<th><p class="button-selection">Говорить</p></th>
 								<th><button
-										style="
-											--height:{config.main.ki.global.height + 'px'};
-											--width:{config.main.ki.global.width + 'px'};
-											--color:{config.main.ki.global.color + '%'}"
 										class="inputbutton input-text {config.main.ki.global.select ? 'bactive' : ''}"
 										id="kiGlobal"
 										on:click={(event) => {
@@ -1390,10 +1391,6 @@
 								<th><img src="img/radio.png" class="minradio" alt="minradio"></th>
 								<th><p class="button-selection">Говорить в рацию</p></th>
 								<th><button
-										style="
-											--height:{config.main.ki.radio.height + 'px'};
-											--width:{config.main.ki.radio.width + 'px'};
-											--color:{config.main.ki.radio.color + '%'}"
 										class="inputbutton input-text {config.main.ki.radio.select ? 'bactive' : ''}"
 										id="kiRadio"
 										on:click={(event) => {
