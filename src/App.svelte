@@ -200,7 +200,7 @@
 	function deleteRoom(roomID) {
 		delete volumeWindowRoom[roomID];
 	};
-	function playerSetDistancePlayer(id, dist) {
+	function playerSetDistance(id, dist) {
 		volumeWindowPlayer[id].distance = dist;
 	}
 
@@ -630,7 +630,7 @@
 	}
 	.input-mode {
 		margin-left: 13%;
-		background-image: url(img/trigger-input-mode-on.png);
+		background-image: url(../img/trigger-input-mode-on.png);
 		width: 20px;
 		height: 18px;
 	}
@@ -1182,15 +1182,15 @@
 										{#if Player.room == id}
 											<tr class="voiceRoomPlayerSettings">
 												<th class="th">
-													<img src="../img/userloc.png" class="userloc" alt="userloc">
+													<img src="img/userloc.png" class="userloc" alt="userloc">
 													<p class="userName">{Player.name}</p>
 												</th>
 												<th class="th">
-													<img src="../img/distance.png" class="imgdistance" alt="distance">
+													<img src="img/distance.png" class="imgdistance" alt="distance">
 													<p id="userName{id}Distance" class="userName">{Player.distance + ' m.'}</p>
 												</th>
 												<th id="grid" class="th">
-													<img src="../img/micSettings.png" class="micSettings" alt="micSettings">
+													<img src="img/micSettings.png" class="micSettings" alt="micSettings">
 													<input id="sliderP{id}" min="0" max="100" bind:value={Player.value} type="range" class="sliderP" style="--columnsP:{Player.value + "%"}">
 													<p id="sliderP{id}volume" class="userName">{Player.value}</p>
 												</th>
@@ -1437,7 +1437,7 @@
 						{#each volumeWindowPlayer as players}
 							{#if players.room == id && players.talk}
 								<tr>
-									<th class="over"><img draggable="false" class="overlayRadiominImg over" src="../img/overlayVolume.png" alt="overlayRadiomin"></th>
+									<th class="over"><img draggable="false" class="overlayRadiominImg over" src="img/overlayVolume.png" alt="overlayRadiomin"></th>
 									<th class="over"><p class="overlayPlayer over" id="overlayPlayer">{players.name}</p></th>
 									<th class="over"><p class="overlayPlayerDistance over" id="overlayPlayerDistance">
 									{#if players.text != undefined}
@@ -1458,7 +1458,7 @@
 		<img draggable="false"
 			class="overlayMicrophone"
 			id="overlayMicrophone"
-			src="../img/overlayMicrophone.png"
+			src="img/overlayMicrophone.png"
 			alt="overlayMicrophone"
 			style="--left:{move.overlayMicrophone.left+'px'};--top:{move.overlayMicrophone.top+'px'}"
 		>
@@ -1466,7 +1466,7 @@
 		<img draggable="false"
 			class="overlayMicrophone"
 			id="overlayMicrophone"
-			src="../img/overlayMicrophoneOff.png"
+			src="img/overlayMicrophoneOff.png"
 			alt="overlayMicrophone"
 			style="--left:{move.overlayMicrophone.left+'px'};--top:{move.overlayMicrophone.top+'px'}"
 		>
@@ -1475,7 +1475,7 @@
 		<img draggable="false"
 			class="overlayVolumeOn"
 			id="overlayVolumeOn"
-			src="../img/overlayVolumeOn.png"
+			src="img/overlayVolumeOn.png"
 			alt="overlayVolumeOn"
 			style="--left:{move.overlayVolumeOn.left+'px'};--top:{move.overlayVolumeOn.top+'px'}"
 		>
@@ -1483,7 +1483,7 @@
 		<img draggable="false"
 			class="overlayVolumeOn"
 			id="overlayVolumeOn"
-			src="../img/overlayVolumeOff.png"
+			src="img/overlayVolumeOff.png"
 			alt="overlayVolumeOn"
 			style="--left:{move.overlayVolumeOn.left+'px'};--top:{move.overlayVolumeOn.top+'px'}"
 		>
