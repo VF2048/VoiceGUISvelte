@@ -113,14 +113,8 @@
 	    'Channel4',
 	  ],
 	};
-	const mutList = [
-	  'Vf',
-	  'Vf1',
-	  'Vf2',
-	  'Vf3',
-	  'Vf4',
-	  'Vf5',
-	];
+	const mutedPlayers = {};
+	let mutList = [];
 	const volumeWindowRoom = [];
 	const volumeWindowPlayer = [
 	  {id:1, name: 'Vf1', room: 0, value: 50, distance: 100, talk:false},
@@ -194,6 +188,12 @@
 		addRoom('Рация3');
 		addRoom('Рация4');
 		deleteRoom(3);
+		addMutedPlayers(0,"Vf0",true);
+		addMutedPlayers(1,"Vf1",true);
+		addMutedPlayers(2,"Vf2",true);
+		addMutedPlayers(3,"Vf3",true);
+		addMutedPlayers(4,"Vf4",true);
+		addMutedPlayers(3,"Vf3",false);
 		micOverPlayer(0,66,26,39,true);
 		micOverPlayer(1,106,26,39,true);
 		micOverPlayer(2,206,26,39,true);
@@ -210,6 +210,13 @@
 	function playerSetDistance(id, dist) {
 		volumeWindowPlayer[id].distance = dist;
 	};
+
+	function addMutedPlayers(id,nick,add) {
+		if(add){
+			mutedPlayers[id] = nick;
+		}else delete mutedPlayers[id];
+		mutList = Object.values(mutedPlayers);
+	}
 
 	function micOverPlayer(id,x,y,size,add){
 		if(add){
@@ -509,8 +516,9 @@
 		align-items: center;
     	margin: 0;
 		-webkit-appearance: none;
-		width: 45vh;
+		width: 37vh;
 		min-width: 298px;
+		max-width: 345px;
 		padding: 0;
 		border: 0;
 	}
@@ -822,6 +830,7 @@
 		margin-bottom: 4%;
 		width: 25vh;
 		height: 19%;
+		max-width: 84%;
 		padding: 0 4%;
 	}
 	.volumeMainWindow {
@@ -1041,7 +1050,7 @@
 		position: relative;
 		overflow: hidden;
 	}
-	[anim="anim"]:hover { background-color: darken(skyblue, 10%); color: rgba(white, 1);}
+	[anim="anim"]:hover { background-color: darken(#00000000, 10%); color: rgba(white, 1);}
 	.micOverPlayer {
 		position: absolute;
 		top: var(--x);
@@ -1103,7 +1112,13 @@
 				<input class="input-text leaf mut-leaf" type="text" placeholder="Введите никнейм">
 				<div id="mutListPlayers" class="mutListPlayers">
 					{#each mutList as name,id}
-						 <button id="1{id}Vf" class="button selector mut-leaf">{name}</button>
+						<button
+						 	anim="anim" id="1{id}Vf" class="button selector mut-leaf"
+							on:click = {(event) => {
+								if(inGame) window.removeMutedPlayer(name);
+								click(event);
+							}}	 
+						>{name}</button>
 					{/each}
 				</div>
 				<div style="text-align: center;">
