@@ -2,50 +2,8 @@
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
 
-	let overlay;
+	let overlay,i = 0;
 
-	onMount(() => {
-		let frame;
-		let i = 0;
-
-		(function loop() {
-			frame = requestAnimationFrame(loop);
-				if(move.overlay.move && i<0.457){
-					i += 0.005
-					move.background = "rgba(255, 255, 255, " + i + ")";
-				}
-				else if(!move.overlay.move && i>0){
-					i -= 0.005
-					move.background = "rgba(255, 255, 255, " + i + ")";
-				};
-				if(config.main.ki.global.select){
-					config.main.ki.global.color += 5;
-				}else{
-					config.main.ki.global.color = 5;
-				};
-				if(config.main.ki.radio.select){
-					config.main.ki.radio.color += 5;
-				}else{
-					config.main.ki.radio.color = 5;
-				};
-				if(config.main.inputmodeon.click){
-					config.main.inputmodeon.click = false;
-					config.main.inputmodeon.color = 5;
-				}else if(config.main.inputmodeon.color >= 5 && config.main.inputmodeon.color < 100){
-					config.main.inputmodeon.color += 5;
-				};
-				if(config.main.inputModeRadioDeviceOn.click){
-					config.main.inputModeRadioDeviceOn.click = false;
-					config.main.inputModeRadioDeviceOn.color = 5;
-				}else if(config.main.inputModeRadioDeviceOn.color >= 5 && config.main.inputModeRadioDeviceOn.color < 100){
-					config.main.inputModeRadioDeviceOn.color += 5;
-				};
-		}());
-
-		return () => {
-			cancelAnimationFrame(frame);
-		};
-	});
 	const config = {
 	  main: {
 		soundVolume: 50,
@@ -381,14 +339,48 @@
 		else if(event.target.id == 'kiRadio' && !config.main.ki.global.select){
 			config.main.ki.radio.select = true;
 		}
-	}
+	};
 
 	async function click(event) {
 		event.target.style.cssText = "--s: 0; --o: 1; --d: 0;";
 		let x = event.clientX - event.target.getBoundingClientRect().x;
 		let y = event.clientY - event.target.getBoundingClientRect().y;
 		event.target.style.cssText = "--t: 1; --o: 0; --d: 600; --x: " + x + "; --y: " + y + ";";
+	};
+
+	function animation(){
+		if(move.overlay.move && i<0.457){
+			i += 0.005
+			move.background = "rgba(255, 255, 255, " + i + ")";
+		}
+		else if(!move.overlay.move && i>0){
+			i -= 0.005
+			move.background = "rgba(255, 255, 255, " + i + ")";
+		};
+		if(config.main.ki.global.select){
+			config.main.ki.global.color += 5;
+		}else{
+			config.main.ki.global.color = 5;
+		};
+		if(config.main.ki.radio.select){
+			config.main.ki.radio.color += 5;
+		}else{
+			config.main.ki.radio.color = 5;
+		};
+		if(config.main.inputmodeon.click){
+			config.main.inputmodeon.click = false;
+			config.main.inputmodeon.color = 5;
+		}else if(config.main.inputmodeon.color >= 5 && config.main.inputmodeon.color < 100){
+			config.main.inputmodeon.color += 5;
+		};
+		if(config.main.inputModeRadioDeviceOn.click){
+			config.main.inputModeRadioDeviceOn.click = false;
+			config.main.inputModeRadioDeviceOn.color = 5;
+		}else if(config.main.inputModeRadioDeviceOn.color >= 5 && config.main.inputModeRadioDeviceOn.color < 100){
+			config.main.inputModeRadioDeviceOn.color += 5;
+		};
 	}
+	setInterval(animation,16)
 </script>
 
 
@@ -1414,6 +1406,10 @@
 											config.main.ki.global.height = event.clientX - event.target.getBoundingClientRect().x;
 											config.main.ki.global.width = event.clientY - event.target.getBoundingClientRect().y;
 											}}
+											style="
+												--height:{config.main.inputmodeon.height + 'px'};
+												--width:{config.main.inputmodeon.width + 'px'};
+												--color:{config.main.ki.global.color + '%'}"
 										disabled={config.main.ki.radio.on}
 									>
 									{config.main.ki.global.name}</button></th>
@@ -1429,6 +1425,10 @@
 											config.main.ki.radio.width = event.clientY - event.target.getBoundingClientRect().y;
 											battonSelect(event)
 											}}
+											style="
+												--height:{config.main.inputmodeon.height + 'px'};
+												--width:{config.main.inputmodeon.width + 'px'};
+												--color:{config.main.ki.radio.color + '%'}"
 										disabled={config.main.ki.global.on}
 									>
 									{config.main.ki.radio.name}</button></th>
