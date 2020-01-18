@@ -175,9 +175,10 @@
 	};
 	let mic = {};
 	let arr = [];
+	const inGame = true;
 
 	presentation();
-	onload();
+	if(inGame)onload();
 
 	function onload() {
 		window.SetPlayVolume(config.main.soundVolume/100);
@@ -271,7 +272,7 @@
 	 * Close main window.
 	 */
 	function closeMainWindow() {
-		window.SetCursorVisible(false);
+		if(inGame)window.SetCursorVisible(false);
 		gui.mainWindowOpen = false;
 		gui.deviceSelectOpen = false;
 		gui.roomSelectOpen = false;
@@ -284,7 +285,7 @@
 	 * Open main window.
 	 */
 	function openMainWindow() {
-		window.SetCursorVisible(true);
+		if(inGame)window.SetCursorVisible(true);
 		gui.mainWindowOpen = true;
 	};
 
@@ -449,11 +450,8 @@
 	}
 	#container {
 		width: 58vh;
-		height: 67vh;
 		min-width: 459px;
-		min-height: 606px;
 		max-width: 564px;
-		max-height: 690px;
 		background: radial-gradient(circle farthest-corner at 180% 200%, #eb2e4a 0%, #000000 100%);
 		padding: 1% 52px;
 	}
@@ -470,7 +468,6 @@
     	margin-top: 2%;
 	}
 	#boxvoice {
-		margin-top: 5%;
     	margin-left: 9%;
 	}
 	.sound {
@@ -512,7 +509,7 @@
 		align-items: center;
     	margin: 0;
 		-webkit-appearance: none;
-		width: 29vh;
+		width: 45vh;
 		min-width: 298px;
 		padding: 0;
 		border: 0;
@@ -665,7 +662,9 @@
 		padding: 3% 10%;
 		margin-bottom: 4%;
 		height: 15px;
-		width: 146px;	
+		width: 17vh;
+		min-width: 131px;
+		max-width: 161px;	
 		text-align: left;
 		border-radius: 10px;
 		font: 0.7em TTNorms-Regular;
@@ -688,7 +687,9 @@
 		padding: 3% 10%;
 		margin-bottom: 4%;
 		height: 15px;
-		width: 146px;	
+		width: 17vh;
+		min-width: 131px;
+		max-width: 161px;
 		border-radius: 10px;
 		font: 0.7em TTNorms-Regular;
 		color: #FFFFFF;
@@ -709,10 +710,10 @@
 		margin-bottom: 3%;
 	}
 	.minMic {
-		width: 1.3vh;
+		width: 12px;
 	}
 	.minradio {
-		width: 0.9vh;
+		width: 8px;
 	}
 	.button-selection {
 		color: #949494;
