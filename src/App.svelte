@@ -250,16 +250,12 @@
 			config.main.ki.radio.select = false;
 		}else if (!config.main.ki.global.on && key == config.main.ki.global.key && (config.main.inputModeRadio == 2 || config.main.inputModeRadio == 3)) {
 			config.main.ki.global.on = true;
-			console.log('Говорю!')
 		}else if (config.main.ki.global.on && key == config.main.ki.global.key && config.main.inputModeRadio == 3) {
 			config.main.ki.global.on = false;
-			console.log('Не говорю!')
 		}else if (!config.main.ki.radio.on && key == config.main.ki.radio.key && (config.main.inputModeRadio == 2 || config.main.inputModeRadio == 3)) {
 			config.main.ki.radio.on = true;
-			console.log('Говорю в рацию!')
 		}else if (config.main.ki.radio.on && key == config.main.ki.radio.key && config.main.inputModeRadio == 3) {
 			config.main.ki.radio.on = false;
-			console.log('Не говорю в рацию!')
 		}
 	};
 
@@ -268,10 +264,8 @@
 		key = key.length == 1 ? key.toUpperCase() : key;
 		if (config.main.ki.global.on && key == config.main.ki.global.key && config.main.inputModeRadio == 2) {
 			config.main.ki.global.on = false;
-			console.log('Не говорю!')
 		}else if (config.main.ki.radio.on && key == config.main.ki.radio.key  && config.main.inputModeRadio == 2) {
 			config.main.ki.radio.on = false;
-			console.log('Не говорю в рацию!')
 		}
 	};
 
