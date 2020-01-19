@@ -48,49 +48,7 @@
 			},
 		}
 	  },
-	  selectDevice: null,
-	  device: [
-	    'microphone1',
-	    'microphone2',
-	    'microphone3',
-	    'microphone4',
-	    'microphone5',
-	  ],
-	  selectRoom: null,
-	  room: [
-	    'Room1',
-	    'Room2',
-	    'Room3',
-	    'Room4',
-	  ],
-	  selectchannel: null,
-	  channel: [
-	    'Channel1',
-	    'Channel2',
-	    'Channel3',
-	    'Channel4',
-	  ],
 	};
-	const mutedPlayers = {};
-	let mutList = [];
-	const volumeWindowRoom = [];
-	const volumeWindowPlayer = [
-	  {id:1, name: 'Vf1', room: 0, value: 50, distance: 100, talk:false},
-	  {id:2, name: 'Vf2', room: 0, value: 50, distance: 10, talk:true},
-	  {id:3, name: 'Vf3', room: 0, value: 50, distance: 100, talk:false},
-	  {id:4, name: 'Vf4', room: 0, value: 50, distance: 100, talk:false},
-	  {id:5, name: 'Vf5', room: 0, value: 50, distance: 200, talk:true},
-	  {id:6, name: 'Vf6', room: 1, value: 50, distance: 100, talk:false, text:'[text]'},
-	  {id:7, name: 'Vf7', room: 1, value: 50, distance: 100, talk:false},
-	  {id:8, name: 'Vf8', room: 1, value: 50, distance: 100, talk:false},
-	  {id:9, name: 'Vf9', room: 1, value: 50, distance: 50, talk:true, text:'[text]'},
-	  {id:10, name: 'Vf10', room: 1, value: 50, distance: 100, talk:false},
-	  {id:11, name: 'Vf11', room: 2, value: 50, distance: 100, talk:false},
-	  {id:12, name: 'Vf12', room: 2, value: 50, distance: 100, talk:true},
-	  {id:13, name: 'Vf13', room: 2, value: 50, distance: 100, talk:false},
-	  {id:14, name: 'Vf14', room: 2, value: 50, distance: 100, talk:false},
-	  {id:15, name: 'Vf15', room: 2, value: 50, distance: 100, talk:false},
-	];
 	const gui = {
 	  mainWindowOpen: false,
 	  deviceSelectOpen: false,
@@ -125,64 +83,170 @@
 		},
 
 	};
-	let mic = {};
-	let arr = [];
-	const inGame = true;
 
-	presentation();
-	if(inGame)onload();
+
+	const Player = {
+		list: {},
+		add: (pid, name) => {
+			Player.list[pid] = {
+				name: name,
+				id: pid,
+				value: 50,
+			};
+			Player.array = Object.values(Player.list);
+		},
+
+		UpdatePos: (pid, top, left, distance) => {
+			Player.list[pid].distance = distance;
+			Player.list[pid].top = top;
+			Player.list[pid].left = left;
+			Player.array = Object.values(Player.list);
+		},
+
+		Remove: (pid) => {
+			delete Player.list[pid];
+			Player.array = Object.values(Player.list);
+		},
+
+		SetMuted: (pid,is_muted) => {
+			Player.list[pid].is_muted = is_muted;
+			Player.array = Object.values(Player.list);
+		},
+
+		SetVoiceStream: (pid, isteam) => {
+			Player.list[pid].isteam = isteam;
+			Player.array = Object.values(Player.list);
+		},
+
+		AddToRoom: (rid, pid, text) => {
+			Player.list[pid].rid == undefined ? Player.list[pid].rid = [rid] : Player.list[pid].rid.push(rid);
+			Player.array = Object.values(Player.list);
+		},
+		RemoveFromRoom: (rid,pid) => {
+			Player.list[pid].rid.splice(Player.list[pid].rid.lastIndexOf(rid),1);
+			Player.array = Object.values(Player.list);
+		},
+	};
+	const Room = {
+		list: {},
+		select: {},
+		selectedRoom: null,
+	  	selectedchannel: null,
+		add: (rid, is_radio, name) => {
+			Room.list[rid] = {
+				name: name,
+				rid: rid,
+				is_radio: is_radio,
+				open:true
+			};
+			if(is_radio){
+				let names = name.split("_");
+				Room.list[rid].rname = names[0] + ' ' + names[1];
+				if(Room.select[names[0]] == undefined) Room.select[names[0]] = [names[1]]; 
+				else Room.select[names[0]].push(names[1]);
+			}else Room.list[rid].rname = name;
+			Room.array = Object.values(Room.list);
+			Room.selectRoom = Object.keys(Room.select);
+			Room.selectChannel = Object.values(Room.select);
+		},
+		remove: (rid) => {
+			let names = Room.list[rid].name.split("_");
+			Room.select[names[0]].splice(Room.select[names[0]].lastIndexOf(names[1]))
+			delete Room.list[rid];
+			Room.array = Object.values(Room.list);
+			Room.selectRoom = Object.keys(Room.select);
+			Room.selectChannel = Object.values(Room.select);
+		},
+		selected: () => {
+			let name = [Room.selectRoom[Room.selectedRoom],Room.selectChannel[Room.selectedRoom][Room.selectedchannel]]
+			let names = name.join("_");
+			for(let room in Room.list) {
+				if(Room.list[room].name == names) Room.selected = room;
+			};
+			if(inGame)window.SelectPhysMicro(Room.selected);
+		},
+	};
+	const Micro = {
+		list: {},
+		selectDevice: null,
+		add: (PhysMicroID, name) => {
+			Micro.list[PhysMicroID] = {
+				name: name,
+				PhysMicroID: PhysMicroID
+			};
+			Micro.array = Object.values(Micro.list);
+		},
+		remove: (PhysMicroID) => {
+			delete Micro.list[PhysMicroID];
+			Micro.array = Object.values(Micro.list);
+		},
+	};
+
+	const inGame = false;
+
 
 	function onload() {
+		window.AddV8Callback("AddPlayer", Player.add);
+		window.AddV8Callback("UpdatePos", Player.UpdatePos);
+		window.AddV8Callback("RemovePlayer", Player.Remove);
+		window.AddV8Callback("SetPlayerMuted", Player.SetMuted);
+		window.AddV8Callback("SetPlayerVoiceStream", Player.SetVoiceStream);
+		window.AddV8Callback("AddToRoom", Player.AddToRoom);
+		window.AddV8Callback("RemoveFromRoom", Player.RemoveFromRoom);
+	
+		window.AddV8Callback("AddRoom", Room.add);
+		window.AddV8Callback("RemoveRoom", Room.remove);
+
 		window.SetPlayVolume(config.main.soundVolume/100);
 		window.SetRecordVolume(config.main.microphoneVolume/100);
 		window.EnableVoice(config.main.triggerOnOffSound);
 		window.Enable3DVoice(config.main.triggerSound3D);
-	}
+	};
+
+	if(!inGame)presentation();
+	if(inGame)onload();
 	
 	function presentation(){
-		addRoom('Общий');
-		addRoom('Рация1');
-		addRoom('Рация2');
-		addRoom('Рация3');
-		addRoom('Рация4');
-		deleteRoom(3);
-		addMutedPlayers(0,"Vf0",true);
-		addMutedPlayers(1,"Vf1",true);
-		addMutedPlayers(2,"Vf2",true);
-		addMutedPlayers(3,"Vf3",true);
-		addMutedPlayers(4,"Vf4",true);
-		addMutedPlayers(3,"Vf3",false);
-		micOverPlayer(0,66,26,39,true);
-		micOverPlayer(1,106,26,39,true);
-		micOverPlayer(2,206,26,39,true);
-		micOverPlayer(1,206,26,39,false);
-		
-	};
-
-	function addRoom(roomID) {
-		volumeWindowRoom.push({name:roomID,open:true});
-	};
-	function deleteRoom(roomID) {
-		delete volumeWindowRoom[roomID];
-	};
-	function playerSetDistance(id, dist) {
-		volumeWindowPlayer[id].distance = dist;
-	};
-
-	function addMutedPlayers(id,nick,add) {
-		if(add){
-			mutedPlayers[id] = nick;
-		}else delete mutedPlayers[id];
-		mutList = Object.values(mutedPlayers);
-	}
-
-	function micOverPlayer(id,x,y,size,add){
-		if(add){
-			mic[id] = {x:x,y:y,size:size};
-		}else {
-			delete mic[id];
-		}
-		arr = Object.values(mic);
+		Micro.add(0,'Micro0');
+		Micro.add(1,'Micro1');
+		Micro.add(2,'Micro2');
+		Micro.add(3,'Micro3');
+		Micro.add(4,'Micro4');
+		Micro.remove(1);
+		console.log(Micro.array);
+		Player.add(0,'Vf0');
+		Player.add(1,'Vf1');
+		Player.add(2,'Vf2');
+		Player.add(3,'Vf3');
+		Player.add(4,'Vf4');
+		Player.add(5,'Vf5');
+		Player.SetMuted(1,true);
+		Player.SetVoiceStream(1,1);
+		Player.SetVoiceStream(0,1);
+		Player.SetVoiceStream(2,3);
+		Player.SetVoiceStream(3,0);
+		Player.UpdatePos(0,10,10,30);
+		Player.UpdatePos(1,100,100,200);
+		Player.UpdatePos(2,200,200,50);
+		Player.UpdatePos(3,300,300,400);
+		Player.UpdatePos(4,400,400,500);
+		Player.UpdatePos(5,500,500,600);
+		Player.AddToRoom(0,0);
+		Player.AddToRoom(0,1);
+		Player.AddToRoom(1,0);
+		Player.AddToRoom(2,0);
+		Player.AddToRoom(2,1);
+		Player.AddToRoom(3,3);
+		Player.RemoveFromRoom(0,1)
+		console.log(Player.list);
+		Room.add(0, false, 'global');
+		Room.add(1, true, 'family_main');
+		Room.add(2, true, 'family_extra');
+		Room.add(3, true, 'police_main');
+		Room.add(4, true, 'police_officers');
+		Room.remove(2);
+		console.log(Room.list);
+		console.log(Room.select);
 	};
 
 	/**
@@ -206,26 +270,37 @@
 			config.main.ki.radio.key = key;
 			config.main.ki.radio.name = name;
 			config.main.ki.radio.select = false;
-		}else if (!config.main.ki.global.on && key == config.main.ki.global.key && (config.main.inputModeRadio == 2 || config.main.inputModeRadio == 3)) {
-			config.main.ki.global.on = true;
-		}else if (config.main.ki.global.on && key == config.main.ki.global.key && config.main.inputModeRadio == 3) {
-			config.main.ki.global.on = false;
-		}else if (!config.main.ki.radio.on && key == config.main.ki.radio.key && (config.main.inputModeRadio == 2 || config.main.inputModeRadio == 3)) {
-			config.main.ki.radio.on = true;
-		}else if (config.main.ki.radio.on && key == config.main.ki.radio.key && config.main.inputModeRadio == 3) {
-			config.main.ki.radio.on = false;
 		}
+		keyHandler(key, true);
 	};
 
 	function keyup(event) {
 		let key = event.keyCode;
-		key = key.length == 1 ? key.toUpperCase() : key;
-		if (config.main.ki.global.on && key == config.main.ki.global.key && config.main.inputModeRadio == 2) {
-			config.main.ki.global.on = false;
-		}else if (config.main.ki.radio.on && key == config.main.ki.radio.key  && config.main.inputModeRadio == 2) {
-			config.main.ki.radio.on = false;
-		}
+		keyHandler(key, false);
 	};
+
+	function keyHandler(key, is_key_down) {
+		if (config.main.inputModeRadio == 1) return;
+		let chat_ki;
+		let is_mode_toggle = config.main.inputModeRadio == 3;
+		if (key == config.main.ki.global.key)
+			chat_ki = config.main.ki.global;
+		else if (key == config.main.ki.radio.key)
+			chat_ki = config.main.ki.radio;
+		else
+			return;
+		if (is_mode_toggle) {
+			if (is_key_down)
+				chat_ki.on = !chat_ki.on;
+			}
+		else
+			chat_ki.on = is_key_down;
+		let istream = config.main.ki.global.on | config.main.ki.radio.on << 1;
+		if(inGame)
+			window.SetInputStream(istream);
+		else
+			console.log(istream);
+	}
 
 	/**
 	 * Close main window.
@@ -380,7 +455,7 @@
 			config.main.inputModeRadioDeviceOn.color += 5;
 		};
 	}
-	setInterval(animation,16)
+	setInterval(animation,16);
 </script>
 
 
@@ -882,7 +957,7 @@
 		border-radius: 9px;
 		cursor: pointer;
 	}
-	.voiceRoomPlayerList {
+	.voicelist {
 		width: 57vh;
 		min-width: 464px;
 		height: 12vh;
@@ -1043,6 +1118,13 @@
 		left: var(--y);
 		height: var(--size);
 	}
+	.voiceEnd {
+		position: absolute;
+		z-index: 2;
+		top: 71vh;
+		right: 0;
+		left: 0;
+	}
 </style>
 
 
@@ -1061,21 +1143,23 @@
 				<p class="leaf">Выберите устройство</p>
 				<div id="mutListPlayers" class="deviceListPlayers deviceSelectButton">
 					<ul class="ul" id="deviceSelectList">
-						{#each config.device as device,id}
+						{#each Micro.array as micro,id(micro.PhysMicroID)}
 							<li class="li">
-								<input type="radio" value={id} id="radioDevice{id}" name="radioDevice" class="inputDevice" bind:group={config.selectDevice}>
+								<input type="radio" value={micro.PhysMicroID} id="radioDevice{micro.PhysMicroID}" name="radioDevice" class="inputDevice" bind:group={Micro.selectDevice}>
 								<label
-									for="radioDevice{id}"><div
+									for="radioDevice{micro.PhysMicroID}"><div
 										on:click={(event) => {
 											config.main.inputModeRadioDeviceOn.height = event.clientX - event.target.getBoundingClientRect().x;
 											config.main.inputModeRadioDeviceOn.width = event.clientY - event.target.getBoundingClientRect().y;
 											config.main.inputModeRadioDeviceOn.click = true;
+											if(inGame)window.SelectPhysMicro(micro.PhysMicroID);
+											if(!inGame)console.log(micro.PhysMicroID);
 											}}
 										style="
 												--height:{config.main.inputModeRadioDeviceOn.height + 'px'};
 												--width:{config.main.inputModeRadioDeviceOn.width + 'px'};
 												--color:{config.main.inputModeRadioDeviceOn.color + '%'}"
-										class="button selectorDevice">{device}</div></label>
+										class="button selectorDevice">{micro.name}</div></label>
 							</li>
 						{/each}
 					</ul>
@@ -1097,14 +1181,17 @@
 				<p class="leaf">Мут лист игроков:</p>
 				<input class="input-text leaf mut-leaf" type="text" placeholder="Введите никнейм">
 				<div id="mutListPlayers" class="mutListPlayers">
-					{#each mutList as name,id}
-						<button
-						 	anim="anim" id="1{id}Vf" class="button selector mut-leaf"
-							on:click = {(event) => {
-								if(inGame) window.removeMutedPlayer(name);
-								click(event);
-							}}	 
-						>{name}</button>
+					{#each Player.array as name,id}
+						{#if name.is_muted}
+							<button
+								anim="anim" id="1{id}Vf" class="button selector mut-leaf"
+								on:click = {(event) => {
+									if(inGame) window.removeMutedPlayer(name);
+									click(event);
+									if(inGame)window.UnmutePlayer(name.rid)
+								}}	 
+							>{name.name}</button>
+						{/if}
 					{/each}
 				</div>
 				<div style="text-align: center;">
@@ -1125,15 +1212,16 @@
                         <p class="leaf">Выберите комнату</p>
                         <div id="mutListPlayers" class="deviceListPlayers deviceSelectButton">
                             <ul class="ul" id="roomSelectList">
-								{#each config.room as room,id}
+								{#each Room.selectRoom as room,id}
 									<li class="li">
-										<input type="radio" value={id} id="radioRoom{id}" name="radioRoom" class="inputDevice" bind:group={config.selectRoom}>
+										<input type="radio" value={id} id="radioRoom{id}" name="radioRoom" class="inputDevice" bind:group={Room.selectedRoom}>
 										<label for="radioRoom{id}"><div
 											on:click={(event) => {
 												config.main.inputModeRadioDeviceOn.height = event.clientX - event.target.getBoundingClientRect().x;
 												config.main.inputModeRadioDeviceOn.width = event.clientY - event.target.getBoundingClientRect().y;
 												config.main.inputModeRadioDeviceOn.click = true;
-												}}
+												Room.selectedchannel = null;
+											}}
 											style="
 													--height:{config.main.inputModeRadioDeviceOn.height + 'px'};
 													--width:{config.main.inputModeRadioDeviceOn.width + 'px'};
@@ -1162,22 +1250,28 @@
                         <p class="leaf">Выберите канал</p>
                         <div id="mutListPlayers" class="deviceListPlayers deviceSelectButton">
                             <ul class="ul" id="channelSelectList">
-							{#each config.channel as channel,id}
-								<li class="li">
-									<input type="radio" value={id} id="radioChanne{id}" name="radioChannel" class="inputDevice" bind:group={config.selectchannel}>
-									<label for="radioChanne{id}"><div
-										on:click={(event) => {
-											config.main.inputModeRadioDeviceOn.height = event.clientX - event.target.getBoundingClientRect().x;
-											config.main.inputModeRadioDeviceOn.width = event.clientY - event.target.getBoundingClientRect().y;
-											config.main.inputModeRadioDeviceOn.click = true;
-											}}
-										style="
-												--height:{config.main.inputModeRadioDeviceOn.height + 'px'};
-												--width:{config.main.inputModeRadioDeviceOn.width + 'px'};
-												--color:{config.main.inputModeRadioDeviceOn.color + '%'}"
-										class="button selectorDevice">{channel}</div></label>
-								</li>
-							{/each}
+							{#if Room.selectedRoom != null}
+								{#each Room.selectChannel[Room.selectedRoom] as channel,id}
+									<li class="li">
+										<input 
+											type="radio" value={id} id="radioChanne{id}" name="radioChannel" class="inputDevice" 
+											bind:group={Room.selectedchannel}>
+										<label for="radioChanne{id}"><div
+											on:click={(event) => {
+												config.main.inputModeRadioDeviceOn.height = event.clientX - event.target.getBoundingClientRect().x;
+												config.main.inputModeRadioDeviceOn.width = event.clientY - event.target.getBoundingClientRect().y;
+												config.main.inputModeRadioDeviceOn.click = true;
+												Room.selectedchannel = id;
+												Room.selected();
+												}}
+											style="
+													--height:{config.main.inputModeRadioDeviceOn.height + 'px'};
+													--width:{config.main.inputModeRadioDeviceOn.width + 'px'};
+													--color:{config.main.inputModeRadioDeviceOn.color + '%'}"
+											class="button selectorDevice">{channel}</div></label>
+									</li>
+								{/each}
+							{/if}
                         </div>
                         <div class="deviceSelectCloseButton">
                             <button
@@ -1193,37 +1287,43 @@
 	{/if}
 	{#if gui.volumeMainWindow}
 		<div class="volumeMainWindow" id="volumeMainWindow" transition:fade>
-			{#each volumeWindowRoom as room,id}
-				{#if room != undefined}
-					<div id="voiceroom{id}" class="voiceroom"  style="--heights:{room.open ? "20vh" : "6vh"}">
+			{#each Room.array as room,rid(room)}
+				{#if !room.is_radio || room.rid == Room.selected}
+					<div id="voiceroom{rid}" class="voiceroom"  style="--heights:{room.open ? "20vh" : "6vh"}">
 						<div class="voiceroomlogo">
 							<img class="radiomin" src="img/radiomin.png" alt="PicturaCka">
-							<p class="voiceroomlogotext">{room.name}</p>
-							<input id="hiddenSetting{id}" type="checkbox" on:click={()=>{room.open = !room.open}}>
-							<label for="hiddenSetting{id}" class="{room.open ? "hiddenSetting" : "hiddenSettingOff"}"></label>
+							<p class="voiceroomlogotext">{room.rname}</p>
+							<input id="hiddenSetting{rid}" type="checkbox" on:click={()=>{room.open = !room.open;}}>
+							<label for="hiddenSetting{rid}" class="{room.open ? "hiddenSetting" : "hiddenSettingOff"}"></label>
 						</div>
 						{#if room.open}
-							<div id="voiceRoom1PlayerList" class="voiceRoomPlayerList">
+							<div id="voiceRoom1list" class="voicelist">
 								<table id="voiceRoomPlayerSettings1">
 									<tbody>
-										{#each volumeWindowPlayer as Player}
-										{#if Player.room == id}
-											<tr class="voiceRoomPlayerSettings">
-												<th class="th">
-													<img src="img/userloc.png" class="userloc" alt="userloc">
-													<p class="userName">{Player.name}</p>
-												</th>
-												<th class="th">
-													<img src="img/distance.png" class="imgdistance" alt="distance">
-													<p id="userName{id}Distance" class="userName">{Player.distance + ' m.'}</p>
-												</th>
-												<th id="grid" class="th">
-													<img src="img/micSettings.png" class="micSettings" alt="micSettings">
-													<input id="sliderP{id}" min="0" max="100" bind:value={Player.value} type="range" class="sliderP" style="--columnsP:{Player.value + "%"}">
-													<p id="sliderP{id}volume" class="userName">{Player.value}</p>
-												</th>
-											</tr>
-										{/if}
+										{#each Player.array as player,id}
+											{#if player.rid != undefined ? player.rid.includes(rid):false}
+												<tr class="voiceRoomPlayerSettings">
+													<th class="th">
+														<img src="img/userloc.png" class="userloc" alt="userloc">
+														<p class="userName">{player.name}</p>
+													</th>
+													<th class="th">
+														<img src="img/distance.png" class="imgdistance" alt="distance">
+														<p id="userName{id}Distance" class="userName">{player.distance + ' m.'}</p>
+													</th>
+													<th id="grid" class="th">
+														<img src="img/micSettings.png" class="micSettings" alt="micSettings">
+														<input
+															id="sliderP{id}" min="0" max="100" type="range" class="sliderP"
+															bind:value={Player.list[player.id].value}
+															style="--columnsP:{Player.list[player.id].value + "%"}"
+															on:input = {() => {
+																if(inGame) window.SetPlayerVolume(player.id, Player.list[player.id].value);
+															}}>
+														<p id="sliderP{id}volume" class="userName">{Player.list[player.id].value}</p>
+													</th>
+												</tr>
+											{/if}
 										{/each}
 									</tbody>
 								</table>
@@ -1232,6 +1332,14 @@
 					</div>
 				{/if}
 			{/each}
+			<div class="boxmodes end voiceEnd">
+				<button anim="anim" class="button shadow"
+					on:click={(event) => {
+					gui.volumeMainWindow = false;
+					click(event);
+					}
+					}>Закрыть</button>
+			</div>
 		</div>
 	{/if}
 	{#if gui.mainWindowOpen}
@@ -1293,7 +1401,7 @@
 					<button
 						class="input-text deviceSelectOpen" id="deviceSelectOpenButton"
 						on:click={() => gui.deviceSelectOpen = true}>
-						{config.selectDevice == null ? 'Выберите микрофон' : config.device[config.selectDevice]}</button>
+						{Micro.selectDevice == null ? 'Выберите микрофон' : Micro.list[Micro.selectDevice].name}</button>
 					<button
 						anim="anim" class="button mut shadow" id="mutListOpenButton"
 						on:click={(event) => {
@@ -1384,12 +1492,12 @@
 				<div class="inline-block margin">
 					<button
 						class="input-text channelSelectOpen" id="roomSelectOpenButton"
-						on:click={() => gui.channelSelectOpen = true}>
-						{config.selectchannel == null ? 'Выберите чат' : config.channel[config.selectchannel]}</button>
+						on:click={() => gui.roomSelectOpen = true}>
+						{Room.selectedRoom == null ? 'Выберите чат' : Room.selectRoom[Room.selectedRoom]}</button>
 					<button
 						class="input-text channelSelectOpen" id="channelSelectOpenButton"
-						on:click={() => gui.roomSelectOpen = true}>
-						{config.selectRoom == null ? 'Выберите канал' : config.room[config.selectRoom]}</button>
+						on:click={() => gui.channelSelectOpen = true}>
+						{Room.selectedchannel == null ? 'Выберите канал' : Room.selectChannel[Room.selectedRoom][Room.selectedchannel]}</button>
 					<div class="alignmentKey">
 						<p class="white">Назначение клавиш:</p>
 					</div>
@@ -1452,28 +1560,29 @@
 		id="overlay"
 		class="overlay over"
 		style="--left:{move.overlay.left+'px'};--top:{move.overlay.top+'px'};background-color:{move.background}">
-		{#each volumeWindowRoom as room,id}
-			{#if room != undefined}
+		{#each Room.array as room,rid}
+			{#if !room.is_radio || room.rid == Room.selected}
 				<table class="over">
 					<thead class="over">
 						<tr>
 							<th class="over"><img draggable="false" class="overlayRadiomin over" src="img/radiomin.png" alt="overlayRadiomin"></th>
-							<th class="over"><p class="overlayRoomName over" id="overlayRoomName">{room.name}</p></th>
+							<th class="over"><p class="overlayRoomName over" id="overlayRoomName">{room.rname}</p></th>
 						</tr>
 					</thead>
 					<tbody>
-						{#each volumeWindowPlayer as players}
-							{#if players.room == id && players.talk}
+						{#each Player.array as player,id}
+							{#if player.rid != undefined ? player.rid.includes(rid):false && player.isteam > 0}
 								<tr>
 									<th class="over"><img draggable="false" class="overlayRadiominImg over" src="img/overlayVolume.png" alt="overlayRadiomin"></th>
-									<th class="over"><p class="overlayPlayer over" id="overlayPlayer">{players.name}</p></th>
+									<th class="over"><p class="overlayPlayer over" id="overlayPlayer">{player.name}</p></th>
 									<th class="over"><p class="overlayPlayerDistance over" id="overlayPlayerDistance">
-									{#if players.text != undefined}
-										{players.text}
-									{:else}
-										{players.distance+'m.'}
-									{/if}
-									</p></th>
+														{#if player.text != undefined}
+															{player.text}
+														{:else}
+															{player.distance+'m.'}
+														{/if}
+														</p>
+									</th>
 								</tr>
 							{/if}
 						{/each}
@@ -1516,7 +1625,15 @@
 			style="--left:{move.overlayVolumeOn.left+'px'};--top:{move.overlayVolumeOn.top+'px'}"
 		>
 	{/if}
-	{#each arr as mic}
-			<img class="micOverPlayer" style="--x:{mic.x + "px"};--y:{mic.y + "px"};--size:{mic.size + "px"};" src="img/micSettings.png" alt="micOverPlayer">
+	{#each Player.array as player}
+		{#if !player.is_muted && player.isteam == 1}
+			<img class="micOverPlayer" style="--x:{player.left + "px"};--y:{player.top + "px"};--size:{player.distance + "px"};" src="img/micSettings.png" alt="micOverPlayer">
+		{/if}
+		{#if !player.is_muted && player.isteam == 2}
+			<img class="micOverPlayer" style="--x:{player.left + "px"};--y:{player.top + "px"};--size:{player.distance + "px"};" src="img/micSettings.png" alt="micOverPlayer">
+		{/if}
+		{#if !player.is_muted && player.isteam == 3}
+			<img class="micOverPlayer" style="--x:{player.left + "px"};--y:{player.top + "px"};--size:{player.distance + "px"};" src="img/micSettings.png" alt="micOverPlayer">
+		{/if}
 	{/each}
 </div>
