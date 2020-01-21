@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 
 	let overlay,i = 0;
+	const inGame = true;
 
 	const config = {
 	  main: {
@@ -87,6 +88,7 @@
 
 	const Player = {
 		list: {},
+		array: {},
 		add: (pid, name) => {
 			Player.list[pid] = {
 				name: name,
@@ -130,6 +132,7 @@
 	const Room = {
 		list: {},
 		select: {},
+		array: {},
 		selectedRoom: null,
 	  	selectedchannel: null,
 		add: (rid, is_radio, name) => {
@@ -168,6 +171,7 @@
 	};
 	const Micro = {
 		list: {},
+		array: {},
 		selectDevice: null,
 		add: (PhysMicroID, name) => {
 			Micro.list[PhysMicroID] = {
@@ -182,7 +186,6 @@
 		},
 	};
 
-	const inGame = false;
 
 
 	function onload() {
@@ -201,6 +204,7 @@
 		window.SetRecordVolume(config.main.microphoneVolume/100);
 		window.EnableVoice(config.main.triggerOnOffSound);
 		window.Enable3DVoice(config.main.triggerSound3D);
+		window.SetInputStream(3);
 	};
 
 	if(!inGame)presentation();
@@ -454,8 +458,25 @@
 		}else if(config.main.inputModeRadioDeviceOn.color >= 5 && config.main.inputModeRadioDeviceOn.color < 100){
 			config.main.inputModeRadioDeviceOn.color += 5;
 		};
-	}
+	};
+
+	function animClick(event) {
+		config.main.inputmodeon.height = event.clientX - event.target.getBoundingClientRect().x;
+		config.main.inputmodeon.width = event.clientY - event.target.getBoundingClientRect().y;
+		config.main.inputmodeon.click = true;
+	};
+	
 	setInterval(animation,16);
+
+	function inputModeChanged(value) {
+		console.log(value);
+		if(inGame){
+			if(value == 1) 
+				window.SetInputStream(3);
+			else 
+				window.SetInputStream(0);
+		};
+	};
 </script>
 
 
@@ -1440,13 +1461,10 @@
 						<ul class="ul">
 							<li class="li">
 								<input
-									type="radio" value={1} bind:group={config.main.inputModeRadio} id="radio1" name="radio" class="input">
+									type="radio" value={1} bind:group={config.main.inputModeRadio} id="radio1" name="radio" class="input"
+									on:click = {(event) => {inputModeChanged(event.target.value)}}>
 								<label
-									on:click={(event) => {
-										config.main.inputmodeon.height = event.clientX - event.target.getBoundingClientRect().x;
-										config.main.inputmodeon.width = event.clientY - event.target.getBoundingClientRect().y;
-										config.main.inputmodeon.click = true;
-										}}
+									on:click={(event) => {animClick(event)}}
 									style="
 											--height:{config.main.inputmodeon.height + 'px'};
 											--width:{config.main.inputmodeon.width + 'px'};
@@ -1455,14 +1473,10 @@
 							</li>
 							<li class="li">
 								<input
-									on:click={config.main.inputmodeon.click = true}
-									type="radio" value={2} bind:group={config.main.inputModeRadio} id="radio2" name="radio" class="input">
+									type="radio" value={2} bind:group={config.main.inputModeRadio} id="radio2" name="radio" class="input"
+									on:click = {(event) => {inputModeChanged(event.target.value)}}>
 								<label
-									on:click={(event) => {
-										config.main.inputmodeon.height = event.clientX - event.target.getBoundingClientRect().x;
-										config.main.inputmodeon.width = event.clientY - event.target.getBoundingClientRect().y;
-										config.main.inputmodeon.click = true;
-									}}
+									on:click={(event) => {animClick(event)}}
 									style="
 											--height:{config.main.inputmodeon.height + 'px'};
 											--width:{config.main.inputmodeon.width + 'px'};
@@ -1471,14 +1485,10 @@
 							</li>
 							<li class="li">
 								<input
-									on:click={config.main.inputmodeon.click = true}
-									type="radio" value={3} bind:group={config.main.inputModeRadio} id="radio3" name="radio" class="input">
+									type="radio" value={3} bind:group={config.main.inputModeRadio} id="radio3" name="radio" class="input"
+									on:click = {(event) => {inputModeChanged(event.target.value)}}>
 								<label
-									on:click={(event) => {
-										config.main.inputmodeon.height = event.clientX - event.target.getBoundingClientRect().x;
-										config.main.inputmodeon.width = event.clientY - event.target.getBoundingClientRect().y;
-										config.main.inputmodeon.click = true;
-									}}
+									on:click={(event) => {animClick(event)}}
 									style="
 											--height:{config.main.inputmodeon.height + 'px'};
 											--width:{config.main.inputmodeon.width + 'px'};
