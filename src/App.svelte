@@ -1,9 +1,11 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	// import VolumePlayer from './volumePlayer.svelte';
+	
 
 	let overlay,i = 0;
-	const inGame = true;
+	let inGame = true;
 
 	const config = {
 	  main: {
@@ -88,12 +90,12 @@
 
 	const Player = {
 		list: {},
-		array: {},
-		add: (pid, name) => {
+		array: [],
+		add: (pid, name, value) => {
 			Player.list[pid] = {
 				name: name,
 				id: pid,
-				value: 50,
+				value: value,
 			};
 			Player.array = Object.values(Player.list);
 		},
@@ -110,22 +112,8 @@
 			Player.array = Object.values(Player.list);
 		},
 
-		SetMuted: (pid,is_muted) => {
-			Player.list[pid].is_muted = is_muted;
-			Player.array = Object.values(Player.list);
-		},
-
 		SetVoiceStream: (pid, isteam) => {
 			Player.list[pid].isteam = isteam;
-			Player.array = Object.values(Player.list);
-		},
-
-		AddToRoom: (rid, pid, text) => {
-			Player.list[pid].rid == undefined ? Player.list[pid].rid = [rid] : Player.list[pid].rid.push(rid);
-			Player.array = Object.values(Player.list);
-		},
-		RemoveFromRoom: (rid,pid) => {
-			Player.list[pid].rid.splice(Player.list[pid].rid.lastIndexOf(rid),1);
 			Player.array = Object.values(Player.list);
 		},
 	};
@@ -133,6 +121,8 @@
 		list: {},
 		select: {},
 		array: {},
+		selectRoom: [],
+		selectChannel: [],
 		selectedRoom: null,
 	  	selectedchannel: null,
 		add: (rid, is_radio, name) => {
@@ -192,13 +182,13 @@
 		window.AddV8Callback("AddPlayer", Player.add);
 		window.AddV8Callback("UpdatePos", Player.UpdatePos);
 		window.AddV8Callback("RemovePlayer", Player.Remove);
-		window.AddV8Callback("SetPlayerMuted", Player.SetMuted);
 		window.AddV8Callback("SetPlayerVoiceStream", Player.SetVoiceStream);
-		window.AddV8Callback("AddToRoom", Player.AddToRoom);
-		window.AddV8Callback("RemoveFromRoom", Player.RemoveFromRoom);
 	
 		window.AddV8Callback("AddRoom", Room.add);
 		window.AddV8Callback("RemoveRoom", Room.remove);
+
+		window.AddV8Callback("AddMicro", Micro.add);
+		window.AddV8Callback("RemoveMicro", Micro.remove);
 
 		window.SetPlayVolume(config.main.soundVolume/100);
 		window.SetRecordVolume(config.main.microphoneVolume/100);
@@ -207,41 +197,32 @@
 		window.SetInputStream(3);
 	};
 
+	if (!(typeof (window.AddV8Callback) === "function"))
+		inGame = false;
 	if(!inGame)presentation();
 	if(inGame)onload();
 	
 	function presentation(){
-		Micro.add(0,'Micro0');
-		Micro.add(1,'Micro1');
-		Micro.add(2,'Micro2');
-		Micro.add(3,'Micro3');
-		Micro.add(4,'Micro4');
+		for(let i = 0;i < 5;i++){
+			Micro.add(i,'Micro' + i);
+		}
 		Micro.remove(1);
-		console.log(Micro.array);
-		Player.add(0,'Vf0');
-		Player.add(1,'Vf1');
-		Player.add(2,'Vf2');
-		Player.add(3,'Vf3');
-		Player.add(4,'Vf4');
-		Player.add(5,'Vf5');
-		Player.SetMuted(1,true);
+		console.log(Micro.list);
+		for(let i = 0;i<10;i++){
+			Player.add(i,'Vf' + i,50);
+		}
+		console.log();
 		Player.SetVoiceStream(1,1);
 		Player.SetVoiceStream(0,1);
 		Player.SetVoiceStream(2,3);
 		Player.SetVoiceStream(3,0);
+		Player.SetVoiceStream(4,2);
 		Player.UpdatePos(0,10,10,30);
 		Player.UpdatePos(1,100,100,200);
 		Player.UpdatePos(2,200,200,50);
 		Player.UpdatePos(3,300,300,400);
 		Player.UpdatePos(4,400,400,500);
 		Player.UpdatePos(5,500,500,600);
-		Player.AddToRoom(0,0);
-		Player.AddToRoom(0,1);
-		Player.AddToRoom(1,0);
-		Player.AddToRoom(2,0);
-		Player.AddToRoom(2,1);
-		Player.AddToRoom(3,3);
-		Player.RemoveFromRoom(0,1)
 		console.log(Player.list);
 		Room.add(0, false, 'global');
 		Room.add(1, true, 'family_main');
@@ -469,12 +450,16 @@
 	setInterval(animation,16);
 
 	function inputModeChanged(value) {
-		console.log(value);
 		if(inGame){
 			if(value == 1) 
 				window.SetInputStream(3);
 			else 
 				window.SetInputStream(0);
+		}else {
+			if(value == 1) 
+				console.log(3);
+			else 
+				console.log(0);
 		};
 	};
 </script>
@@ -934,7 +919,7 @@
 	.voiceroom {
 		margin-left: 5vh;
 		margin-top: 5vh;
-		height: var(--heights);
+		height: 65vh;
 		width: 60vh;
 		min-width: 483px;
 		background: radial-gradient(farthest-corner at 78% 128%, #eb2e4a -138%, #000000 116%);
@@ -981,7 +966,7 @@
 	.voicelist {
 		width: 57vh;
 		min-width: 464px;
-		height: 12vh;
+		height: 100%;
 		overflow: auto;
 		visibility: visible;
 	}
@@ -1006,6 +991,7 @@
 		margin-left: 1.5vh;
 	}
 	.userName {
+		width: 27px;
 		margin-left: 1vh;
 		font-family: TTNorms-Regular;
 		color: white;
@@ -1134,6 +1120,7 @@
 	}
 	[anim="anim"]:hover { background-color: darken(#00000000, 10%); color: rgba(white, 1);}
 	.micOverPlayer {
+		z-index: -1;
 		position: absolute;
 		top: var(--x);
 		left: var(--y);
@@ -1146,6 +1133,13 @@
 		right: 0;
 		left: 0;
 	}
+	.inputSearch {
+		height: 3vh;
+		width: 48vh;
+		margin-left: 5vh;
+		margin-top: 1vh;
+		margin-bottom: 1vh;
+	}
 </style>
 
 
@@ -1156,6 +1150,8 @@
 	on:keydown={keydown}
 	on:keyup={keyup}
 />
+
+<!-- <VolumePlayer/> -->
 
 <div id="mainWindow" style="background-image: url(img/dsfghdfshsdg.png);" oncontextmenu="return false">
 	{#if gui.deviceSelectOpen}
@@ -1308,51 +1304,40 @@
 	{/if}
 	{#if gui.volumeMainWindow}
 		<div class="volumeMainWindow" id="volumeMainWindow" transition:fade>
-			{#each Room.array as room,rid(room)}
-				{#if !room.is_radio || room.rid == Room.selected}
-					<div id="voiceroom{rid}" class="voiceroom"  style="--heights:{room.open ? "20vh" : "6vh"}">
-						<div class="voiceroomlogo">
-							<img class="radiomin" src="img/radiomin.png" alt="PicturaCka">
-							<p class="voiceroomlogotext">{room.rname}</p>
-							<input id="hiddenSetting{rid}" type="checkbox" on:click={()=>{room.open = !room.open;}}>
-							<label for="hiddenSetting{rid}" class="{room.open ? "hiddenSetting" : "hiddenSettingOff"}"></label>
-						</div>
-						{#if room.open}
-							<div id="voiceRoom1list" class="voicelist">
-								<table id="voiceRoomPlayerSettings1">
-									<tbody>
-										{#each Player.array as player,id}
-											{#if player.rid != undefined ? player.rid.includes(rid):false}
-												<tr class="voiceRoomPlayerSettings">
-													<th class="th">
-														<img src="img/userloc.png" class="userloc" alt="userloc">
-														<p class="userName">{player.name}</p>
-													</th>
-													<th class="th">
-														<img src="img/distance.png" class="imgdistance" alt="distance">
-														<p id="userName{id}Distance" class="userName">{player.distance + ' m.'}</p>
-													</th>
-													<th id="grid" class="th">
-														<img src="img/micSettings.png" class="micSettings" alt="micSettings">
-														<input
-															id="sliderP{id}" min="0" max="100" type="range" class="sliderP"
-															bind:value={Player.list[player.id].value}
-															style="--columnsP:{Player.list[player.id].value + "%"}"
-															on:input = {() => {
-																if(inGame) window.SetPlayerVolume(player.id, Player.list[player.id].value);
-															}}>
-														<p id="sliderP{id}volume" class="userName">{Player.list[player.id].value}</p>
-													</th>
-												</tr>
-											{/if}
-										{/each}
-									</tbody>
-								</table>
-							</div>
-						{/if}
-					</div>
-				{/if}
-			{/each}
+			<div id="voiceroom" class="voiceroom">
+				<div id="voiceRoom1list" class="voicelist">
+					<table id="voiceRoomPlayerSettings1">
+						<input type="text" class="input-text inputSearch" placeholder="Введите никнейм">
+						<tbody>
+							{#each Player.array as player,id}
+								<tr class="voiceRoomPlayerSettings">
+									<th class="th">
+										<img src="img/userloc.png" class="userloc" alt="userloc">
+										<p class="userName">{player.name}</p>
+									</th>
+									<th class="th">
+										<img src="img/distance.png" class="imgdistance" alt="distance">
+										<p id="userName{id}Distance" class="userName">
+											{player.distance != undefined ? player.distance + ' m.':'много m.'}
+										</p>
+									</th>
+									<th id="grid" class="th" style="margin-left: auto;">
+										<img src="img/micSettings.png" class="micSettings" alt="micSettings">
+										<input
+											id="sliderP{id}" min="0" max="100" type="range" class="sliderP"
+											bind:value={Player.list[player.id].value}
+											style="--columnsP:{Player.list[player.id].value + "%"}"
+											on:input = {() => {
+												if(inGame) window.SetPlayerVolume(player.id, Player.list[player.id].value);
+											}}>
+										<p id="sliderP{id}volume" class="userName">{Player.list[player.id].value}</p>
+									</th>
+								</tr>
+							{/each}
+						</tbody>
+					</table>
+				</div>
+			</div>
 			<div class="boxmodes end voiceEnd">
 				<button anim="anim" class="button shadow"
 					on:click={(event) => {
@@ -1581,7 +1566,7 @@
 					</thead>
 					<tbody>
 						{#each Player.array as player,id}
-							{#if player.rid != undefined ? player.rid.includes(rid):false && player.isteam > 0}
+							{#if (!room.is_radio && player.isteam == 1) || (room.is_radio && player.isteam == 2)}
 								<tr>
 									<th class="over"><img draggable="false" class="overlayRadiominImg over" src="img/overlayVolume.png" alt="overlayRadiomin"></th>
 									<th class="over"><p class="overlayPlayer over" id="overlayPlayer">{player.name}</p></th>
