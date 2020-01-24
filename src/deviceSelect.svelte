@@ -9,7 +9,7 @@
     export let selection;
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    };
     async function animation(event){
         let x = event.clientX - event.target.getBoundingClientRect().x;
         let y = event.clientY - event.target.getBoundingClientRect().y;

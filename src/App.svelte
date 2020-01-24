@@ -18,7 +18,6 @@
 	    triggerSound3D: true,
 		inputmode: false,
 		inputmodeon: {
-			click:false,
 			height: 10,
 			width: 10,
 			color: 5,
@@ -398,14 +397,28 @@
 		}
 	};
 
-	function click(event,name) {
+	function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    };
+
+	async function click(effect,event,name) {
 		gui[name] = false;
-		if(event != undefined){
-			event.target.style.cssText = "--s: 0; --o: 1; --d: 0;";
-			let x = event.clientX - event.target.getBoundingClientRect().x;
-			let y = event.clientY - event.target.getBoundingClientRect().y;
+		if(event == undefined) 
+			return;
+		event.target.style.cssText = "--s: 0; --o: 1; --d: 0;";
+		let x = event.clientX - event.target.getBoundingClientRect().x;
+		let y = event.clientY - event.target.getBoundingClientRect().y;
+		if(effect == 1){
 			event.target.style.cssText = "--t: 1; --o: 0; --d: 600; --x: " + x + "; --y: " + y + ";";
-		}
+			return;
+		};
+		if(effect == 2){
+			for(let i=0;i<=100;i+=5){
+            	event.target.style.cssText = "--x:" + x + "; --y:" + y +"; --size:" + i + ";";
+            	await sleep(16);
+        	}
+			return;
+		};
 	};
 
 	function animation(){
@@ -427,12 +440,6 @@
 		}else{
 			config.main.ki.radio.color = 5;
 		};
-		if(config.main.inputmodeon.click){
-			config.main.inputmodeon.click = false;
-			config.main.inputmodeon.color = 5;
-		}else if(config.main.inputmodeon.color >= 5 && config.main.inputmodeon.color < 100){
-			config.main.inputmodeon.color += 5;
-		};
 		if(config.main.inputModeRadioDeviceOn.click){
 			config.main.inputModeRadioDeviceOn.click = false;
 			config.main.inputModeRadioDeviceOn.color = 5;
@@ -441,12 +448,6 @@
 		};
 	};
 
-	function animClick(event) {
-		config.main.inputmodeon.height = event.clientX - event.target.getBoundingClientRect().x;
-		config.main.inputmodeon.width = event.clientY - event.target.getBoundingClientRect().y;
-		config.main.inputmodeon.click = true;
-	};
-	
 	setInterval(animation,16);
 
 	function inputModeChanged(value) {
@@ -747,7 +748,7 @@
 		border-radius: 10px;
 		font: 0.7em TTNorms-Regular;
 		color: #FFFFFF;
-		background: radial-gradient(circle farthest-corner at var(--height) var(--width), #eb2e4a var(--color), #0000 0%);
+		background: radial-gradient(circle farthest-corner at calc(var(--x,1) * 1px) calc(var(--y,1) * 1px), #eb2e4a calc(var(--size,100) * 1%), #0000 0%);
 		border: solid 1px #eb2e4a;
 		box-shadow: 4px 4px 35px 12px rgba(189,0,40,0.4);
 		white-space: nowrap;
@@ -1055,37 +1056,25 @@
 								<input
 									type="radio" value={1} bind:group={config.main.inputModeRadio} id="radio1" name="radio" class="input"
 									on:click = {(event) => {inputModeChanged(event.target.value)}}>
-								<label
-									on:click={(event) => {animClick(event)}}
-									style="
-											--height:{config.main.inputmodeon.height + 'px'};
-											--width:{config.main.inputmodeon.width + 'px'};
-											--color:{config.main.inputmodeon.color + '%'}"
-									for="radio1"><div class="button selector A">По голосу</div></label>
+								<label on:click={(event) => {click(2,event)}} for="radio1">
+									<div class="button selector A">По голосу</div>
+								</label>
 							</li>
 							<li class="li">
 								<input
 									type="radio" value={2} bind:group={config.main.inputModeRadio} id="radio2" name="radio" class="input"
 									on:click = {(event) => {inputModeChanged(event.target.value)}}>
-								<label
-									on:click={(event) => {animClick(event)}}
-									style="
-											--height:{config.main.inputmodeon.height + 'px'};
-											--width:{config.main.inputmodeon.width + 'px'};
-											--color:{config.main.inputmodeon.color + '%'}"
-									for="radio2"><div class="button selector A">При удердании</div></label>
+								<label	on:click={(event) => {click(2,event)}}	for="radio2">
+									<div class="button selector A">При удердании</div>
+								</label>
 							</li>
 							<li class="li">
 								<input
 									type="radio" value={3} bind:group={config.main.inputModeRadio} id="radio3" name="radio" class="input"
 									on:click = {(event) => {inputModeChanged(event.target.value)}}>
-								<label
-									on:click={(event) => {animClick(event)}}
-									style="
-											--height:{config.main.inputmodeon.height + 'px'};
-											--width:{config.main.inputmodeon.width + 'px'};
-											--color:{config.main.inputmodeon.color + '%'}"
-									for="radio3"><div class="button selector A">Переключение по клавише</div></label>
+								<label	on:click={(event) => {click(2,event)}}	for="radio3">
+									<div class="button selector A">Переключение по клавише</div>
+								</label>
 							</li>
 						</ul>
 					</div>
