@@ -1,7 +1,8 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
-	// import VolumePlayer from './volumePlayer.svelte';
+	import VolumePlayer from './volumePlayer.svelte';
+	import DeviceSelect from './deviceSelect.svelte';
 	
 
 	let overlay,i = 0;
@@ -57,7 +58,6 @@
 	  deviceSelectOpen: false,
 	  roomSelectOpen: false,
 	  channelSelectOpen: false,
-	  mutList: false,
 	  volumeMainWindow: false,
 	};
 	const move = {
@@ -86,7 +86,6 @@
 		},
 
 	};
-
 
 	const Player = {
 		list: {},
@@ -166,7 +165,7 @@
 		add: (PhysMicroID, name) => {
 			Micro.list[PhysMicroID] = {
 				name: name,
-				PhysMicroID: PhysMicroID
+				id: PhysMicroID
 			};
 			Micro.array = Object.values(Micro.list);
 		},
@@ -175,8 +174,6 @@
 			Micro.array = Object.values(Micro.list);
 		},
 	};
-
-
 
 	function onload() {
 		window.AddV8Callback("AddPlayer", Player.add);
@@ -401,11 +398,14 @@
 		}
 	};
 
-	async function click(event) {
-		event.target.style.cssText = "--s: 0; --o: 1; --d: 0;";
-		let x = event.clientX - event.target.getBoundingClientRect().x;
-		let y = event.clientY - event.target.getBoundingClientRect().y;
-		event.target.style.cssText = "--t: 1; --o: 0; --d: 600; --x: " + x + "; --y: " + y + ";";
+	function click(event,name) {
+		gui[name] = false;
+		if(event != undefined){
+			event.target.style.cssText = "--s: 0; --o: 1; --d: 0;";
+			let x = event.clientX - event.target.getBoundingClientRect().x;
+			let y = event.clientY - event.target.getBoundingClientRect().y;
+			event.target.style.cssText = "--t: 1; --o: 0; --d: 600; --x: " + x + "; --y: " + y + ";";
+		}
 	};
 
 	function animation(){
@@ -500,27 +500,6 @@
 	}
 	input, button {
     	outline: none;
-	}
-	::-webkit-scrollbar {
-		width: 6px;
-		height: 6px;
-	}
-	::-webkit-scrollbar-button {
-		width: 0px;
-		height: 0px;
-	}
-	::-webkit-scrollbar-thumb {
-		background: #ca314a;
-		border: 0px none #ffffff;
-		border-radius: 0px;
-	}
-	::-webkit-scrollbar-track {
-		background: #0d0d0d;
-		border: 0px none #ffffff;
-		border-radius: 0px;
-	}
-	::-webkit-scrollbar-corner {
-		background: transparent;
 	}
 	#container {
 		width: 58vh;
@@ -818,57 +797,6 @@
 		display: flex;
 		justify-content: center;
 	}
-	#floatwindow {
-		z-index: 2;
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
-	.mutlist {
-		width: 32vh;
-		height: 33vh;
-		min-height: 268px;
-		min-width: 281px;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		margin: auto;
-		background-color: #1b1a1a;
-		background: linear-gradient(145deg, #000000 0%, #63232e 280%);
-		box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.75);
-	}
-	.leaf {
-		margin-left: 10%;
-		margin-top: 10%;
-	}
-	.deviceListPlayers {
-		height: 54%;
-		width: 85%;
-		overflow: auto;
-		margin-left: 3vh;
-		margin-top: 2vh;
-	}
-	.deviceSelectCloseButton {
-		text-align: center;
-		margin: 2vh;
-	}
-	.selectorDevice {
-		padding: 2% 7%;
-		margin-bottom: 4%;
-		height: 14px;
-		width: 193px;
-		text-align: left;
-		border-radius: 10px;
-		font: 0.7em TTNorms-Regular;
-		color: #949494;
-		background: none;
-		border: solid 1px #dcdcdc;
-		white-space: nowrap;
-	}
 	.inputDevice:checked + label div {
 		padding: 2% 7%;
 		margin-bottom: 4%;
@@ -880,160 +808,6 @@
 		background: radial-gradient(circle farthest-corner at var(--height) var(--width), #eb2e4a var(--color), #0000 0%);
 		border: solid 1px #eb2e4a;
 		white-space: nowrap;
-	}
-	.mut-leaf {
-		margin-left: 10%;
-		margin-bottom: 7%;
-		width: 24.5vh;
-	}
-	.mutListPlayers {
-		margin-bottom: 0.4vh;
-		height: 43%;
-		width: 94%;
-		overflow: auto;
-	}
-	.button.mut-leaf {
-		margin-left: 10%;
-		margin-bottom: 4%;
-		width: 25vh;
-		height: 19%;
-		max-width: 84%;
-		padding: 0 4%;
-	}
-	.volumeMainWindow {
-		z-index: 2;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		margin: auto;
-		overflow: scroll;
-		color: white;
-		height: 76vh;
-		width: 70vh;
-		min-width: 547px;
-		min-height: 610px;
-		background: radial-gradient(circle farthest-corner at 700% 100%, #eb2e4a 0%, #000000 100%);
-	}
-	.voiceroom {
-		margin-left: 5vh;
-		margin-top: 5vh;
-		height: 65vh;
-		width: 60vh;
-		min-width: 483px;
-		background: radial-gradient(farthest-corner at 78% 128%, #eb2e4a -138%, #000000 116%);
-	}
-	.voiceroomlogo {
-		display: flex;
-		align-items: center;
-		height: 6vh;
-	}
-	.radiomin {
-		height: 1.6vh;
-		margin-left: 4vh;
-	}
-	.voiceroomlogotext {
-		margin-left: 1vh;
-		font-family: TTNorms-Regular;
-		color: white;
-		letter-spacing: 0.001em;
-		font-size: 1.1em;
-		font-weight: normal;
-	}
-	.hiddenSetting {
-		margin-left: 2vh;
-		height: 1vh;
-		width: 1vh;
-		background-image: url(../img/hiddenSettingsOn.png);
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: 80%;
-		border-radius: 9px;
-		cursor: pointer;
-	}
-	.hiddenSettingOff {
-		margin-left: 2vh;
-		height: 1vh;
-		width: 1vh;
-		background-image: url(../img/hiddenSettingsOff.png);
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: 80%;
-		border-radius: 9px;
-		cursor: pointer;
-	}
-	.voicelist {
-		width: 57vh;
-		min-width: 464px;
-		height: 100%;
-		overflow: auto;
-		visibility: visible;
-	}
-	.voiceRoomPlayerSettings {
-		display: flex;
-		height: 3vh;
-		width: 48vh;
-		min-width: 397px;
-		margin-left: 5vh;
-		margin-bottom: 1vh;
-		border: solid 1px #dcdcdc;
-		border-radius: 10px;
-		background: none;
-	}
-	.th {
-		display: flex;
-		align-items: center;
-		min-width: 9vh;
-	}
-	.userloc {
-		height: 1vh;
-		margin-left: 1.5vh;
-	}
-	.userName {
-		width: 27px;
-		margin-left: 1vh;
-		font-family: TTNorms-Regular;
-		color: white;
-		font-size: 0.7em;
-		font-weight: normal;
-	}
-	.imgdistance {
-		margin-left: 7vh;
-		height: 1.1vh;
-	}
-	.micSettings {
-		margin-left: 2vh;
-		height: 1.5vh;
-	}
-	.sliderP {
-		-webkit-appearance: none;
-		align-items: center;
-    	margin: 0;
-		-webkit-appearance: none;
-		width: 17vh;
-		min-width: 157px;
-		padding: 0;
-		border: 0;
-	}
-	.sliderP::-webkit-slider-thumb {
-		-webkit-appearance: none;
-		width: 7px;
-		height: 7px;
-		background: #eb2e4a;
-		border-radius: 50%;
-		cursor: pointer;
-		box-shadow: 4px 4px 35px 12px rgba(189,0,40,0.4);
-	}
-	.sliderP::-webkit-slider-runnable-track {
-		display: flex;
-    	align-items: center;
-    	height: 3px;
-		background: linear-gradient(90deg, #eb2e4a var(--columnsP), #4c2027 var(--columnsP));
-		cursor: pointer;
-		border-radius: 40px;
-		border: 0;
-		margin-left: 1vh;
 	}
 	.overlay {
 		position: absolute;
@@ -1126,20 +900,6 @@
 		left: var(--y);
 		height: var(--size);
 	}
-	.voiceEnd {
-		position: absolute;
-		z-index: 2;
-		top: 71vh;
-		right: 0;
-		left: 0;
-	}
-	.inputSearch {
-		height: 3vh;
-		width: 48vh;
-		margin-left: 5vh;
-		margin-top: 1vh;
-		margin-bottom: 1vh;
-	}
 </style>
 
 
@@ -1151,202 +911,55 @@
 	on:keyup={keyup}
 />
 
-<!-- <VolumePlayer/> -->
-
 <div id="mainWindow" style="background-image: url(img/dsfghdfshsdg.png);" oncontextmenu="return false">
 	{#if gui.deviceSelectOpen}
-		<div id="floatwindow" transition:fade>
-			<div class="mutlist">
-				<p class="leaf">Выберите устройство</p>
-				<div id="mutListPlayers" class="deviceListPlayers deviceSelectButton">
-					<ul class="ul" id="deviceSelectList">
-						{#each Micro.array as micro,id(micro.PhysMicroID)}
-							<li class="li">
-								<input type="radio" value={micro.PhysMicroID} id="radioDevice{micro.PhysMicroID}" name="radioDevice" class="inputDevice" bind:group={Micro.selectDevice}>
-								<label
-									for="radioDevice{micro.PhysMicroID}"><div
-										on:click={(event) => {
-											config.main.inputModeRadioDeviceOn.height = event.clientX - event.target.getBoundingClientRect().x;
-											config.main.inputModeRadioDeviceOn.width = event.clientY - event.target.getBoundingClientRect().y;
-											config.main.inputModeRadioDeviceOn.click = true;
-											if(inGame)window.SelectPhysMicro(micro.PhysMicroID);
-											if(!inGame)console.log(micro.PhysMicroID);
-											}}
-										style="
-												--height:{config.main.inputModeRadioDeviceOn.height + 'px'};
-												--width:{config.main.inputModeRadioDeviceOn.width + 'px'};
-												--color:{config.main.inputModeRadioDeviceOn.color + '%'}"
-										class="button selectorDevice">{micro.name}</div></label>
-							</li>
-						{/each}
-					</ul>
-				</div>
-				<div class="deviceSelectCloseButton">
-					<button
-						anim="anim" id="deviceSelectCloseButton" class="button"
-						on:click={(event) => {
-							gui.deviceSelectOpen = false
-							click(event);
-						}}>Закрыть</button>
-				</div>
-			</div>
-		</div>
-	{/if}
-	{#if gui.mutList}
-		<div id="floatwindow" transition:fade>
-			<div class="mutlist">
-				<p class="leaf">Мут лист игроков:</p>
-				<input class="input-text leaf mut-leaf" type="text" placeholder="Введите никнейм">
-				<div id="mutListPlayers" class="mutListPlayers">
-					{#each Player.array as name,id}
-						{#if name.is_muted}
-							<button
-								anim="anim" id="1{id}Vf" class="button selector mut-leaf"
-								on:click = {(event) => {
-									if(inGame) window.removeMutedPlayer(name);
-									click(event);
-									if(inGame)window.UnmutePlayer(name.rid)
-								}}	 
-							>{name.name}</button>
-						{/if}
-					{/each}
-				</div>
-				<div style="text-align: center;">
-					<button
-						anim="anim" id="mutListCloseButton" class="button"
-						on:click={(event) => {
-							gui.mutList = false;
-							click(event);
-						}}>Закрыть</button>
-				</div>
-			</div>
-		</div>
+		<DeviceSelect
+			recitation = true;
+			windowName = {'deviceSelectOpen'}
+			logo = {'Выберите устройство'}
+			click = {(event,name) => click(event,name)}
+			array = {Micro.array}
+			selected = {Micro.selectDevice}
+			selection = {(value) => {
+				Micro.selectDevice = value;
+				if(inGame)window.SelectPhysMicro(value);
+			}}
+		/>
 	{/if}
 	{#if gui.roomSelectOpen}
-		<div id="floatwindow" transition:fade>
-			<div id="roomSelect">
-                <div class="mutlist">
-                        <p class="leaf">Выберите комнату</p>
-                        <div id="mutListPlayers" class="deviceListPlayers deviceSelectButton">
-                            <ul class="ul" id="roomSelectList">
-								{#each Room.selectRoom as room,id}
-									<li class="li">
-										<input type="radio" value={id} id="radioRoom{id}" name="radioRoom" class="inputDevice" bind:group={Room.selectedRoom}>
-										<label for="radioRoom{id}"><div
-											on:click={(event) => {
-												config.main.inputModeRadioDeviceOn.height = event.clientX - event.target.getBoundingClientRect().x;
-												config.main.inputModeRadioDeviceOn.width = event.clientY - event.target.getBoundingClientRect().y;
-												config.main.inputModeRadioDeviceOn.click = true;
-												Room.selectedchannel = null;
-											}}
-											style="
-													--height:{config.main.inputModeRadioDeviceOn.height + 'px'};
-													--width:{config.main.inputModeRadioDeviceOn.width + 'px'};
-													--color:{config.main.inputModeRadioDeviceOn.color + '%'}"
-											class="button selectorDevice">{room}</div></label>
-									</li>
-								{/each}
-                            </ul>
-                        </div>
-                        <div class="deviceSelectCloseButton">
-                            <button
-								anim="anim" id="roomSelectCloseButton" class="button"
-								on:click={(event) => {
-									gui.roomSelectOpen = false;
-									click(event);
-								}}>Закрыть</button>
-                        </div>
-                </div>
-            </div>
-		</div>
+		<DeviceSelect
+			recitation = {true}
+			logo = {'Выберите комнату'}
+			windowName = {'roomSelectOpen'}
+			click = {(event,name) => click(event,name)}
+			array = {Room.selectRoom}
+			selected = {Room.selectedRoom}
+			selection = {(value) => {
+				Room.selectedRoom = value;
+			}}
+		/>
 	{/if}
 	{#if gui.channelSelectOpen}
-		<div id="floatwindow" transition:fade>
-			<div id="channelSelect">
-                <div class="mutlist">
-                        <p class="leaf">Выберите канал</p>
-                        <div id="mutListPlayers" class="deviceListPlayers deviceSelectButton">
-                            <ul class="ul" id="channelSelectList">
-							{#if Room.selectedRoom != null}
-								{#each Room.selectChannel[Room.selectedRoom] as channel,id}
-									<li class="li">
-										<input 
-											type="radio" value={id} id="radioChanne{id}" name="radioChannel" class="inputDevice" 
-											bind:group={Room.selectedchannel}>
-										<label for="radioChanne{id}"><div
-											on:click={(event) => {
-												config.main.inputModeRadioDeviceOn.height = event.clientX - event.target.getBoundingClientRect().x;
-												config.main.inputModeRadioDeviceOn.width = event.clientY - event.target.getBoundingClientRect().y;
-												config.main.inputModeRadioDeviceOn.click = true;
-												Room.selectedchannel = id;
-												Room.selected();
-												}}
-											style="
-													--height:{config.main.inputModeRadioDeviceOn.height + 'px'};
-													--width:{config.main.inputModeRadioDeviceOn.width + 'px'};
-													--color:{config.main.inputModeRadioDeviceOn.color + '%'}"
-											class="button selectorDevice">{channel}</div></label>
-									</li>
-								{/each}
-							{/if}
-                        </div>
-                        <div class="deviceSelectCloseButton">
-                            <button
-								anim="anim" id="channelSelectCloseButton" class="button"
-								on:click={(event) => {
-									gui.channelSelectOpen = false;
-									click(event);
-								}}>Закрыть</button>
-                        </div>
-                </div>
-            </div>
-		</div>
+		<DeviceSelect
+			recitation = {Room.selectedRoom != null ? true : false}
+			logo = {'Выберите канал'}
+			windowName = {'channelSelectOpen'}
+			click = {(event,name) => click(event,name)}
+			array = {Room.selectChannel[Room.selectedRoom]}
+			selected = {Room.selectedchannel}
+			selection = {(value) => {
+				Room.selectedchannel = value;
+				Room.selected();
+			}}
+		/>
 	{/if}
 	{#if gui.volumeMainWindow}
-		<div class="volumeMainWindow" id="volumeMainWindow" transition:fade>
-			<div id="voiceroom" class="voiceroom">
-				<div id="voiceRoom1list" class="voicelist">
-					<table id="voiceRoomPlayerSettings1">
-						<input type="text" class="input-text inputSearch" placeholder="Введите никнейм">
-						<tbody>
-							{#each Player.array as player,id}
-								<tr class="voiceRoomPlayerSettings">
-									<th class="th">
-										<img src="img/userloc.png" class="userloc" alt="userloc">
-										<p class="userName">{player.name}</p>
-									</th>
-									<th class="th">
-										<img src="img/distance.png" class="imgdistance" alt="distance">
-										<p id="userName{id}Distance" class="userName">
-											{player.distance != undefined ? player.distance + ' m.':'много m.'}
-										</p>
-									</th>
-									<th id="grid" class="th" style="margin-left: auto;">
-										<img src="img/micSettings.png" class="micSettings" alt="micSettings">
-										<input
-											id="sliderP{id}" min="0" max="100" type="range" class="sliderP"
-											bind:value={Player.list[player.id].value}
-											style="--columnsP:{Player.list[player.id].value + "%"}"
-											on:input = {() => {
-												if(inGame) window.SetPlayerVolume(player.id, Player.list[player.id].value);
-											}}>
-										<p id="sliderP{id}volume" class="userName">{Player.list[player.id].value}</p>
-									</th>
-								</tr>
-							{/each}
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="boxmodes end voiceEnd">
-				<button anim="anim" class="button shadow"
-					on:click={(event) => {
-					gui.volumeMainWindow = false;
-					click(event);
-					}
-					}>Закрыть</button>
-			</div>
-		</div>
+		<VolumePlayer
+			click = {(event,name) => click(event,name)}
+			list = {Player.list}
+			array = {Player.array}
+			inGame = {inGame}
+		/>
 	{/if}
 	{#if gui.mainWindowOpen}
 		<div id="container" transition:fade>
@@ -1408,12 +1021,6 @@
 						class="input-text deviceSelectOpen" id="deviceSelectOpenButton"
 						on:click={() => gui.deviceSelectOpen = true}>
 						{Micro.selectDevice == null ? 'Выберите микрофон' : Micro.list[Micro.selectDevice].name}</button>
-					<button
-						anim="anim" class="button mut shadow" id="mutListOpenButton"
-						on:click={(event) => {
-							gui.mutList = true;
-							click(event);
-						}}>Мут лист</button>
 					<button
 						anim="anim" class="button mut shadow" id="volumePlayersButton"
 						on:click={(event) => {
@@ -1576,7 +1183,7 @@
 														{:else}
 															{player.distance+'m.'}
 														{/if}
-														</p>
+													</p>
 									</th>
 								</tr>
 							{/if}
