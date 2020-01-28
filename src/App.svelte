@@ -63,7 +63,7 @@
 		},
 
 		UpdatePos: (pid, top, left, distance) => {
-			Player.list[pid].distance = distance;
+			Player.list[pid].distance = Math.round(700/distance);
 			Player.list[pid].top = top;
 			Player.list[pid].left = left;
 			Player.array = Object.values(Player.list);
@@ -155,6 +155,7 @@
 		window.EnableVoice(config.main.triggerOnOffSound);
 		window.Enable3DVoice(config.main.triggerSound3D);
 		window.SetInputStream(3);
+		window.LoadConfig((conf) => config = JSON.parse(conf));
 	};
 
 	if (!(typeof (window.AddV8Callback) === "function"))
@@ -194,10 +195,6 @@
 		console.log(Room.select);
 	};
 
-	/**
-	 * Opens and closes the main window.
-	 * @param {object} event - Event on main window.
-	 */
 	function keydown(event) {
 		if (gui.mainWindowOpen == false && event.key == 'Insert') {
 			openMainWindow();
@@ -245,7 +242,7 @@
 			window.SetInputStream(istream);
 		else
 			console.log(istream);
-	}
+	};
 
 	function closeMainWindow() {
 		if(inGame)window.SetCursorVisible(false);
@@ -255,6 +252,8 @@
 		gui.channelSelectOpen = false;
 		gui.mutList = false;
 		gui.volumeMainWindow = false;
+		if(inGame)
+			window.SaveConfig(JSON.stringify(config));
 	};
 
 	function openMainWindow() {
@@ -333,7 +332,7 @@
 				return true;
 			}
 		}
-	}
+	};
 </script>
 
 

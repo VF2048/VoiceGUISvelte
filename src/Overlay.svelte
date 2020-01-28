@@ -81,7 +81,6 @@
 		if(move.ismove && mainWindowOpen){
 			switch(move.nowMove){
 				case 'overlay' :{
-
 					move.overlay.left = event.pageX - move.elem.shiftX;
 					move.overlay.top = event.pageY - move.elem.shiftY;
 					break;
@@ -101,20 +100,6 @@
 			}
 		}
 	};
-
-	function animation(){
-		if(move.overlay.move && i<0.457){
-			i += 0.005
-			move.background = "rgba(255, 255, 255, " + i + ")";
-		}
-		else if(!move.overlay.move && i>0){
-			i -= 0.005
-			move.background = "rgba(255, 255, 255, " + i + ")";
-		};
-	};
-
-	// setInterval(animation,16);
-
 </script>
 
 <style>
@@ -178,7 +163,6 @@
 		cursor: pointer;
 	}
     .micOverPlayer {
-		z-index: -1;
 		position: absolute;
 		top: var(--x);
 		left: var(--y);
@@ -188,7 +172,7 @@
 
 <svelte:window 
     on:mouseup="{onMouseUp}"
-	on:mousemove="{(event) => onMouseMove(event)}"
+	on:mousemove="{onMouseMove}"
 />
 
 <div

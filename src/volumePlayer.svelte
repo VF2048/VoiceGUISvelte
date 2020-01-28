@@ -7,7 +7,7 @@
 	let player = array;
 	
 	function search(event) {
-		let filter = array.filter(player => player.name == event.target.value)
+		let filter = array.filter(player => player.name.match(event.target.value));
 		if(event.target.value)
 			player = filter;
 		else
