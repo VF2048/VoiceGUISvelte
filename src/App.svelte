@@ -1,35 +1,25 @@
 <script>
 	import { fade } from 'svelte/transition';
-	import { onMount } from 'svelte';
 	import VolumePlayer from './volumePlayer.svelte';
-	import DeviceSelect from './deviceSelect.svelte';
+	import Selector from './Selector.svelte';
+	import Overlay from './Overlay.svelte'
 	
 
-	let overlay,i = 0;
 	let inGame = true;
 
 	const config = {
 	  main: {
 		soundVolume: 50,
 		soundVolumeOff: 50,
+		soundMute: false, 
 		microphoneVolume: 50,
 		microphoneVolumeOff: 50,
+		microphoneMute: false,
 	    triggerOnOffSound: true,
 	    triggerSound3D: true,
 		inputmode: false,
-		inputmodeon: {
-			height: 10,
-			width: 10,
-			color: 5,
-		},
 	    inputModeRadio: 1,
 		inputModeRadioDevice: 1,
-		inputModeRadioDeviceOn: {
-			click:false,
-			height: 10,
-			width: 10,
-			color: 5,
-		},
 		ki: {
 			global: {
 				key:65,
@@ -58,32 +48,6 @@
 	  roomSelectOpen: false,
 	  channelSelectOpen: false,
 	  volumeMainWindow: false,
-	};
-	const move = {
-		nowMove:'',
-		ismove: false,
-		domove:false,
-		background: '',
-		elem: {
-			shiftX:0,
-			shiftY:0,
-		},
-		overlay: {
-			move:false,
-			left: 330,
-			top: 18,
-		},
-		overlayMicrophone: {
-			click: false,
-			left: 78,
-			top: 20,
-		},
-		overlayVolumeOn: {
-			click: false,
-			left: 25,
-			top: 19,
-		},
-
 	};
 
 	const Player = {
@@ -283,9 +247,6 @@
 			console.log(istream);
 	}
 
-	/**
-	 * Close main window.
-	 */
 	function closeMainWindow() {
 		if(inGame)window.SetCursorVisible(false);
 		gui.mainWindowOpen = false;
@@ -296,96 +257,9 @@
 		gui.volumeMainWindow = false;
 	};
 
-	/**
-	 * Open main window.
-	 */
 	function openMainWindow() {
 		if(inGame)window.SetCursorVisible(true);
 		gui.mainWindowOpen = true;
-	};
-
-	/**
-	 * Drag and drop handler.
-	 */
-	function onMouseDown(event) {
-		let a = false;
-		let arr = event.target.classList;
-		let iterator = arr.values();
-		if(event.which == 1){
-			move.nowMove = event.target.id;
-			let id = event.target.id;
-			for(var value of iterator) {
-				if(value == 'over'|| id == "overlay"){
-					move.nowMove = 'overlay';
-					move.elem.shiftX = event.clientX - overlay.getBoundingClientRect().left;
-					move.elem.shiftY = event.clientY - overlay.getBoundingClientRect().top;
-					move.ismove = true;
-					move.overlay.move = true;
-				}
-			}
-			if(id =="overlayMicrophone" || id == "overlayVolumeOn"){
-				move.elem.shiftX = event.clientX - event.target.getBoundingClientRect().left;
-				move.elem.shiftY = event.clientY - event.target.getBoundingClientRect().top;
-				move.ismove = true;
-			}
-		}
-	};
-
-	function onMouseMove(event) {
-		if(move.ismove && gui.mainWindowOpen){
-			switch(move.nowMove){
-				case 'overlay' :{
-
-					move.overlay.left = event.pageX - move.elem.shiftX;
-					move.overlay.top = event.pageY - move.elem.shiftY;
-					break;
-				};
-				case 'overlayVolumeOn' :{
-					move.overlayVolumeOn.left = event.pageX - move.elem.shiftX;
-					move.overlayVolumeOn.top = event.pageY - move.elem.shiftY;
-					move.domove = true;
-					break;
-				};
-				case 'overlayMicrophone' :{
-					move.overlayMicrophone.left = event.pageX - move.elem.shiftX;
-					move.overlayMicrophone.top = event.pageY - move.elem.shiftY;
-					move.domove = true;
-					break;
-				};
-			}
-		}
-	};
-
-	function onMouseUp() {
-		if(!move.domove){
-			switch(move.nowMove){
-				case 'overlayVolumeOn': {
-					if(move.overlayVolumeOn.click){
-						move.overlayVolumeOn.click = !move.overlayVolumeOn.click;
-						config.main.soundVolume = config.main.soundVolumeOff;
-					}else {
-						move.overlayVolumeOn.click = !move.overlayVolumeOn.click;
-						config.main.soundVolumeOff = config.main.soundVolume;
-						config.main.soundVolume = 0;
-					}
-					break;
-				};
-				case 'overlayMicrophone': {
-					if(move.overlayMicrophone.click){
-						move.overlayMicrophone.click = !move.overlayMicrophone.click;
-						config.main.microphoneVolume = config.main.microphoneVolumeOff;
-					}else {
-						move.overlayMicrophone.click = !move.overlayMicrophone.click;
-						config.main.microphoneVolumeOff = config.main.microphoneVolume;
-						config.main.microphoneVolume = 0;
-					}
-					break;
-				};
-			}
-		}
-		move.ismove = false;
-		move.domove = false;
-		move.overlay.move = false;
 	};
 
 	function battonSelect(event){
@@ -401,7 +275,7 @@
         return new Promise(resolve => setTimeout(resolve, ms));
     };
 
-	async function click(effect,event,name) {
+	async function click(event,name,effect) {
 		gui[name] = false;
 		if(event == undefined) 
 			return;
@@ -415,40 +289,11 @@
 		if(effect == 2){
 			for(let i=0;i<=100;i+=5){
             	event.target.style.cssText = "--x:" + x + "; --y:" + y +"; --size:" + i + ";";
-            	await sleep(16);
+            	await sleep(10);
         	}
 			return;
 		};
 	};
-
-	function animation(){
-		if(move.overlay.move && i<0.457){
-			i += 0.005
-			move.background = "rgba(255, 255, 255, " + i + ")";
-		}
-		else if(!move.overlay.move && i>0){
-			i -= 0.005
-			move.background = "rgba(255, 255, 255, " + i + ")";
-		};
-		if(config.main.ki.global.select){
-			config.main.ki.global.color += 5;
-		}else{
-			config.main.ki.global.color = 5;
-		};
-		if(config.main.ki.radio.select){
-			config.main.ki.radio.color += 5;
-		}else{
-			config.main.ki.radio.color = 5;
-		};
-		if(config.main.inputModeRadioDeviceOn.click){
-			config.main.inputModeRadioDeviceOn.click = false;
-			config.main.inputModeRadioDeviceOn.color = 5;
-		}else if(config.main.inputModeRadioDeviceOn.color >= 5 && config.main.inputModeRadioDeviceOn.color < 100){
-			config.main.inputModeRadioDeviceOn.color += 5;
-		};
-	};
-
-	setInterval(animation,16);
 
 	function inputModeChanged(value) {
 		if(inGame){
@@ -463,6 +308,32 @@
 				console.log(0);
 		};
 	};
+
+	function mute(id) {
+		if(id === 1){
+			if(config.main.soundMute){
+				config.main.soundMute = false;
+				config.main.soundVolume = config.main.soundVolumeOff;
+				return false;
+			}else {
+				config.main.soundMute = true;
+				config.main.soundVolumeOff = config.main.soundVolume;
+				config.main.soundVolume = 0;
+				return true;
+			}
+		}else{
+			if(config.main.microphoneMute){
+				config.main.microphoneMute = false;
+				config.main.microphoneVolume = config.main.microphoneVolumeOff;
+				return false;
+			}else {
+				config.main.microphoneMute = true;
+				config.main.microphoneVolumeOff = config.main.microphoneVolume;
+				config.main.microphoneVolume = 0;
+				return true;
+			}
+		}
+	}
 </script>
 
 
@@ -810,56 +681,6 @@
 		border: solid 1px #eb2e4a;
 		white-space: nowrap;
 	}
-	.overlay {
-		position: absolute;
-		min-width: 137px;
-		top: var(--top);
-		left: var(--left);
-		cursor: pointer;
-		z-index: 1000;
-	}
-	.overlayRadiomin {
-		height: 2.3vh;
-		margin-top: 0.3vh;
-		margin-left: 1vh;
-	}
-	.overlayRoomName {
-		font-family: TTNormal-Light;
-		font-size: 1.6em;
-		margin-left: 1vh;
-		color: #ffffff;
-		width: 0px;
-	}
-	.overlayRadiominImg {
-		height: 1.3vh;
-	}
-	.overlayPlayer {
-		font-family: TTNorms-Regular;
-		color: #ffffff;
-		font-size: 0.8em;
-		width: 26px;
-	}
-	.overlayPlayerDistance {
-		font-family: TTNorms-Regular;
-		color: #ffffff;
-		font-size: 0.8em;
-	}
-	.overlayMicrophone {
-		height: 5vh;
-		position: absolute;
-		z-index: 1000;
-		top: var(--top);
-		left: var(--left);
-		cursor: pointer;
-	}
-	.overlayVolumeOn {
-		height: 5vh;
-		position: absolute;
-		z-index: 1000;
-		top: var(--top);
-		left: var(--left);
-		cursor: pointer;
-	}
 	.bactive {
 		text-decoration:none;
 		font: 0.8em TTNorms-Regular;
@@ -868,7 +689,7 @@
 		border:solid 1px #ca314a;
 		border-radius: 10px;
 		box-shadow: 4px 4px 35px 12px rgba(189,0,40,0.4);
-		background: radial-gradient(circle farthest-corner at var(--height) var(--width), #eb2e4a var(--color), #0000 0%);
+		background: radial-gradient(circle farthest-corner at calc(var(--x,1) * 1px) calc(var(--y,1) * 1px), #eb2e4a calc(var(--size,1) * 1%), #0000 0%);
 	}
 	[anim="anim"]:before {
 		--ripple-background: white;
@@ -894,27 +715,17 @@
 		overflow: hidden;
 	}
 	[anim="anim"]:hover { background-color: darken(#00000000, 10%); color: rgba(white, 1);}
-	.micOverPlayer {
-		z-index: -1;
-		position: absolute;
-		top: var(--x);
-		left: var(--y);
-		height: var(--size);
-	}
 </style>
 
 
 <svelte:window 
-	on:mousemove="{(event) => onMouseMove(event)}"
-	on:mousedown="{(event) => onMouseDown(event)}"
-	on:mouseup="{onMouseUp}"
 	on:keydown={keydown}
 	on:keyup={keyup}
 />
 
 <div id="mainWindow" style="background-image: url(img/dsfghdfshsdg.png);" oncontextmenu="return false">
 	{#if gui.deviceSelectOpen}
-		<DeviceSelect
+		<Selector
 			recitation = true;
 			windowName = {'deviceSelectOpen'}
 			logo = {'Выберите устройство'}
@@ -928,7 +739,7 @@
 		/>
 	{/if}
 	{#if gui.roomSelectOpen}
-		<DeviceSelect
+		<Selector
 			recitation = {true}
 			logo = {'Выберите комнату'}
 			windowName = {'roomSelectOpen'}
@@ -941,7 +752,7 @@
 		/>
 	{/if}
 	{#if gui.channelSelectOpen}
-		<DeviceSelect
+		<Selector
 			recitation = {Room.selectedRoom != null ? true : false}
 			logo = {'Выберите канал'}
 			windowName = {'channelSelectOpen'}
@@ -980,10 +791,9 @@
 								style="--columns:{config.main.soundVolume + "%"}"
 								bind:value={config.main.soundVolume}
 								on:input={() => {
-									window.SetPlayVolume(config.main.soundVolume/100);
-									if(move.overlayVolumeOn.click){
-										move.overlayVolumeOn.click = !move.overlayVolumeOn.click
-									}
+									if(inGame)
+										window.SetPlayVolume(config.main.soundVolume/100);
+									config.main.soundMute = false;
 								}}
 							>
 							<p class="light inline-block">{config.main.soundVolume}</p>
@@ -1004,10 +814,9 @@
 								style="--columns:{config.main.microphoneVolume + "%"}"
 								bind:value={config.main.microphoneVolume}
 								on:input={() => {
-									window.SetRecordVolume(config.main.microphoneVolume/100);
-									if(move.overlayMicrophone.click){
-										move.overlayMicrophone.click = !move.overlayMicrophone.click
-									}
+									if(inGame)
+										window.SetRecordVolume(config.main.microphoneVolume/100);
+									config.main.microphoneMute = false;
 								}}
 							>
 							<p class="light inline-block">{config.main.microphoneVolume}</p>
@@ -1056,7 +865,7 @@
 								<input
 									type="radio" value={1} bind:group={config.main.inputModeRadio} id="radio1" name="radio" class="input"
 									on:click = {(event) => {inputModeChanged(event.target.value)}}>
-								<label on:click={(event) => {click(2,event)}} for="radio1">
+								<label on:click={(event) => {click(event,'',2)}} for="radio1">
 									<div class="button selector A">По голосу</div>
 								</label>
 							</li>
@@ -1064,7 +873,7 @@
 								<input
 									type="radio" value={2} bind:group={config.main.inputModeRadio} id="radio2" name="radio" class="input"
 									on:click = {(event) => {inputModeChanged(event.target.value)}}>
-								<label	on:click={(event) => {click(2,event)}}	for="radio2">
+								<label	on:click={(event) => {click(event,'',2)}}	for="radio2">
 									<div class="button selector A">При удердании</div>
 								</label>
 							</li>
@@ -1072,7 +881,7 @@
 								<input
 									type="radio" value={3} bind:group={config.main.inputModeRadio} id="radio3" name="radio" class="input"
 									on:click = {(event) => {inputModeChanged(event.target.value)}}>
-								<label	on:click={(event) => {click(2,event)}}	for="radio3">
+								<label	on:click={(event) => {click(event,'',2)}}	for="radio3">
 									<div class="button selector A">Переключение по клавише</div>
 								</label>
 							</li>
@@ -1102,13 +911,8 @@
 										id="kiGlobal"
 										on:click={(event) => {
 											battonSelect(event)
-											config.main.ki.global.height = event.clientX - event.target.getBoundingClientRect().x;
-											config.main.ki.global.width = event.clientY - event.target.getBoundingClientRect().y;
+											click(event,'',2)
 											}}
-											style="
-												--height:{config.main.inputmodeon.height + 'px'};
-												--width:{config.main.inputmodeon.width + 'px'};
-												--color:{config.main.ki.global.color + '%'}"
 										disabled={config.main.ki.radio.on}
 									>
 									{config.main.ki.global.name}</button></th>
@@ -1120,14 +924,9 @@
 										class="inputbutton input-text {config.main.ki.radio.select ? 'bactive' : ''}"
 										id="kiRadio"
 										on:click={(event) => {
-											config.main.ki.radio.height = event.clientX - event.target.getBoundingClientRect().x;
-											config.main.ki.radio.width = event.clientY - event.target.getBoundingClientRect().y;
 											battonSelect(event)
+											click(event,'',2)
 											}}
-											style="
-												--height:{config.main.inputmodeon.height + 'px'};
-												--width:{config.main.inputmodeon.width + 'px'};
-												--color:{config.main.ki.radio.color + '%'}"
 										disabled={config.main.ki.global.on}
 									>
 									{config.main.ki.radio.name}</button></th>
@@ -1146,85 +945,13 @@
 			</div>
 		</div>
 	{/if}
-	<div
-		bind:this={overlay}
-		id="overlay"
-		class="overlay over"
-		style="--left:{move.overlay.left+'px'};--top:{move.overlay.top+'px'};background-color:{move.background}">
-		{#each Room.array as room,rid}
-			{#if !room.is_radio || room.rid == Room.selected}
-				<table class="over">
-					<thead class="over">
-						<tr>
-							<th class="over"><img draggable="false" class="overlayRadiomin over" src="img/radiomin.png" alt="overlayRadiomin"></th>
-							<th class="over"><p class="overlayRoomName over" id="overlayRoomName">{room.rname}</p></th>
-						</tr>
-					</thead>
-					<tbody>
-						{#each Player.array as player,id}
-							{#if (!room.is_radio && player.isteam == 1) || (room.is_radio && player.isteam == 2)}
-								<tr>
-									<th class="over"><img draggable="false" class="overlayRadiominImg over" src="img/overlayVolume.png" alt="overlayRadiomin"></th>
-									<th class="over"><p class="overlayPlayer over" id="overlayPlayer">{player.name}</p></th>
-									<th class="over"><p class="overlayPlayerDistance over" id="overlayPlayerDistance">
-														{#if player.text != undefined}
-															{player.text}
-														{:else}
-															{player.distance+'m.'}
-														{/if}
-													</p>
-									</th>
-								</tr>
-							{/if}
-						{/each}
-					</tbody>
-				</table>
-			{/if}
-		{/each}
-	</div>
-	{#if !move.overlayMicrophone.click}
-		<img draggable="false"
-			class="overlayMicrophone"
-			id="overlayMicrophone"
-			src="img/overlayMicrophone.png"
-			alt="overlayMicrophone"
-			style="--left:{move.overlayMicrophone.left+'px'};--top:{move.overlayMicrophone.top+'px'}"
-		>
-	{:else}
-		<img draggable="false"
-			class="overlayMicrophone"
-			id="overlayMicrophone"
-			src="img/overlayMicrophoneOff.png"
-			alt="overlayMicrophone"
-			style="--left:{move.overlayMicrophone.left+'px'};--top:{move.overlayMicrophone.top+'px'}"
-		>
-	{/if}
-	{#if !move.overlayVolumeOn.click}
-		<img draggable="false"
-			class="overlayVolumeOn"
-			id="overlayVolumeOn"
-			src="img/overlayVolumeOn.png"
-			alt="overlayVolumeOn"
-			style="--left:{move.overlayVolumeOn.left+'px'};--top:{move.overlayVolumeOn.top+'px'}"
-		>
-	{:else}
-		<img draggable="false"
-			class="overlayVolumeOn"
-			id="overlayVolumeOn"
-			src="img/overlayVolumeOff.png"
-			alt="overlayVolumeOn"
-			style="--left:{move.overlayVolumeOn.left+'px'};--top:{move.overlayVolumeOn.top+'px'}"
-		>
-	{/if}
-	{#each Player.array as player}
-		{#if !player.is_muted && player.isteam == 1}
-			<img class="micOverPlayer" style="--x:{player.left + "px"};--y:{player.top + "px"};--size:{player.distance + "px"};" src="img/micSettings.png" alt="micOverPlayer">
-		{/if}
-		{#if !player.is_muted && player.isteam == 2}
-			<img class="micOverPlayer" style="--x:{player.left + "px"};--y:{player.top + "px"};--size:{player.distance + "px"};" src="img/micSettings.png" alt="micOverPlayer">
-		{/if}
-		{#if !player.is_muted && player.isteam == 3}
-			<img class="micOverPlayer" style="--x:{player.left + "px"};--y:{player.top + "px"};--size:{player.distance + "px"};" src="img/micSettings.png" alt="micOverPlayer">
-		{/if}
-	{/each}
+	<Overlay 
+		players = {Player.array}
+		rooms = {Room.array}
+		selected = {Room.selected}
+		mainWindowOpen = {gui.mainWindowOpen}
+		mutes = {config}
+		mute = {mute}
+
+	/>
 </div>

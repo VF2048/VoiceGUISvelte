@@ -3,7 +3,16 @@
     export let array;
     export let list;
     export let inGame;
-    export let click;
+	export let click;
+	let player = array;
+	
+	function search(event) {
+		let filter = array.filter(player => player.name == event.target.value)
+		if(event.target.value)
+			player = filter;
+		else
+			player = array;
+	}
 </script>
 
 <style>
@@ -201,9 +210,12 @@
     <div id="voiceroom" class="voiceroom">
         <div id="voiceRoom1list" class="voicelist">
             <table id="voiceRoomPlayerSettings1">
-                <input type="text" class="input-text" placeholder="Введите никнейм">
+                <input
+					type="text" class="input-text" placeholder="Введите никнейм"
+					on:input = {search}
+				>
                 <tbody>
-                    {#each array as player,id}
+                    {#each player as player,id}
                         <tr class="voiceRoomPlayerSettings">
                             <th>
                                 <img src="img/userloc.png" class="userloc" alt="userloc">
